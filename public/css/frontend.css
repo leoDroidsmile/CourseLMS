@@ -1,0 +1,68 @@
+.userDrop{
+    transform: translate3d(-226px, 50px, 0px) !important;
+}
+
+/**
+  Default Markup
+**/
+
+body {
+    background: #F0E5E1 ;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+
+
+/**
+  Component
+**/
+
+label {
+    width: 100%;
+}
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+    box-shadow: 0 0 1px 1px #2ecc71;
+}
+.st0 {
+    opacity: 0.6;
+    fill: #000000;
+    border-radius: 100px;
+    enable-background: new;
+}
+
+.st1 {
+    fill: #FFFFFF;
+}
+
+.st3{
+    enable-background:new -307.4 338.8 91.8 91.8;
+}
+.btm-nav{
+  background-color: rgba(81,190,120,0.1) !important;
+  color: #51be78 !important;
+}
+
+.paytm-top {
+    top: -50px !important;
+}
+
+

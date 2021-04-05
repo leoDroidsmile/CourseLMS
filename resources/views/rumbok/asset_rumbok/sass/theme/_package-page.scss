@@ -1,0 +1,103 @@
+/* Package Page */
+.single-package-item {
+    position: relative;
+    padding: 10px;
+    z-index: 1;
+    margin-bottom: 30px;
+    text-align: center;
+    transition: $transition;
+    overflow: hidden;
+    &:hover {
+        box-shadow: $box-shadow;
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90%;
+        background-color: $secondary-color;
+        z-index: -1;
+    }
+    &.different-bg {
+        &:before {
+            background-color: $yellow-soft-color;
+        }
+    }
+    .package-offer {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        span {
+            color: $white-color;
+            display: inline-block;
+            padding: 4px 10px;
+            text-transform: capitalize;
+        }
+        &.green-bg {
+            span {
+                background-color: $primary-color;
+            }
+        }
+        &.yellow-bg {
+            span {
+                background-color: $yellow-color;
+            }
+        }
+        &.blue-bg {
+            span {
+                background-color: $blue-color;
+            }
+        }
+    }
+    .package-content {
+        padding: 40px 20px;
+    }
+    .package-icon {
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
+        background-color: $white-color;
+        border-radius: 50%;
+        box-shadow: 0 10px 30px rgba($blue-color, .1) ;
+        margin: auto;
+    }
+    .package-title {
+        margin-top: 30px;
+    }
+    .package-price {
+        margin-top: 30px;
+        &.green-price {
+            h4 {
+                color: $primary-color;
+            }
+        }
+        &.yellow-price {
+            h4 {
+                color: $yellow-color;
+            }
+        }
+        &.blue-price {
+            h4 {
+                color: $blue-color;
+            }
+        }
+    }
+}
+
+.register-form {
+    .register-button {
+        span {
+            margin-left: 20px;
+            .login-link {
+                color: $primary-color;
+            }
+            @include portrait-phone {
+                display: block;
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+    }
+}

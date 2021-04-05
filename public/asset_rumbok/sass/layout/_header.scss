@@ -1,0 +1,251 @@
+/* Header Section */
+.header-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+}
+
+.header-info {
+    background-color: $dark-color;
+    padding: 12px 0;
+    position: relative; 
+    @include tablet {
+        .menu-toggle-bar {
+            position: absolute;
+            top: 5px;
+            right: 0;
+        }
+    }
+    @include landscape-phone {
+        .menu-toggle-bar {
+            position: absolute;
+            top: 0;
+            right: -100px;
+        }
+    }
+    @include portrait-phone {
+        .menu-toggle-bar {
+            position: absolute;
+            top: 0;
+            right: 20px;
+        }
+    }
+    span,
+    a,
+    i {
+        color: $white-color;
+    }
+    .info-left {
+        display: flex;
+        align-items: center;
+        @include tablet {
+            display: inherit;
+        }
+        @include landscape-phone {
+            display: inherit;
+        }
+        @include portrait-phone {
+            display: inherit;
+        }
+        i {
+            margin-right: 10px;
+        }
+        .email-part {
+            margin-left: 30px;
+            @include tablet {
+                margin-left: 0;
+            }
+            @include landscape-phone {
+                margin-left: 0;
+            }
+            @include portrait-phone {
+                margin-left: 0;
+            }
+        }
+    }
+    .info-right {
+        ul {
+            float: right;
+            @include portrait-phone {
+                float: none;
+                margin: 20px 0 10px;
+            }
+            .login-button {
+                @include landscape-phone {
+                    display: none;
+                }
+            }
+            li {
+                display: inline-block;
+                +li {
+                    margin-left: 30px;
+                    @include landscape-phone {
+                        margin-left: 20px;
+                    } 
+                    @include portrait-phone {
+                        margin-left: 20px;
+                    } 
+                    i {
+                        transition: $transition;
+                        &:hover {
+                            color: $primary-color;
+                        }
+                    }
+                }
+                &.login-button {
+                    a {
+                        text-transform: capitalize;
+                        background-color: $primary-color;
+                        padding: 15px 20px;
+                        transition: $transition;
+                        &:hover {
+                            opacity: .9;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.main-header {
+    padding: 20px 0;
+    .header-logo {
+        img {
+            width: auto;
+            height: auto;
+            @include tablet {
+                margin: auto;
+            }
+            @include landscape-phone {
+                margin: auto;
+            }
+            @include portrait-phone {
+                margin: auto;
+            }
+        }
+    }
+    .main-header-right {
+        display: flex;
+        align-items: center;
+        float: right;
+        @include tablet {
+            float: none;
+            margin-top: 15px;
+        }
+        @include landscape-phone {
+            float: none;
+            margin-top: 15px;
+        }
+        @include portrait-phone {
+            float: none;
+            margin-top: 15px;
+        }
+        .header-button {
+            margin-left: 30px;
+            @include desktop {
+                margin-left: 20px;
+            }
+            @include tablet {
+                margin-left: 20px;
+            }
+            @include landscape-phone {
+                margin-left: 20px;
+            }
+            @include portrait-phone {
+                margin-left: 20px;
+            }
+            .template-button-2 {
+                @include landscape-phone {
+                    display: none;
+                }
+                @include portrait-phone {
+                    display: none;
+                }
+            }
+            .template-button {
+                margin-left: 30px;
+                @include desktop {
+                    margin-left: 20px;
+                }
+                @include tablet {
+                    margin-left: 20px;
+                }
+                @include landscape-phone {
+                    margin-left: 0;
+                }
+                @include portrait-phone {
+                    display: none;
+                }
+            }
+        }
+        .header-search {
+            margin-left: 30px;
+            @include desktop {
+                margin-left: 20px;
+            }
+            @include tablet {
+                margin-left: 20px;
+            }
+            @include landscape-phone {
+                margin-left: 20px;
+            }
+            @include portrait-phone {
+                margin-left: 20px;
+            }
+        }
+    }
+}
+
+.main-header-home-2 {
+    @include landscape-phone {
+        margin-bottom: 20px;
+    }
+    @include portrait-phone {
+        margin-bottom: 20px;
+    }
+    .main-header-right {
+        @include tablet {
+            margin-top: 0;
+        }
+    }
+    .menu-bar {
+        i {
+            margin-top: 7px;
+        }
+    }
+    padding: 0;
+    .header-logo {
+        img {
+            margin-top: 15px;
+            @include tablet {
+                margin-top: 30px;
+            }
+            @include landscape-phone {
+                margin-top: 30px;
+            }
+            @include portrait-phone {
+                margin-top: 30px;
+            }
+        }
+    }
+    .header-button {
+        @include tablet {
+            display: none;
+        }
+        @include landscape-phone {
+            display: none;
+        }
+        @include portrait-phone {
+            display: none;
+        }
+        .template-button {
+            margin-left: 10px!important;
+        }
+    }
+    .category-bar {
+        margin-left: 30px;
+    }
+}

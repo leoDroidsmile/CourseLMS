@@ -1,0 +1,159 @@
+/* Purchase Page */
+.purchase-table {
+    .purchase-table-head,
+    .purchase-table-item {
+        ul {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            @include tablet {
+                display: inherit;
+                text-align: inherit;
+            }
+            @include landscape-phone {
+                display: inherit;
+                text-align: inherit;
+            }
+            @include portrait-phone {
+                display: inherit;
+                text-align: inherit;
+            }
+        }
+    }
+    .purchase-table-head {
+        margin-bottom: 40px;
+        border-bottom: 1px solid $border-color;
+        height: 40px;
+        @include tablet {
+            display: none;
+        }
+        @include landscape-phone {
+            display: none;
+        }
+        @include portrait-phone {
+            display: none;
+        }
+    }
+    .single-table-item {
+        h5 {
+            @include tablet {
+                margin: 15px 0;
+            }
+            @include landscape-phone {
+                margin: 15px 0;
+            }
+            @include portrait-phone {
+                margin: 15px 0;
+            }
+            a {
+                color: $heading-color;
+                transition: $transition;
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+        @include tablet {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 20px 30px;
+            background-color: $white-color;
+            box-shadow: 0 5px 20px $border-color;
+        }
+        @include landscape-phone {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 20px 30px;
+            background-color: $white-color;
+            box-shadow: 0 5px 20px $border-color;
+        }
+        @include portrait-phone {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 20px 30px;
+            background-color: $white-color;
+            box-shadow: 0 5px 20px $border-color;
+        }
+        .purchase-table-head {
+            display: none;
+            @include tablet {
+                display: block;
+                height: auto;
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+            @include landscape-phone {
+                display: block;
+                height: auto;
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+            @include portrait-phone {
+                display: block;
+                height: auto;
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+        }
+        .purchase-table-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: $white-color;
+            box-shadow: 0 5px 20px $border-color;
+            @include tablet {
+                margin-bottom: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+            @include landscape-phone {
+                margin-bottom: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+            @include portrait-phone {
+                margin-bottom: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+            img {
+                @include tablet {
+                    display: none;
+                }
+                @include landscape-phone {
+                    display: none;
+                }
+                @include portrait-phone {
+                    display: none;
+                }
+            }
+            span {
+                text-transform: capitalize;
+                a {
+                    color: $primary-color;
+                }
+                @include tablet {
+                    display: none;
+                }
+                @include landscape-phone {
+                    display: none;
+                }
+                @include portrait-phone {
+                    display: none;
+                }
+            }
+            li {
+                a {
+                    color: $white-color;
+                    background-color: $primary-color;
+                    padding: 4px 10px;
+                    border-radius: 5px;
+                    text-transform: capitalize;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}

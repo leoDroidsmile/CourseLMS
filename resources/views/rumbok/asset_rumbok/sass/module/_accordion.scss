@@ -1,0 +1,89 @@
+/* Accordion */
+.accordion-wrapper{
+    .card{
+        +.card{
+            margin-top: 20px;
+        }
+        border: none;
+        background-color: transparent;
+        .card-header{
+            background-color: transparent;
+            padding: 0;
+            border: none;
+            a{
+                display: block;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 1.15;
+                font-family: $heading-font;
+                background-color: transparent;
+                color: $paragraph-color;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+                padding: 14px 24px;
+                cursor: pointer;
+                position: relative;
+                text-transform: capitalize;
+                span {
+                    position: absolute;
+                    top: 15px;
+                    right: 60px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    @include portrait-phone {
+                        display: none;
+                    }
+                }
+                &:after{
+                    position: absolute;
+                    right: 24px;
+                    top: 15px;
+                    content: "\f106";
+                    font-family: "fontawesome";
+                    font-weight: 700;
+                }
+                &[aria-expanded="false"]{
+                    &:after{
+                        content: "\f107";
+                    }
+                }
+                &[aria-expanded="true"]{
+                    color: $paragraph-color;
+                    border: 1px solid $border-color;
+                    background: transparent;
+                }
+            }
+        }
+        .card-body{
+            background-color: transparent;
+            padding: 15px 24px 0;
+            border: 1px solid transparent;
+            .single-course-video {
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0;
+                span,
+                a {
+                    font-size: 14px;
+                    text-transform: capitalize;
+                    color: $paragraph-color;
+                    i {
+                        color: $primary-color;
+                        margin-right: 10px;
+                    }
+                }
+                .locked {
+                    a {
+                        font-size: 12px;
+                        padding: 5px 10px;
+                        background-color: $lock-bg;
+                        border-radius: 20px;
+                        &:hover {
+                            color: $paragraph-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

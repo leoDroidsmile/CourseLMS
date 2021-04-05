@@ -1,0 +1,56 @@
+/* Course Category Page */
+.lms-single-widget {
+    padding: 40px 30px;
+    background-color: $white-color;
+    box-shadow: 0 10px 30px $border-color;
+    margin-bottom: 30px;
+    .lms-widget-title {
+        margin-bottom: 20px;
+    }
+    ul {
+        li {
+            +li {
+                border-top: 1px solid $border-color;
+            }
+            a {
+                display: block;
+                padding: 10px 0 10px 20px;
+                color: $paragraph-color;
+                text-transform: capitalize;
+                position: relative;
+                transition: $transition;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 16px;
+                    left: 0;
+                    width: 10px;
+                    height: 10px;
+                    background-color: transparent;
+                    border: 1px solid rgba($paragraph-color, .5);
+                    transition: $transition;
+                }
+            }
+            &.active,
+            &:hover {
+                a {
+                    &::before {
+                        border: 1px solid transparent;
+                        background-color: $primary-color;;
+                    }
+                }
+            }
+        }
+    }
+    select {
+        width: 100%;
+        padding: 14px;
+        text-transform: capitalize;
+        border: 1px solid transparent;
+        background-color: $secondary-color;
+        color: $paragraph-color;
+        option {
+            background-color: $white-color;
+        }
+    }
+}

@@ -1,0 +1,170 @@
+/* Footer Section */
+.footer-section {
+    position: relative;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../images/footer-bg-shape.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .footer-shape {
+        @include tablet {
+            display: none;
+        }
+        @include landscape-phone {
+            display: none;
+        }
+        @include portrait-phone {
+            display: none;
+        }
+        img {
+            width: auto;
+            height: auto;
+            &.plus-sign {
+                position: absolute;
+                top: 20%;
+                left: 10%;
+            }
+            &.round-shape-3 {
+                position: absolute;
+                top: 30%;
+                right: 10%;
+            }
+        }
+    }
+    .footer-copyright-section {
+        span {
+            text-transform: capitalize;
+        }
+        .copyright-button {
+            float: right;
+            @include portrait-phone {
+                float: none;
+                margin-top: 20px;
+            }
+            .dropup-item {
+                display: inline-block;
+                position: relative;
+                ul {
+                    background-color: $white-color;
+                    border: 1px solid $border-color;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    position: absolute;
+                    top: -90px;
+                    left: 0;
+                    width: 100%;
+                    z-index: 1;
+                    opacity: 0;
+                    visibility: hidden;
+                    &.active {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                    li {
+                        margin: 5px 0;
+                        a {
+                            color: $paragraph-color;
+                            transition: $transition;
+                            text-transform: capitalize;
+                            &:hover {
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.footer-widget-section {
+    .footer-logo {
+        margin-bottom: 10px;
+        img {
+            width: auto;
+            height: auto;
+        }
+    }
+    .widget-title {
+        margin-bottom: 20px;
+    }
+    .footer-widget {
+        margin-bottom: 30px;
+        li {
+            margin-bottom: 10px;
+            a {
+                color: $paragraph-color;
+                text-transform: capitalize;
+                transition: all .2s ease-in;
+                &:hover {
+                    color: $primary-color;
+                }
+                i {
+                    margin-right: 5px;
+                }
+            }
+        }
+        .phone-number {
+            font-size: 18px;
+            font-weight: 500;
+            color: $white-color;
+            margin-top: 10px;
+            display: inline-block;
+            i {
+                color: $primary-color;
+                margin-right: 5px;;
+            }
+        }
+    }
+    .company-address {
+        .address-info {
+            span {
+                text-transform: capitalize;
+            }
+        }
+    }
+}
+.footer-copyright-home-2 {
+    padding: 15px 0;
+    background-color: $copyright-bg;
+    span {
+        text-transform: capitalize;
+    }
+}
+
+.footer-home-2 {
+    background-color: $secondary-home-2;
+    background-image: url('../images/footer-bg-home-2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: $white-color;
+    .footer-widget-section {
+        h4.home-2,
+        p {
+            color: $white-color;
+        }
+        .footer-widget {
+            li {
+                a {
+                    color: $white-color;
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+        .company-address {
+            .address-info {
+                span {
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}

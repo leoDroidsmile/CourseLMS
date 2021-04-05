@@ -1,0 +1,117 @@
+/* Instructor Details Page */
+.instructor-details-section {
+    .instructor-image {
+        img {
+            @include tablet {
+                display: none;
+            }
+            @include landscape-phone {
+                display: none;
+            }
+            @include portrait-phone {
+                display: none;
+            }
+        }
+    }
+}
+
+.instructor-info {
+    .instructor-tag {
+        color: $primary-color;
+        text-transform: capitalize;
+        display: inline-block;
+        margin-top: 5px;
+    }
+    .instructor-social-link {
+        ul {
+            margin-top: 10px;
+            li { 
+                display: inline-block;
+                margin-right: 10px;
+                a {
+                    transition: $transition;
+                    color: $paragraph-color;
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+    .instructor-education {
+        ul {
+            margin-top: 10px;
+            li {
+                margin: 5px 0;
+                text-transform: capitalize;
+                i {
+                    font-size: 14px;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .instructor-asset {
+        display: flex;
+        align-items: center;
+        @include landscape-phone {
+            display: inherit;
+        }
+        @include portrait-phone {
+            display: inherit;
+        }
+        img {
+            width: auto;
+            height: auto;
+        }
+        .single-asset {
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            @include landscape-phone {
+                margin: 10px 0;
+            }
+            @include portrait-phone {
+                margin: 10px 0;
+            }
+            .asset-image {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.instructor-content-bottom {
+    
+    .bottom-right-part {
+        @include tablet {
+            margin-top: 30px;
+        }
+        @include landscape-phone {
+            margin-top: 30px;
+        }
+        @include portrait-phone {
+            margin-top: 30px;
+        }
+    }
+}
+
+.instructor-skill-part {
+    .bottom-content-title {
+        margin-bottom: 20px;
+    }
+    .single-skill-item {
+        margin-bottom: 20px;
+    }
+    .progress {
+        height: 10px;
+        border-radius: 20px;
+        .progress-bar-striped {
+            background-color: $primary-color;
+        }
+    }
+    .progress-info {
+        margin-bottom: 5px;
+        text-transform: capitalize;
+    }
+}

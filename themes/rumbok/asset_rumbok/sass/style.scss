@@ -1,0 +1,79 @@
+/*-------------------------------------------------------------
+Template Name: Rumbok Learning Managment System 
+Template URL: rumbok.softtechthemes.com
+Author: SoftTech IT
+Author URL: https://themeforest.net/user/softtech-it/portfolio
+Version: 1.0
+Description: Education learning managment system template
+Tags: education, learning
+Text Domain: rumbok
+-------------------------------------------------------------*/ 
+
+/*------------------------------------------------------------- 
+TABLE OF CONTENTS: 
+---------------------------------------------------------------
+>> Author CSS
+>> Navbar
+>> Header Section
+>> Footer Section
+>> Breadcrumb Section
+>> Preloader
+>> Button 
+>> Form
+>> Accordion
+>> Theme Defalult
+>> Home Page 01
+>> Home Page 02
+>> About Page
+>> Blog Page
+>> Blog Details Page
+>> Contact Page
+>> Package Page
+>> Purchase Page
+>> Course Page
+>> Course Details Page
+>> Course Video Page
+>> Course Category Page
+>> Cart Page
+>> Login Page
+>> Instructor Details Page
+>> 404 Page
+--------------------------------------------------------------*/
+
+// Setting
+@import 'settings/variable';
+@import 'settings/mixin';
+
+// Base
+@import 'base/base';
+
+// Layout
+@import 'layout/navbar';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/breadcrumb';
+
+// Module
+@import 'module/preloader';
+@import 'module/button';
+@import 'module/form';
+@import 'module/accordion';
+
+// Theme 
+@import 'theme/theme-default';
+@import 'theme/home-page-1';
+@import 'theme/home-page-2';
+@import 'theme/about-page';
+@import 'theme/blog-page';
+@import 'theme/blog-details-page'; 
+@import 'theme/contact-page'; 
+@import 'theme/package-page'; 
+@import 'theme/purchase-page'; 
+@import 'theme/course-page'; 
+@import 'theme/course-details-page'; 
+@import 'theme/course-video-page'; 
+@import 'theme/course-category-page'; 
+@import 'theme/cart-page'; 
+@import 'theme/login-page'; 
+@import 'theme/instructor-details-page'; 
+@import 'theme/404-page'; 

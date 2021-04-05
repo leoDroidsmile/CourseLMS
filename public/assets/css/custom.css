@@ -1,0 +1,262 @@
+/*Avatar and logo*/
+.avatar-xl{
+    height: 120px !important;
+    width: 120px !important;
+}
+.avatar-lg{
+    height: 60px !important;
+    width: 60px !important;
+}
+.avatar-sm{
+    height: 40px !important;
+    width: 40px !important;
+}
+.avatar-thumbnail{
+    width: 60px !important;
+}
+
+.background-white{
+    background: #fff !important;
+}
+
+/*instructor package*/
+.package-img{
+    max-height: 150px;
+    max-width: 250px;
+}
+
+.custom-modal{
+    border: 1px solid #818181;
+    z-index: 999999;
+}
+
+.select2-container--open .select2-dropdown--below{
+    z-index: 99999999;
+}
+
+/*mobile screen padding*/
+@media (max-width: 767px) {
+    .breadcrumbbar {
+        margin: 100px 0 0 0;
+        padding: 0px 0 20px 0 !important;
+    }
+}
+
+/*Switches*/
+.switchery {
+    background-color: #ffffff;
+    border: 1px solid tranparent;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    height: 21px;
+    position: relative;
+    vertical-align: middle;
+    width: 45px;
+    margin-bottom: 5px;
+}
+.switchery > small {
+    background: #fff;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    height: 20px;
+    position: absolute;
+    top: 0;
+    width: 18px;
+}
+
+/*notification*/
+.ui-pnotify .brighttheme.ui-pnotify-container {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.bg-ecf0f1{
+  background: #ecf0f1;
+}
+.contentbar {
+     padding: 30px;
+    padding-top: 0px;
+    margin-bottom: 30px;
+}
+
+.lms-notify{
+    height: 400px;
+    overflow: scroll;
+}
+
+.bootstrap-tagsinput span{
+    line-height: 35px !important;
+}
+
+/* Media slide */
+
+.sidenav {
+    height: 90%;
+    width: 0;
+    position: fixed;
+    /*z-index: 1049;*/
+    z-index: 9999;
+    top: 5%;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    border-radius: 5px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.media_select{
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.media_select:hover{
+    transform: scale(1.05);
+}
+
+.progress-height{
+    height: 15px;
+    border-radius: 5px;
+}
+
+
+/* skeleton loader */
+ /* Card styles */
+ .loader_card .card {
+     background-color: #fff;
+     height: auto;
+     width: auto;
+     overflow: hidden;
+     margin: 12px;
+     border-radius: 5px;
+     box-shadow: 9px 17px 45px -29px rgba(0, 0, 0, 0.44);
+ }
+
+ /* Card image loading */
+ .loader_card .card__image img {
+     width: 100%;
+     height: 100%;
+ }
+
+ .loader_card .card__image.loading {
+     height: 200px;
+     width: 400px;
+ }
+
+ /* Card title */
+ .loader_card .card__title {
+     padding: 8px;
+     font-size: 22px;
+     font-weight: 700;
+ }
+
+ .loader_card .card__title.loading {
+     height: 1rem;
+     width: 50%;
+     margin: 1rem;
+     border-radius: 3px;
+ }
+
+ /* Card description */
+ .loader_card .card__description {
+     padding: 8px;
+     font-size: 16px;
+ }
+
+ .loader_card .card__description.loading {
+     height: 3rem;
+     margin: 1rem;
+     border-radius: 3px;
+ }
+
+ /* The loading Class */
+ .loader_card .loading {
+     position: relative;
+     background-color: #e2e2e2;
+ }
+
+ /* The moving element */
+ .loader_card .loading::after {
+     display: block;
+     content: "";
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     transform: translateX(-100%);
+     background: -webkit-gradient(linear, left top,
+             right top, from(transparent),
+             color-stop(rgba(255, 255, 255, 0.2)),
+             to(transparent));
+
+     background: linear-gradient(90deg, transparent,
+             rgba(255, 255, 255, 0.2), transparent);
+
+     /* Adding animation */
+     animation: loading 0.8s infinite;
+ }
+
+ /* Loading Animation */
+ @keyframes loading {
+     100% {
+         transform: translateX(100%);
+     }
+ }
+
+
+ .font-size-16{
+     font-size: 16px !important;
+ }
+
+
+ .font-size-16:hover{
+     color: cornflowerblue !important;
+ }
+
+
+ .w-517{
+  width: 517px !important;
+ }
+
+ .w-12{
+  width: 12% !important;
+ }
+
+.f-s-57 {
+    font-size: 57px;
+}
+
+ .addonProgressBar {
+     width: 0%;
+ }

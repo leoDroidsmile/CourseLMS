@@ -1,0 +1,104 @@
+/* Author CSS */
+body {
+	margin: 0;
+    color: $paragraph-color;
+    font-size: 16px;
+    font-family: $body-font;
+    font-weight: 400;
+}
+
+h1 {
+    color: $dark-color;
+    font-size: 60px;
+    font-weight: 700;
+    @include portrait-phone {
+        font-size: 54px;
+    }
+}
+h1.home-2 {
+    font-family: $home-2-font;
+}
+
+h2 {
+    color: $heading-color;
+    font-size: 42px;
+    font-weight: 700;
+}
+h2.home-2 {
+    font-family: $home-2-font;
+}
+
+h3 {
+    color: $paragraph-color;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+h4 {
+    color: $paragraph-color;
+    font-size: 24px;
+    font-weight: 700;
+}
+h4.home-2 {
+    font-family: $home-2-font;
+}
+
+h5 {
+    color: $paragraph-color;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+h6 {
+    color: $paragraph-color;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $heading-font;
+    text-transform: capitalize;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+p {
+	color: $paragraph-color;
+	margin-bottom: 10px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus,
+video:focus,
+.slick-slide {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}

@@ -1,0 +1,251 @@
+/* Course Details Page */
+.course-details-sidebar {
+    @include tablet {
+        margin-bottom: 60px;
+    }
+    @include landscape-phone {
+        margin-bottom: 50px;
+    }
+    @include portrait-phone {
+        margin-bottom: 40px;
+    }
+    .course-details-widget {
+        padding: 40px 30px;
+        box-shadow: $box-shadow;
+        .course-widget-title {
+            margin-bottom: 20px;
+        }
+        .course-widget-items {
+            .single-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 0;
+                +.single-item {
+                    border-top: 1px solid $border-color;
+                }
+                span {
+                    text-transform: capitalize;
+                }
+                .item-left {
+                    i {
+                        color: $primary-color;
+                        margin-right: 5px;
+                        font-size: 14px;
+                    }
+                }
+                .item-right {
+                    ul {
+                        li {
+                            display: inline-block;
+                            margin-left: 5px;
+                            a {
+                                color: $paragraph-color;
+                                transition: $transition;
+                                &:hover {
+                                    color: $primary-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .course-widget-buttons {
+            .template-button {
+                border-radius: 0;
+                margin-top: 20px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.course-details-tab {
+    .tab {
+        ul {
+            margin: 30px 0;
+            li {
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: capitalize;
+                color: $paragraph-color;
+                background-color: transparent;
+                border: 1px solid $border-color;
+                padding: 12px 24px;
+                display: inline-block;
+                cursor: pointer;
+                transition: $transition;
+                margin-right: 20px;
+                @include landscape-phone {
+                    margin-right: 10px;
+                }
+                @include portrait-phone {
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                }
+                &.active {
+                    color: $white-color;
+                    background-color: $primary-color;
+                }
+            }
+        }
+    }
+    .tab-content {
+        .tab-content-bg {
+            padding: 30px;
+            background-color: rgba($border-color, .3);
+        }
+        .lost {
+            display: none;
+        }
+        .active {
+            display: block;
+            animation: .5s .1s fadeIn;
+        }
+        .learn-item,
+        .require-item {
+            margin-top: 20px;
+            li {
+                margin: 10px 0;
+                i {
+                    font-size: 14px;
+                    margin-right: 5px;
+                }
+            }
+        }
+        .require-item {
+            text-transform: capitalize;
+            i {
+                color: $primary-color;
+            }
+        }
+        .overview-content {
+            .overview-video {
+                position: relative;
+                .video-play-button {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    i {
+                        color: $white-color;
+                        background-color: $primary-color;
+                        font-size: 30px;
+                        width: 60px;
+                        height: 60px;
+                        line-height: 60px;
+                        text-align: center;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+        .curriculum-content {
+            .single-course-video {
+                a {
+                    transition: $transition;
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+        .instructor-content {
+            .single-instructor {
+                background-color: $white-color;
+                border: 1px solid $border-color;
+                box-shadow: none;
+                margin-bottom: 0;
+                .hover-state {
+                    opacity: 1;
+                    visibility: visible;
+                    top: 0;
+                }
+            }
+            .instructor-about {
+                @include tablet {
+                    margin-top: 40px;
+                }
+                @include landscape-phone {
+                    margin-top: 40px;
+                }
+                @include portrait-phone {
+                    margin-top: 40px;
+                }
+            }
+        }
+        .review-content {
+            .rating-left {
+                background-color: $white-color;
+                border: 1px solid $border-color;
+                text-align: center;
+                padding: 40px 10px;
+                h2 {
+                    color: $primary-color;
+                }
+                .green-starts {
+                    li {
+                        display: inline-block;
+                        margin: 0 2px;
+                        a {
+                            color: $primary-color;
+                            font-size: 20px;
+                        }
+                    }
+                }
+                span {
+                    text-transform: capitalize;
+                    display: block;
+                    margin-top: 5px;
+                }
+            }
+            .rating-right {
+                @include tablet {
+                    margin-top: 40px;
+                }
+                @include landscape-phone {
+                    margin-top: 40px;
+                }
+                @include portrait-phone {
+                    margin-top: 40px;
+                }
+                .review-title  {
+                    margin-bottom: 20px;
+                }
+                .single-review {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin: 10px 0;
+                    .progress-part {
+                        width: 250px;
+                        @include desktop {
+                            width: 220px;
+                        }
+                        @include portrait-phone {
+                            width: 140px;
+                        }
+                        .progress {
+                            height: 10px;
+                            border-radius: 20px;
+                            .progress-bar-striped {
+                                background-color: $primary-color;
+                            }
+                        }
+                    }
+                    .yellow-starts {
+                        li {
+                            display: inline-block;
+                            margin: 0;
+                            a {
+                                color: $yellow-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

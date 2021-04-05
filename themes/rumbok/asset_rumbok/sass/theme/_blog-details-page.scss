@@ -1,0 +1,214 @@
+/* Blog Details Page */
+.blog-content-section {
+    &.blog-details-page {
+        .blog-single-post {
+            padding: 0;
+            background-color: transparent;
+            margin-bottom: 0;
+            .blog-thumbnail {
+                img {
+                    &:hover {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+            }
+            .blog-content-part {
+                padding: 0;
+                margin-top: 30px;
+                .content-list {
+                    .single-list {
+                        display: inline-block;
+                        margin: 5px 0;
+                        i {
+                            margin-right: 10px;
+                        }
+                    }
+                }
+                .blog-quote {
+                    background-color: $primary-color;
+                    padding: 40px 40px 50px;
+                    span.quote-text {
+                        color: $white-color;
+                        font-size: 30px;
+                    }
+                    span.quote-icon {
+                        color: $white-color;
+                        font-size: 40px;
+                        margin-left: 10px;
+                        position: relative;
+                        top: 10px;
+                    }
+                }
+                .content-bottom-tag {
+                    li {
+                        display: inline;
+                        margin-right: 10px;
+                        a {
+                            display: inline-block;
+                            color: $paragraph-color;
+                            background-color: rgba($blue-color, .05);
+                            padding: 5px 10px;
+                            text-transform: capitalize;
+                        }
+                    }
+                }
+                .blog-social-icons {
+                    ul {
+                        float: right;
+                        @include portrait-phone {
+                            float: none;
+                            margin-top: 20px;
+                        }
+                        li {
+                            display: inline;
+                            margin-left: 10px;
+                            span {
+                                font-size: 20px;
+                                font-weight: 500;
+                                text-transform: capitalize;
+                            }
+                            a {
+                                color: $paragraph-color;
+                                transition: $transition;
+                                font-size: 20px;
+                                &:hover {
+                                    color: $primary-color;
+                                }
+                            }
+                        }
+                    }
+                }
+                .blog-images {
+                    .single-image {
+                        &.image-2 {
+                            @include portrait-phone {
+                                margin-top: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .blog-details-slider {
+            margin-top: 30px;
+            padding: 50px 40px;
+            background-color: rgba($blue-color, .05);
+            .blog-details-single-slide {
+                h5 {
+                    a {
+                        color: $paragraph-color;
+                        transition: $transition;
+                        &:hover {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+            .slick-slide {
+                margin: 0 15px;
+            }
+            .prev-arrow,
+            .next-arrow {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 16px;
+                background-color: $primary-color;
+                border: 1px solid transparent;
+                color: $white-color;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                cursor: pointer;
+                transition: $transition;
+                z-index: 1;
+                &:hover {
+                    background-color: transparent;
+                    border: 1px solid $primary-color;
+                }
+            }
+            .prev-arrow {
+                left: 0;
+            }
+            .next-arrow {
+                right: 0;
+            }
+            
+        }
+
+        .blog-comment-area {
+            .single-comment {
+                display: flex;
+                align-items: center;
+                margin-top: 30px;
+                .comment-image {
+                    img {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        margin-right: 20px;
+                    }
+                }
+                .comment-content {
+                    .comment-content-top {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .content-top-left {
+                            h5 {
+                                display: inline-block;
+                            }
+                            span {
+                               margin-left: 20px;
+                               @include portrait-phone {
+                                display: block;
+                                margin-left: 0;
+                            }
+                            }
+                        }
+                        .comment-reply-button {
+                            a {
+                                text-transform: capitalize;
+                                display: inline-block;
+                                padding: 3px 10px;
+                                border-radius: 5px;
+                                color: $white-color;
+                                background-color: $primary-color;
+                                transition: $transition;
+                                border: 1px solid transparent;
+                                &:hover {
+                                    color: $primary-color;
+                                    background-color: transparent;
+                                    border: 1px solid $primary-color;
+                                }
+                            }
+                        }
+                    }
+                }
+                &.comment-left-margin {
+                    margin-left: 80px;
+                    @include landscape-phone {
+                        margin-left: 40px;
+                    }
+                    @include portrait-phone {
+                        margin-left: 40px;
+                    }
+                }
+            }
+        }
+
+        .blog-comment-form {
+            padding: 40px 60px;
+            box-shadow: $box-shadow;
+            @include portrait-phone {
+                padding: 40px;
+            }
+            form {
+                margin-top: 40px;
+            }
+        }
+    }
+} 

@@ -1,0 +1,306 @@
+/* Course Video Page */
+.header-section-backend {
+    background-color: $heading-color;
+    padding: 0 60px;
+    @include screen-1200 {
+        padding: 0 30px;
+    }
+    @include desktop {
+        padding: 0 20px;
+    }
+    @include tablet {
+        text-align: center;
+        padding: 0 20px;
+    }
+    @include landscape-phone {
+        text-align: center;
+        padding: 0 20px;
+    }
+    @include portrait-phone {
+        text-align: center;
+        padding: 0 20px;
+    }
+    .main-header {
+        position: relative;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 230px;
+            width: 1px;
+            height: 100%;
+            background-color: $white-color;
+            @include tablet {
+                width: 0;
+            }
+            @include landscape-phone {
+                width: 0;
+            }
+            @include portrait-phone {
+                width: 0;
+            }
+        }
+    }
+    .header-left {
+        display: flex;
+        align-items: center;
+        @include tablet {
+            display: inherit;
+        }
+        @include landscape-phone {
+            display: inherit;
+        }
+        @include portrait-phone {
+            display: inherit;
+        }
+        .header-logo {
+            margin-right: 100px;
+            @include tablet {
+                margin-right: 0;
+            }
+            @include landscape-phone {
+                margin-right: 0;
+            }
+            @include portrait-phone {
+                margin-right: 0;
+            }
+        }
+        .header-title {
+            @include tablet {
+                margin: 10px 0 20px;
+            }
+            @include landscape-phone {
+                margin: 10px 0 20px;
+            }
+            @include portrait-phone {
+                margin: 10px 0 20px;
+            }
+            h5 {
+                color: $white-color;
+            }
+        }
+    }
+    .header-backend-buttons {
+        float: right;
+        @include tablet {
+            float: none;
+            text-align: center;
+        }
+        @include landscape-phone {
+            float: none;
+            text-align: center;
+        }
+        @include portrait-phone {
+            float: none;
+            text-align: center;
+        }
+        a {
+            margin-left: 20px;
+        }
+        .template-button-2 {
+            color: $white-color;
+        }
+        .template-button {
+            &:hover {
+                color: $white-color;
+            }
+        }
+    }
+}
+
+.course-video-section {
+    .course-video-part {
+        video {
+            width: 100%;
+        }
+    }
+    .video-playlist-sidebar {
+        padding: 60px 40px;
+        @include tablet {
+            padding: 40px 20px;
+        }
+        @include landscape-phone {
+            padding: 40px 20px;
+        }
+        @include portrait-phone {
+            padding: 40px 20px;
+        }
+    }
+}
+
+.course-video-tab {
+    padding-left: 40px;
+    @include tablet {
+        padding: 20px;
+    }
+    @include landscape-phone {
+        padding: 20px;
+    }
+    @include portrait-phone {
+        padding: 20px;
+    }
+    .hr-line {
+        width: 100%;
+        height: 1px;
+        background-color: $border-color;
+    }
+    .tab {
+        .hr-line {
+            margin-bottom: 30px;
+        }
+        ul {
+            margin-bottom: 30px;
+            li {
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: capitalize;
+                color: $paragraph-color;
+                background-color: transparent;
+                border: 1px solid $border-color;
+                padding: 12px 24px;
+                display: inline-block;
+                cursor: pointer;
+                transition: $transition;
+                margin-right: 20px;
+                @include landscape-phone {
+                    margin-right: 10px;
+                }
+                @include portrait-phone {
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                }
+                &.active {
+                    color: $white-color;
+                    background-color: $primary-color;
+                }
+            }
+        }
+    }
+    .tab-content {
+        .lost {
+            display: none;
+        }
+        .active {
+            display: block;
+            animation: .5s .1s fadeIn;
+        }
+        .overview-content {
+            .single-list {
+                margin: 5px 0;
+                display: block;
+                i {
+                    font-size: 14px;
+                    margin-right: 5px;
+                }
+            }
+            .uppercase-font {
+                display: block;
+                margin-top: 20px;
+                text-transform: capitalize;
+            }
+            .caret-list {
+                margin-top: 20px;
+                li {
+                    margin: 5px 0;
+                    i {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+
+        .q-a-content {
+            .header-search {
+                form {
+                    width: 100%;
+                }
+            }
+            .hr-line {
+                margin-top: 20px;
+            }
+            .single-question {
+                display: flex;
+                padding: 30px;
+                border-bottom: 1px solid $border-color;
+                .question-image {
+                    margin-right: 20px;
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 10px;
+                    }
+                }
+                .content-bottom {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    a {
+                        color: $paragraph-color;
+                        transition: $transition;
+                        &:hover {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .note-content {
+            text-align: center;
+            .header-search {
+                form {
+                    width: 100%;
+                }
+            }
+            span {
+                display: inline-block;
+                margin-top: 30px;
+            }
+        }
+
+        .announcement-content {
+            .announcement-top {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                .top-image {
+                    margin-right: 10px;
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                    }
+                }
+                span {
+                    text-transform: capitalize;
+                }
+            }
+            .announcement-comment {
+                display: flex;
+                align-items: center;
+                .comment-image {
+                    margin-right: 10px;
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                    }
+                }
+                .comment-box {
+                    input {
+                        width: 600px;
+                        padding: 10px 20px;
+                        border: 1px solid transparent;
+                        background-color: rgba($border-color, .5);
+                        @include landscape-phone {
+                            width: 400px;
+                        }
+                        @include portrait-phone {
+                            width: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

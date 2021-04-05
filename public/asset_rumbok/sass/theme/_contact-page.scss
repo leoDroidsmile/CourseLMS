@@ -1,0 +1,105 @@
+/* Contact Page */
+.single-contact-info {
+    padding: 50px 20px 30px;
+    background-color: $secondary-color;
+    text-align: center;
+    transition: $transition;
+    margin-bottom: 30px;;
+    &:hover {
+        box-shadow: $box-shadow;
+        .feature-round-shape-3 {
+            transform: scale(1.2);
+        }
+    }
+    .contact-info-icon {
+        position: relative;
+        margin-bottom: 30px;
+        z-index: 1;
+        img {
+            width: auto;
+            height: auto;
+            margin: auto;
+        }
+        .feature-round-shape-3 {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            width: auto;
+            height: auto;
+            transition: $transition;
+            z-index: -1;
+        }
+    }
+    span {
+        color: $paragraph-color;
+        text-transform: capitalize;
+    }
+    h4 {
+        a {
+            color: $paragraph-color;
+            transition: $transition;
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+.contact-bottom-section {
+    position: relative;
+    padding: 90px 0 245px;
+    @include tablet {
+        padding: 90px 0 120px;
+    }
+    @include landscape-phone {
+        padding: 90px 0 120px;
+    }
+    @include portrait-phone {
+        padding: 90px 0 120px;
+    }
+    .map-area {
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            @include tablet {
+                height: 400px;
+            }
+            @include landscape-phone {
+                height: 300px;
+            }
+            @include portrait-phone {
+                height: 300px;
+            }
+        }
+    }
+}
+
+.contact-page-form {
+    margin-top: -500px;
+    padding: 40px 30px;
+    background-color: $white-color;
+    box-shadow: 0 5px 10px $border-color;
+    position: absolute;
+    z-index: 1;
+    @include tablet {
+        position: inherit;
+        margin-top: 40px;
+    }
+    @include landscape-phone {
+        position: inherit;
+        margin-top: 40px;
+    }
+    @include portrait-phone {
+        position: inherit;
+        margin-top: 40px;
+    }
+    .contact-form-title {
+        margin-bottom: 30px;
+        h3 {
+            span {
+                color: $primary-color;
+            }
+        }
+    }
+}

@@ -1,0 +1,96 @@
+/* Course Page */
+.course-page-content {
+    .header-search {
+        float: right;
+        @include landscape-phone {
+            display: none;
+        }
+        @include portrait-phone {
+            display: none;
+        }
+    }
+}
+
+.course-tab {
+    li {
+        display: inline-block;
+        text-transform: capitalize;
+        font-weight: 500;
+        transition: $transition;
+        cursor: pointer;
+        margin: 4px 20px 4px 0;
+        &.active {
+            color: $primary-color;
+        }
+    }
+}
+
+.course-single-item {
+    background-color: $secondary-color;
+    padding: 10px;
+    transition: $transition;
+    margin-bottom: 30px;
+    &.diffrent-bg {
+        background-color: $yellow-soft-color;
+    }
+    &:hover {
+        box-shadow: $box-shadow;
+        .course-image {
+            .course-video-part {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    .course-image {
+        position: relative;
+        .course-video-part {
+            position: absolute;
+            bottom: -10px;
+            right: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: $transition;
+            .video-play-button {
+                i {
+                    color: $white-color;
+                    background-color: $primary-color;
+                    font-size: 20px;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    .course-content {
+        padding: 30px 10px 30px 0;
+        h4 {
+            a {
+                color: $heading-color;
+                transition: $transition;
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+    .cotent-bottom {
+        transition: $transition;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .content-right {
+            li {
+                display: inline;
+                a {
+                    display: inline-block;
+                    font-size: 14px;
+                    color: $yellow-color;
+                }
+            }
+        }
+    }
+}

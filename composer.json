@@ -1,0 +1,87 @@
+{
+    "name": "softtech-it/courselms",
+    "type": "project",
+    "description": "This is Learning management system version 2.2",
+    "keywords": [
+        "framework",
+        "laravel",
+        "version 2.2"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.2.5",
+        "anandsiddharth/laravel-paytm-wallet": "^1.0.16",
+        "barryvdh/laravel-dompdf": "^0.8.7",
+        "beyondcode/laravel-vouchers": "^1.3",
+        "fideloper/proxy": "^4.4.1",
+        "fruitcake/laravel-cors": "^1.0.6",
+        "guzzlehttp/guzzle": "^6.5.5",
+        "intervention/image": "^2.5.1",
+        "joisarjignesh/bigbluebutton": "^1.1.6",
+        "laravel/framework": "^7.30.0",
+        "laravel/passport": "^9.4.0",
+        "laravel/socialite": "^4.4.1",
+        "laravel/tinker": "^2.x-dev",
+        "laravel/ui": "2.0.0",
+        "mckenziearts/laravel-notify": "^1.1.2",
+        "mews/purifier": "^3.3.3",
+        "milon/barcode": "^7.0.1",
+        "mprince/laravel-logger-course-lms": "dev-main",
+        "mprince/laravel7-pointable": "9999999-dev",
+        "nesbot/carbon": "^2.42.0",
+        "owen-oj/laravel-getid3": "^1.1",
+        "paypal/rest-api-sdk-php": "^1.14",
+        "peal/laravel-barcode-generator": "^1.3.1",
+        "realrashid/sweet-alert": "^3.2",
+        "stripe/stripe-php": "^7.67.0"
+    },
+    "require-dev": {
+        "facade/ignition": "^2.5.3",
+        "fzaninotto/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^4.3.0",
+        "phpunit/phpunit": "^8.5.13",
+        "sven/artisan-view": "^3.3.2"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Helper/Helper.php"
+        ],
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    }
+}

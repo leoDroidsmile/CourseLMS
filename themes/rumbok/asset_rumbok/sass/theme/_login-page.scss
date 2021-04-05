@@ -1,0 +1,130 @@
+/* Login Page */
+.login-section {
+    .login-image {
+       img {
+        @include tablet {
+            display: none;
+        } 
+        @include landscape-phone {
+            display: none;
+        } 
+        @include portrait-phone {
+            display: none;
+        } 
+       }
+    }
+
+    .login-form {
+        h3 {
+            span {
+                color: $primary-color;
+            }
+        }
+        .google-button {
+            margin-top: 30px;
+            .template-button {
+                text-align: center;
+                width: 100%;
+                i {
+                    margin-right: 5px;
+                }
+            }
+        }
+        span.separator {
+            display: block;
+            position: relative;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px; 
+            z-index: 1;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background-color: $border-color;
+                z-index: -1;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 50%;
+                width: 50px;
+                height: 50px;
+                transform: translateX(-50%);
+                background-color: $white-color;
+                z-index: -1;
+            }
+        }
+        .login-tab {
+            margin-top: 20px;
+            li {
+                display: inline-block;
+                margin-right: 20px;
+                @include portrait-phone {
+                    margin-right: 10px;
+                }
+            }
+            .active {
+                .template-button-2 {
+                    border: 1px solid transparent;
+                    color: $white-color;
+                    background-color: $primary-color;
+                }
+            }
+        }
+        .checkbox-forgotpass-area {
+            display: flex;
+            justify-content: space-between;
+            .checkbox-part {
+                input {
+                    border: 1px solid $primary-color;
+                    margin-right: 5px;
+                }
+                label {
+                    color: $primary-color;
+                    text-transform: capitalize;
+                    cursor: pointer;
+                }
+            }
+            .forgotpass-part {
+                a {
+                    color: $primary-color;
+                    text-transform: capitalize;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+        .tab-content {
+            .lost {
+                display: none;
+            }
+            .active {
+                display: block;
+                animation: .5s .1s fadeIn;
+            }
+        }
+        .login-button {
+            span {
+                display: inline-block;
+                text-transform: capitalize;
+                margin-left: 20px;
+                @include portrait-phone {
+                    margin-left: 0;
+                    margin-top: 20px;
+                }
+                a {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+

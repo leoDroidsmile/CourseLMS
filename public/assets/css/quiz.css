@@ -1,0 +1,185 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.w-33{
+    width: 33%;
+}
+.countdown-wrapper {
+    margin-top: 35px;
+}
+
+.countdown.flip-clock-wrapper ul {
+    height: 144px;
+    margin: 0 10px;
+    width: 96px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.countdown.flip-clock-wrapper ul li {
+    line-height: 144px;
+}
+
+.countdown.flip-clock-wrapper ul li a div div.inn {
+    background-color: #607D8B;
+    color: #F44336;
+    font-size: 120px;
+    text-shadow: 0 1px 2px #000;
+}
+
+.countdown.flip-clock-wrapper ul,
+.countdown.flip-clock-wrapper ul li a div div.inn {
+    border-radius: 8px;
+}
+
+.countdown.flip-clock-wrapper ul li a div.down {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.countdown.flip-clock-wrapper ul li a div.up:after {
+    top: 71px;
+}
+
+.countdown .flip-clock-dot.top {
+    top: 38px;
+}
+
+.countdown .flip-clock-dot.bottom {
+    top: 86px;
+}
+
+.countdown .flip-clock-dot {
+    height: 20px;
+    left: 20px;
+    width: 20px;
+    background: #607D8B;
+}
+
+.countdown .flip-clock-divider {
+    height: 144px;
+    width: 60px;
+}
+
+.countdown .flip-clock-divider:first-child {
+    width: 0;
+}
+
+.countdown .flip-clock-divider.seconds .flip-clock-label,
+.countdown .flip-clock-divider.minutes .flip-clock-label {
+    right: -232px;
+}
+
+.countdown .flip-clock-divider .flip-clock-label {
+    color: #F44336;
+    font-size: 30px;
+    width: 200px;
+}
+
+/*------------------------------------------------------------*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f1f1f1;
+}
+
+#regForm {
+    background-color: #ffffff;
+    margin: 100px auto;
+    font-family: Raleway;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+    background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+    display: none;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#prevBtn {
+    background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #4CAF50;
+}
+
+
+/*div radio*/
+.isHidden {
+    display: none; /* hide radio buttons */
+}
+
+.label {
+    display: inline-block;
+    background-color: transparent;
+    width: 365px;
+    height: 120px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #636e72;
+}
+
+.radio:checked + .label { /* target next sibling (+) label */
+    background-color: #f1f2f6;
+    border: 4px solid #00b894;
+}
+
+
+.question{
+    text-align:center;margin-top:40px;
+}

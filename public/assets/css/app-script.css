@@ -1,0 +1,7 @@
+/* App custom css */
+.st-drop{
+    position: absolute;
+    will-change: transform;
+    top: 0px; left: 0px;
+    transform: translate3d(30px, 29px, 0px);
+}
