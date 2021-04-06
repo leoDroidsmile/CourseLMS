@@ -469,7 +469,7 @@ class FrontendController extends Controller
         } catch (\Exception $exception) {
         }
 
-        Session::flash('message', translate("Registration done successfully. Please verify your email."));
+        Session::flash('message', translate("Registration done successfully."));
         return redirect()->route('login');
 
 

@@ -21,7 +21,9 @@ class CreateUsersTable extends Migration
             $table->enum('user_type',['Student','Instructor','Admin'])->nullable(); //this is identify user type
             //1=Admin,2=Instructor,3=Student
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('verified')->default(false);
+
+            // Disable email verification
+            $table->boolean('verified')->default(true);
             $table->string('password')->nullable();
             $table->boolean('banned')->default(false); // User cannot login if banned
             $table->string('provider_id')->nullable(); // this is for login fb,g+ etc
