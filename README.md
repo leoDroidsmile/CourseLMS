@@ -4,16 +4,16 @@ This repository was based on the laravel template bought on https://codecanyon.n
 
 The licence is only for one domain, so it needs to manage like 
 
-### httpd-vhosts.conf
+#### httpd-vhosts.conf
 <VirtualHost *:80>
-    ServerAdmin webmaster@dummy-host2.example.com
-    DocumentRoot "C:/xampp/htdocs/CourseLMS"
-    ServerName local.lms.olmaa.net
-    ErrorLog "logs/course-lms.com-error.log"
-    CustomLog "logs/course-lms.com-access.log" common
+    ServerAdmin webmaster@dummy-host2.example.com <br/>
+    DocumentRoot "C:/xampp/htdocs/CourseLMS" <br/>
+    ServerName local.lms.olmaa.net <br/>
+    ErrorLog "logs/course-lms.com-error.log" <br/>
+    CustomLog "logs/course-lms.com-access.log" common <br/>
 </VirtualHost>
 
-### C:\Windows\System32\drivers\etc\hosts
+#### C:\Windows\System32\drivers\etc\hosts
 127.0.0.1 local.lms.olmaa.net
 
 
