@@ -44,7 +44,29 @@
                 <div class="course-dashboard-column">
                     <div class="lecture-viewer-container">
                         <div class="lecture-video-item" id="videoId">
+                            
+                            <div role="alert" class="alert alert-primary padding-top-20px padding-bottom-20px">
+                                <div class="container-fluid">
+                                    <div class="copyright-content copyright-content-2">
+                                        <div class="row align-items-center">
+                                            <div class="col-sm-8 column-lmd-half column-td-full">
+                                                <div class="copyright-content-inner">
+                                                    @translate(You must download pc app)
+                                                </div>
+                                            </div><!-- end col-lg-4 -->
+                                            <div class="col-sm-4 column-lmd-half column-td-full text-center">
+                                                <a href="/public/videoplayers/PC player.zip">
+                                                    <button id="btn_download" class="btn btn-primary text-white">
+                                                        @translate(Download app)
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div><!-- end row -->
+                                    </div><!-- end copyright-content -->
+                                </div><!-- end container-fluid -->
+                            </div>
 
+                            
                             @if (isset($s_course->overview_url))
                                 @if ($s_course->provider === "Youtube")
                                     <iframe
@@ -788,7 +810,7 @@
 
         /*for youtube*/
         function playYoutube(data) {
-            $('#videoId').append('  <iframe' +
+            playVideoPC('  <iframe' +
                 '                                        src="https://www.youtube.com/embed/' + data + '"\n' +
                 '                                        frameborder="0"\n' +
                 '                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"\n' +
@@ -797,7 +819,7 @@
 
         /*for vimeo video*/
         function playVimeo(data) {
-            $('#videoId').append(' <iframe\n' +
+            playVideoPC(' <iframe\n' +
                 '            src="https://player.vimeo.com/video/' + data + '"\n' +
                 '             frameborder="0" allow="autoplay; fullscreen"\n' +
                 '            allowfullscreen></iframe>');
@@ -846,6 +868,13 @@
             }
         }
 
+        function playVideoPC(data){
+            var element = document.createElement('a');
+            // element.setAttribute('href', 'courselmsvideoplayer://' + data);
+            element.setAttribute('href', 'iqacademyplayer://' + data);
+            element.click();
+        }
+
         $(window).on('load', function () {
             $('.countDown').click();
         });
@@ -883,6 +912,7 @@
                 }
             }, 1000);
         }
+
     </script>
 
 @endsection
