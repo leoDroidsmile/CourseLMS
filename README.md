@@ -11,6 +11,7 @@ The licence is only for one domain, so it needs to manage like
     ServerName local.lms.olmaa.net <br/>
     ErrorLog "logs/course-lms.com-error.log" <br/>
     CustomLog "logs/course-lms.com-access.log" common <br/>
+    <br/>
 </VirtualHost>
 
 #### C:\Windows\System32\drivers\etc\hosts
