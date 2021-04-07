@@ -36,6 +36,8 @@ Route::group(['middleware' => 'installed'], function () {
     Route::get('user/verify/{token}', 'Auth\RegisterController@verifyUser')->name('user.verify');
     Route::post('send/verify/code', 'Auth\RegisterController@sendToken')->name('send.verify.token');
     Route::get('verify/user', 'Auth\RegisterController@verifyForm');
+
+    Route::get('videoplayer/index', 'VideoPlayerController@index');
 });
 
 Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'], 'prefix' => 'dashboard'], function () {
