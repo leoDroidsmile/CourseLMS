@@ -779,17 +779,17 @@
                     $('#videoId').empty();
                     $('.course-content').empty();
                     if (result.provider == "Youtube") {
-                        playVideoPC(result.url)
+                        playVideoPC('youtube', result.url)
                     } else if (result.provider == "Vimeo") {
-                        playVideoPC(result.url)
+                        playVideoPC('vimeo', result.url)
                     } else if (result.provider == "HTML5") {
-                        playVideoPC(result.url)
+                        playVideoPC('html5', result.url)
                     } else if (result.provider == "File") {
-                        playVideoPC(result.url)
+                        playVideoPC('file', result.url)
                     } else if (result.provider == "Live") {
-                        playVideoPC(result.url)
+                        playVideoPC('live', result.url)
                     } else if (result.provider == "Quiz") {
-                        playVideoPC(result.url)
+                        playVideoPC('quiz', result.url)
                     } else {
                         playDoc(result.url, result.item1, result.item2, result.description)
                     }
@@ -868,11 +868,11 @@
             }
         }
 
-        function playVideoPC(data){
+        function playVideoPC(type, data){
             var element = document.createElement('a');
             console.log("=========\n", data);
             // element.setAttribute('href', 'iqacademyplayer://video/?url=' + data);
-            element.setAttribute('href', 'courselmsvideoplayer://video/?url=' + data);
+            element.setAttribute('href', 'courselmsvideoplayer://video/?type=' + type + '&url=' + data);
             element.click();
         }
 
