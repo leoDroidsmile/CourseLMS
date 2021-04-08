@@ -781,15 +781,15 @@
                     if (result.provider == "Youtube") {
                         playVideoPC(result.url)
                     } else if (result.provider == "Vimeo") {
-                        playVimeo(result.url)
+                        playVideoPC(result.url)
                     } else if (result.provider == "HTML5") {
-                        playHtml(result.url)
+                        playVideoPC(result.url)
                     } else if (result.provider == "File") {
-                        playFile(result.url)
+                        playVideoPC(result.url)
                     } else if (result.provider == "Live") {
-                        liveClass(result.url)
+                        playVideoPC(result.url)
                     } else if (result.provider == "Quiz") {
-                        quizView(result.url)
+                        playVideoPC(result.url)
                     } else {
                         playDoc(result.url, result.item1, result.item2, result.description)
                     }
