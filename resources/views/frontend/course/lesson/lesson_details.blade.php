@@ -775,11 +775,11 @@
                 url: url,
                 method: 'GET',
                 success: function (result) {
-                    console.log(result);
+                    console.log("contentVideoURL ==== ", result);
                     $('#videoId').empty();
                     $('.course-content').empty();
                     if (result.provider == "Youtube") {
-                        playYoutube(result.url)
+                        playVideoPC(result.url)
                     } else if (result.provider == "Vimeo") {
                         playVimeo(result.url)
                     } else if (result.provider == "HTML5") {
@@ -870,8 +870,9 @@
 
         function playVideoPC(data){
             var element = document.createElement('a');
-            // element.setAttribute('href', 'courselmsvideoplayer://' + data);
-            element.setAttribute('href', 'iqacademyplayer://' + data);
+            console.log("=========\n", data);
+            // element.setAttribute('href', 'iqacademyplayer://video/?url=' + data);
+            element.setAttribute('href', 'courselmsvideoplayer://video/?url=' + data);
             element.click();
         }
 

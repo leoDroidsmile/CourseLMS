@@ -74,13 +74,6 @@
             END LatestCourse AREA
     ======================================-->
 
-
-<!-- start scroll top -->
-<div id="scroll-top">
-    <i class="fa fa-angle-up" title="@translate(Go top)"></i>
-</div>
-<!-- end scroll top -->
-
 <!-- template js files -->
 <script src="{{ asset('frontend/js/jquery.js') }}"></script>
 <script src="{{ asset('frontend/js/popper.js') }}"></script>
