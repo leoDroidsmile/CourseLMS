@@ -21,8 +21,8 @@ CustomLog "logs/course-lms.com-access.log" common
 
 127.0.0.1 local.lms.olmaa.net
 
-  ## Local Server
-  http://localhost
+## Local Server
+http://localhost
   
 
 ## Stage Server
