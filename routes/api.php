@@ -238,5 +238,6 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
         Route::get('single/page/{id}','SettingApiController@singlePage');
 
 
-
+        // Return Video Url and type for Windows PC Video Player
+        Route::get('contentWithVideo', 'CourseApiController@singleContentWithVideo');
     });

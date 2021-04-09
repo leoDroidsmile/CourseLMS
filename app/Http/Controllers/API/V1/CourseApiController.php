@@ -14,6 +14,9 @@ use App\Model\Course;
 use App\Model\Enrollment;
 use App\Http\Controllers\Controller;
 use App\Model\SeenContent;
+
+use App\Model\Demo;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -179,5 +182,73 @@ class CourseApiController extends Controller
     }
 
 
+    /*single content*/
+    public function singleContentWithVideo(Request $request)
+    {
+        $contentId = $request->contentId;
+        $userId = $request->userId;
 
+        $content = ClassContent::find($contentId);
+        $demo = new Demo();
+        if($content->content_type == 'Video'){
+            $demo->provider = $content->provider;
+            $demo->description = $content->description;
+            if ($content->provider == "Youtube") {
+                $demo->url = Str::after($content->video_url, 'https://youtu.be/');
+            } elseif ($content->provider == "Vimeo") {
+                $demo->url = Str::after($content->video_url, 'https://vimeo.com/');
+            } elseif ($content->provider == "File") {
+                $demo->url = asset($content->video_url);
+            } elseif ($content->provider == "Live") {
+                $demo->url = $content->video_url;
+            } else{
+                $demo->provider = "HTML5";
+                $demo->url = $content->video_url;
+            }
+        }elseif ($content->content_type == 'Quiz'){
+            /*if quiz is done then show the score*/
+            $scores = QuizScore::where('quiz_id',$content->quiz_id)
+                ->where('content_id',$content->id)
+                ->where('user_id', $userId)->first();
+
+            if ($scores != null){
+                $demo->provider = $content->content_type;
+                $demo->url = route('quiz.score.show',$scores->id);
+            }else{
+                $demo->provider = $content->content_type;
+                $demo->url = route('start',[$content->quiz_id,$content->id]);
+            }
+        }
+        else{
+            $demo->provider = $content->content_type;
+            $demo->description = $content->description;
+            $demo->item1 = translate('Content document');
+            $demo->item2 = translate('Download');
+            $demo->url = filePath($content->file);
+        }
+
+
+        $course_id = Classes::where('id', $content->class_id)->first()->course_id;
+
+
+        if(!request()->is('subscription/*')){
+            $enroll_id = Enrollment::where('course_id', $course_id)->where('user_id', $userId)->first()->id;
+        }else{
+            $enroll_id = SubscriptionEnrollment::where('user_id', $userId)->first()->id;
+        }
+
+        $seens = SeenContent::where('class_id', $content->class_id)
+            ->where('content_id', $content->id)
+            ->where('course_id', $course_id)->where('enroll_id', $enroll_id)->where('user_id', $userId)->get();
+        if ($seens->count() == 0) {
+            $seen = new SeenContent();
+            $seen->class_id = $content->class_id;
+            $seen->content_id = $content->id;
+            $seen->course_id = $course_id;
+            $seen->enroll_id = $enroll_id;
+            $seen->user_id = $userId;
+            $seen->saveOrFail();
+        }
+        return response()->json($demo);
+    }
 }
