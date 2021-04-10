@@ -14,7 +14,7 @@ use App\Model\Course;
 use App\Model\Enrollment;
 use App\Http\Controllers\Controller;
 use App\Model\SeenContent;
-
+use Illuminate\Support\Str;
 use App\Model\Demo;
 
 use Illuminate\Http\Request;

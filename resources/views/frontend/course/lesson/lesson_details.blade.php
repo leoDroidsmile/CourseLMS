@@ -773,7 +773,6 @@
         /*get content data*/
         function contentData(id) {
             var url = $('#contentVideoUrl-' + id).val();
-            console.log("url : ", url);
             playVideoPC(id);
             return;
 
