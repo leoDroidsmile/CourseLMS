@@ -692,7 +692,6 @@
     <script type="text/javascript">
         "use strict"
         var token = "{{Auth::user()->id}}";
-        console.log("userId : ", userId);
 
         $(document).ready(function () {
             $.ajaxSetup({
@@ -775,7 +774,9 @@
         function contentData(id) {
             var url = $('#contentVideoUrl-' + id).val();
             console.log("url : ", url);
-            
+            playVideoPC(id);
+            return;
+
             $.ajax({
                 url: url,
                 method: 'GET',
@@ -873,11 +874,10 @@
             }
         }
 
-        function playVideoPC(type, data){
+        function playVideoPC(data){
             var element = document.createElement('a');
-            console.log("=========\n", data);
             // element.setAttribute('href', 'iqacademyplayer://video/?url=' + data);
-            element.setAttribute('href', 'courselmsvideoplayer://video/?type=' + type + '&url=' + data + "&id=" + token);
+            element.setAttribute('href', 'courselmsvideoplayer://video/?user=' + token + '&class=' + data);
             element.click();
         }
 
