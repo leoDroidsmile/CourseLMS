@@ -27,7 +27,12 @@ $(document).ready(function () {
     wishList();
     enrollCourse();
     resetAddToCart();
+    removeShoppingCartButton();
 })
+
+function removeShoppingCartButton(){
+    $(".la-shopping-cart").parent().hide();
+}
 
 /*Reset Add to cart */
 function resetAddToCart(){
