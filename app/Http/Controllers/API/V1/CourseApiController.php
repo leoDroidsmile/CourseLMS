@@ -16,6 +16,8 @@ use App\Http\Controllers\Controller;
 use App\Model\SeenContent;
 use Illuminate\Support\Str;
 use App\Model\Demo;
+use App\Coupon;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -250,5 +252,42 @@ class CourseApiController extends Controller
             $seen->saveOrFail();
         }
         return response()->json($demo);
+    }
+
+    public function coupon_apply(Request $request)
+    {
+      $coupon = Coupon::where('code',$request->code)->Published()->select('code')->first();
+      $course = Course::where('id', $request->course_id)->first();
+
+      if ($coupon != null) {
+          $start_day  = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->start_day);
+          $end_day    = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->end_day);
+          $min_value  = Coupon::where('code',$request->code)->Published()->first()->min_value;
+          
+         if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
+           if ($course->discount_price > $coupon->min_value) {
+            //  session()->put('coupon',[
+            //    'name' => $coupon->code,
+            //    'discount' => $coupon->discount($coupon->rate),
+            //    'total' => $request->total,
+            //  ]);
+
+             //save in enrolments table
+             $enrollment = new Enrollment();
+             $enrollment->user_id = $request->user_id; //this is student id
+             $enrollment->course_id = $request->course_id;
+             $enrollment->save();
+
+             return redirect()->route('my.courses');
+            }else {
+              return response(['error' => 'Minimum Amount '. ' ' . $min_value . ' '  .'needed'], 200);
+           }
+        }
+        else {
+          return response(['error' => translate('Coupon expired.')], 200);
+        }
+      }else {
+        return response(['error' => translate('Invalid Coupon Code.')], 200);
+      }
     }
 }

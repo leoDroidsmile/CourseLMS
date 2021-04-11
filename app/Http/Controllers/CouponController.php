@@ -112,8 +112,8 @@ class CouponController extends Controller
                'discount' => $coupon->discount($coupon->rate),
                'total' => $request->total,
              ]);
-            Session::flash('success', translate('Coupon applied'));
-             return back();
+              Session::flash('success', translate('Coupon applied'));
+              return back();
            }else {
             Session::flash('error', 'Minimum Amount '. ' ' . $min_value . ' '  .'needed');
              return back();
@@ -140,6 +140,9 @@ class CouponController extends Controller
       Session::flash('error' ,translate('Coupon removed'));
       return back();
     }
+
+
+    
 
     //END
 }

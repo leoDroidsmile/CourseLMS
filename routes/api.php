@@ -240,4 +240,6 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
 
         // Return Video Url and type for Windows PC Video Player
         Route::get('contentWithVideo', 'CourseApiController@singleContentWithVideo');
+
+        Route::post('coupon_apply', 'CourseApiController@coupon_apply');
     });

@@ -1,8 +1,7 @@
 @extends('frontend.app')
 
 @section('content')
-
-<!-- ================================
+    <!-- ================================
       START BREADCRUMB AREA
   ================================= -->
     <section class="breadcrumb-area breadcrumb-detail-area"
@@ -118,13 +117,13 @@
                         @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
                             <a href="#!"
                                class="theme-btn w-100 mb-3 addToCart-{{$s_course->id}}"
-                               onclick="addToCart({{$s_course->id}},'{{route('add.to.cart')}}')">@translate(Buy)</a>
+                               onclick="addToCart({{$s_course->id}},'{{route('add.to.cart')}}')">@translate(Add to cart)</a>
                         @else
-                            <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
+                            <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Add to cart)</a>
                         @endif
                     @endauth
                     @guest
-                        <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
+                        <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Add to cart)</a>
 
                     @endguest
                 </div>
@@ -392,14 +391,14 @@
                                                         @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
                                                             <a href="#!" class="text-btn addToCart-{{$course->id}}"
 
-                                                               onclick="addToCart({{$course->id}},'{{route('add.to.cart')}}')">@translate(Buy)</a>
+                                                               onclick="addToCart({{$course->id}},'{{route('add.to.cart')}}')">@translate(Add to cart)</a>
                                                         @else
-                                                            <a href="{{route('login')}}" class="text-btn">@translate(Buy)</a>
+                                                            <a href="{{route('login')}}" class="text-btn">@translate(Add to cart)</a>
                                                         @endif
                                                     @endauth
 
                                                     @guest()
-                                                        <a href="{{route('login')}}" class="text-btn">@translate(Buy)</a>
+                                                        <a href="{{route('login')}}" class="text-btn">@translate(Add to cart)</a>
                                                     @endguest
 
 
@@ -621,14 +620,14 @@
                                                     @auth()
                                                         @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
                                                             <a href="#!" class="text-btn addToCart-{{$moreCourseItem->id}}"
-                                                               onclick="addToCart({{$moreCourseItem->id}},'{{route('add.to.cart')}}')">@translate(Buy)</a>
+                                                               onclick="addToCart({{$moreCourseItem->id}},'{{route('add.to.cart')}}')">@translate(Add to cart)</a>
                                                         @else
-                                                            <a href="{{route('login')}}" class="text-btn">@translate(Buy)</a>
+                                                            <a href="{{route('login')}}" class="text-btn">@translate(Add to cart)</a>
                                                         @endif
                                                     @endauth
 
                                                     @guest()
-                                                        <a href="{{route('login')}}" class="text-btn">@translate(Buy)</a>
+                                                        <a href="{{route('login')}}" class="text-btn">@translate(Add to cart)</a>
                                                     @endguest
 
 
@@ -773,15 +772,15 @@
                                         <div class="buy-course-btn mb-3 text-center">
                                             @auth()
                                                 @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
-                                                    <a class="theme-btn w-100 mb-3 addToCart-{{$s_course->id}}"
-                                                       onclick="javascript:void(0)" data-toggle="modal"
-                                                       data-target=".coupon-modal-form">@translate(Buy)</a>
+                                                    <a href="#!"
+                                                       class="theme-btn w-100 mb-3 addToCart-{{$s_course->id}}"
+                                                       onclick="addToCart({{$s_course->id}},'{{route('add.to.cart')}}')">@translate(Add to cart)</a>
                                                 @else
-                                                    <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
+                                                    <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Add to cart)</a>
                                                 @endif
                                             @endauth
                                             @guest
-                                                <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
+                                                <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Add to cart)</a>
 
                                             @endguest
                                         </div>
@@ -940,77 +939,4 @@
 
     {{--======================================= Course Preview: END =====================================--}}
 
-
-    {{--======================================= Coupon Dialog: START =====================================--}}
-
-    <div class="modal-form">
-        <div class="modal fade coupon-modal-form" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-top">
-                        <h5 class="modal-title">{{ $s_course->title }}</h5>
-                        <button type="button" id="coupon_modal_close" class="close close-arrow" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="la la-close"></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="input-box">
-                            <div class="form-group mb-0">
-                                <!-- Search bar -->
-                                <div class="alert alert-danger" style="display:none;" id="result_error"></div>
-                                <div class="alert alert-success" style="display:none;" id="result_success"></div>
-
-                                @auth()
-                                    @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
-                                    <div style="display:none;" id="user_id">{{\Illuminate\Support\Facades\Auth::user()->id}}</div>
-                                    @endif
-                                @endauth
-                                <input class="form-control" type="text" name="code" id="coupon_code" placeholder="Enter Coupon Code Here">
-                                <button id="apply_coupon" class="btn btn-primary mt-2">@translate(Apply Coupon)</button>
-                            </div>
-                        </div><!-- end input-box -->
-                    </div>
-                </div>
-            </div>
-        </div><!-- end modal -->
-    </div>
-
-    {{--======================================= Coupon Dialog: END =====================================--}}
-
-@endsection
-
-
-@section('js')
-<script type="text/javascript">
-    $(function () {
-        $("#apply_coupon").click(function(){
-            var url = "/api/v1/coupon_apply";
-            var coupon_code = $("#coupon_code").val();
-            var user_id = $("#user_id").text();
-            var course_id = "{{$moreCourseItem->id}}";
-
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: {code: coupon_code, user_id: user_id, course_id : course_id},
-                success: function (result) {
-                    console.log(result);
-                    
-                    $("#result_error").hide();
-                    $("#result_success").hide();
-
-                    if(result.error){
-                        $("#result_error").show();
-                        $("#result_error").text(result.error);
-                    }
-
-                    if(result.success){
-                        $("#result_error").show();
-                        $("#result_error").text(result.error);
-                    }
-                }
-            });
-        });
-    });
-</script>
 @endsection
