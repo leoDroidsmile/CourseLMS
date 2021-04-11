@@ -23,11 +23,24 @@ $(document).ready(function () {
         $('#custom_toggle_bar').removeClass('d-flex');
     }
 
-    cartList();
+    // cartList();
     wishList();
     enrollCourse();
-    // console.clear();
+    resetAddToCart();
 })
+
+/*Reset Add to cart */
+function resetAddToCart(){
+    var add_cart = $('a:contains("Add to cart")');
+    
+    console.log("dklsjfklsd ", add_cart.length);
+    $('a:contains("Add to cart")').each(function(item){
+        var course_detail_url = $(this).parent().parent().parent().find("a").prop("href");
+        $(this).text("Course Detail");
+        $(this).prop("onclick", null);
+        $(this).prop("href", course_detail_url);
+    })
+}
 
 /*enroll course*/
 function enrollCourse() {
