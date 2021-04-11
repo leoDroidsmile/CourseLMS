@@ -340,21 +340,6 @@
                                                                             class="card__price">{{formatPrice($course->price)}}</span>
                                                                     @endif
                                                                 @endif
-                                                            <!--there are the login-->
-                                                                @auth()
-                                                                    @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
-                                                                        <a href="#!"
-                                                                           class="text-btn addToCart-{{$course->id}}"
-                                                                           onclick="addToCart({{$course->id}},'{{route('add.to.cart')}}')">@translate(Add to cart)</a>
-                                                                    @else
-                                                                        <a href="{{route('login')}}" class="text-btn">@translate(Add to cart)</a>
-                                                                    @endif
-                                                                @endauth
-
-                                                                @guest()
-                                                                    <a href="{{route('login')}}" class="text-btn">@translate(Add to cart)</a>
-                                                                @endguest
-
 
                                                             </div><!-- end card-price-wrap -->
                                                         </div><!-- end card-content -->
