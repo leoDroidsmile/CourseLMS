@@ -1013,7 +1013,7 @@
                         // $("#result_error").show();
                         // $("#result_error").text(result.success);
                         $.notify(result.success, 'success');
-                        $(".coupon-modal-form").hide();
+                        $(".coupon-modal-form").modal('hide');
                     }
                 }
             });
