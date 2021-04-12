@@ -42,10 +42,10 @@
                     <th>@translate(S/L)</th>
                     <th>@translate(Code)</th>
                     <th>@translate(Discount)</th>
-                    {{-- <th>@translate(Minimum Shopping)</th> --}}
                     <th>@translate(Start Date)</th>
                     <th>@translate(End Date)</th>
                     <th>@translate(Status)</th>
+                    <th>@translate(Used)</th>
                     <th>@translate(Action)</th>
                 </tr>
                 </thead>
@@ -56,7 +56,6 @@
                         <td>{{ $loop->index++ + 1 }}</td>
                         <td>{{ $coupon->code }}</td>
                         <td>{{ formatPrice($coupon->rate) }}</td>
-                        {{-- <td>{{ formatPrice($coupon->min_value) }}</td> --}}
                         <td>{{ $coupon->start_day }}</td>
                         <td>{{ $coupon->end_day }}</td>
                         <td>
@@ -71,6 +70,12 @@
                                 </div>
                             </div>
                         </td>
+                        <td>
+                            @if($coupon->is_used)
+                                <span class="badge badge-warning p-2">Used</span></td>
+                            @else
+                                <span class="badge badge-success p-2">Not Used</span></td>
+                            @endif
                         <td>
                             <a href="#!" class="btn btn-primary"
                                onclick="forModal('{{ route('coupon.edit', $coupon->id) }}', '@translate(Edit)')">@translate(Edit)
