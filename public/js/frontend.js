@@ -28,6 +28,7 @@ $(document).ready(function () {
     enrollCourse();
     resetAddToCart();
     removeShoppingCartButton();
+    repalceImageDataOriginalWithSrc();
 })
 
 function removeShoppingCartButton(){
@@ -45,6 +46,17 @@ function resetAddToCart(){
         $(this).prop("href", course_detail_url);
     })
 }
+
+/* Replace image property, data-original with src */
+function repalceImageDataOriginalWithSrc(){
+    $("img").each(function() {
+        if($(this).attr("data-original") && $(this).attr("src")){
+            $(this).attr("src",$(this).attr("data-original"));
+            $(this).removeAttr("data-original");
+        }
+    })
+}
+
 
 /*enroll course*/
 function enrollCourse() {
