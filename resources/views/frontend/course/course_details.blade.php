@@ -956,41 +956,71 @@
 
     {{--======================================= Coupon Dialog: START =====================================--}}
 
+    @auth()
     <div class="modal-form">
         <div class="modal fade coupon-modal-form" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-top">
-                        <h5 class="modal-title">{{ $s_course->title }}</h5>
-                        <button type="button" id="coupon_modal_close" class="close close-arrow" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="la la-close"></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="input-box">
-                            <div class="form-group mb-0">
-                                <!-- Search bar -->
-                                <div class="alert alert-danger" style="display:none;" id="result_error"></div>
-                                <div class="alert alert-success" style="display:none;" id="result_success"></div>
+                    @if($s_course->is_discount == 1 && $s_course->discount_price > walletBalance() 
+                        || $s_course->is_discount == 0 && $s_course->price > walletBalance())
+                        <div class="modal-top not-enough-balance">
+                            <h5 class="modal-title" >Your current balance is not enough</h5>
+                            <button type="button" id="coupon_modal_close" class="close close-arrow" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="la la-close"></span>
+                            </button>
+                        </div>
 
-                                @auth()
+                        <div class="modal-body">
+                            <div class="input-box">
+                                <div class="form-group mb-0 text-center">
+                                    
                                     @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
-                                    <div style="display:none;" id="user_id">{{\Illuminate\Support\Facades\Auth::user()->id}}</div>
+                                        <div style="display:none;" id="user_id">{{\Illuminate\Support\Facades\Auth::user()->id}}</div>
                                     @endif
-
                                     <input class="form-control" type="text" name="code" id="coupon_code" placeholder="Enter Coupon Code Here">
                                     <button id="apply_coupon" class="btn btn-primary mt-2">@translate(Apply Coupon)</button>
-                                    <hr>
-                                    <button id="buy_wallet" class="btn btn-primary mt-2">@translate(Buy with Wallet) ({{ walletBalance() }})</button>
-                                @endauth
-                            </div>
-                        </div><!-- end input-box -->
-                    </div>
+                                
+                                </div>
+                            </div><!-- end input-box -->
+                        </div>
+                    @else
+                        <div class="modal-top  enough-balance">
+                            <h5 class="modal-title">Your current balance is enough</h5>
+                            <button type="button" id="coupon_modal_close" class="close close-arrow" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="la la-close"></span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="input-box">
+                                <div class="form-group mb-0 text-center">
+                                    <div >
+                                    Direct payment from the balance<br>
+                                    </div>
+                                    <div>
+                                    <button id="buy_wallet" class="btn btn-primary mt-2">@translate(Buy with Wallet)</button>
+                                    <br>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
+                                        <div style="display:none;" id="user_id">{{\Illuminate\Support\Facades\Auth::user()->id}}</div>
+                                    @endif
+                                    <div class="middle-center">Or with new Coupon Code</div>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-9">
+                                            <input class="form-control" type="text" name="code" id="coupon_code" placeholder="Enter Coupon Code Here">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <button id="apply_coupon" class="btn btn-primary mt-2">@translate(Apply Coupon)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end input-box -->
+                        </div>
+                    @endif
                 </div>
             </div>
         </div><!-- end modal -->
     </div>
-
+    @endauth
     {{--======================================= Coupon Dialog: END =====================================--}}
 
 @endsection
@@ -1074,4 +1104,44 @@
         })
     });
 </script>
+
+<style>
+.not-enough-balance{
+    background: #d32f2f!important;
+}
+
+.not-enough-balance >  h5{
+    color:white;
+}
+
+.enough-balance{
+    background: #005cbf!important;
+}
+
+.enough-balance > h5{
+    color:white;
+}
+
+.middle-center{
+    margin:30px;
+    font-size:16px;
+}
+
+.hrdivider {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.hrdivider span {
+  position: absolute;
+  top: -11px;
+  background: #fff;
+  padding: 0 20px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+</style>
 @endsection
