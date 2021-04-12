@@ -3,28 +3,29 @@
  $(document).ready(function() {
 	$('#wallet-amount').on('keyup',function() {
 	    var wallet_amount = $(this).val();
+			console.log("======", url);
 	    var url = $('#url').val();
 
 	    // ajax setup
 
 	    $.ajaxSetup({
-		headers: {
-		    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
+				headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}	
 	    });
 
 	    // ajax setup request start
 
 	    $.ajax({
-		type: 'GET',
-		url: url,
-		data: {
-		    wallet_amount: wallet_amount
-		},
-		success: function(data) {
-		    $('#wallet-pay').val(data);
-		    $('.wallet-pay').text(data);
-		}
+				type: 'GET',
+				url: url,
+				data: {
+						wallet_amount: wallet_amount
+				},
+				success: function(data) {
+						$('#wallet-pay').val(data);
+						$('.wallet-pay').text(data);
+				}
 	    });
 
 	    // ajax setup request end

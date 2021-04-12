@@ -1021,7 +1021,7 @@ function getWalletSetting($key)
 
  function walletRate()
  {
-     return getWalletSetting('wallet_rate') ?? 1000;
+     return getWalletSetting('wallet_rate') ?? 1;
  }
 
  function registrationPoint()
