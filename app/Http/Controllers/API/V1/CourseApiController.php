@@ -270,8 +270,8 @@ class CourseApiController extends Controller
 
 
          if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
-           if ($course->is_discount == 1 && $course->discount_price < $coupon->min_value 
-                || $course->is_discount == 0 && $course->price < $coupon->min_value) {
+           if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
+                || $course->is_discount == 0 && $course->price < $coupon->rate) {
             //  session()->put('coupon',[
             //    'name' => $coupon->code,
             //    'discount' => $coupon->discount($coupon->rate),
@@ -301,7 +301,7 @@ class CourseApiController extends Controller
              // Add remained amount to user's wallet
             $user = User::where('id', $request->user_id)->first();
             $amount = $remaining; // (Double) Can be a negative value
-            $message = "Courses have been purchased"; //The reason for this transaction
+            $message = "Courses have been purchased with Coupon"; //The reason for this transaction
 
             //Optional (if you modify the point_transaction table)
             $data = [
@@ -313,7 +313,7 @@ class CourseApiController extends Controller
 
              return response(['success' => 'Courses have been purchased successfully.'], 200);
             }else {
-              return response(['error' => 'Minimum Amount '. ' ' . $min_value . ' '  .'needed'], 200);
+              return response(['error' => 'Not enough money for the coupon '], 200);
            }
         }
         else {
@@ -322,5 +322,67 @@ class CourseApiController extends Controller
       }else {
         return response(['error' => translate('Invalid Coupon Code.')], 200);
       }
+    }
+
+
+    public function buyCourseWithWallet(Request $request)
+    {
+        $course = Course::where('id', $request->course_id)->first();
+        $user = User::where('id', $request->user_id)->first();
+      
+        if($course->is_discount == 1)
+            $course_price = $course->discount_price;
+        else
+            $course_price = $course->price;
+
+        if ($course_price < $user->currentPoints()) {
+        
+            //save in enrolments table
+            $enrollment = new Enrollment();
+            $enrollment->user_id = $request->user_id; //this is student id
+            $enrollment->course_id = $request->course_id;
+            $enrollment->save();
+            
+
+            $history = new CoursePurchaseHistory();
+            $history->enrollment_id = $enrollment->id;
+            $history->amount = $course_price;
+            $history->payment_method = "Wallet";
+            $history->save();
+
+                
+            // Sub course price to user's wallet
+            $message = "Courses have been purchased with Wallet"; //The reason for this transaction
+
+            //Optional (if you modify the point_transaction table)
+            $data = [
+                'ref_id' => 'someReferId',
+            ];
+
+            $transaction = $user->subPoints($course_price,$message,$data);
+
+
+            return response(['success' => 'Courses have been purchased successfully.'], 200);
+        }else {
+            return response(['error' => 'Not enough money in Your wallet'], 200);
+        }
+    }
+
+    function enrollFreeCourse(Request $request){
+        $course = Course::where('id', $request->course_id)->first();
+        $user = User::where('id', $request->user_id)->first();
+      
+        $enrollment = new Enrollment();
+        $enrollment->user_id = $request->user_id; //this is student id
+        $enrollment->course_id = $request->course_id;
+        $enrollment->save();
+        
+        $history = new CoursePurchaseHistory();
+        $history->enrollment_id = $enrollment->id;
+        $history->amount = 0;
+        $history->payment_method = "Free Course";
+        $history->save();
+
+        return response(['success' => 'Course has been set enrolled.'], 200);
     }
 }

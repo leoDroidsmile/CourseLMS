@@ -771,19 +771,32 @@
                                         </div><!-- end preview-course-incentives -->
 
                                         <div class="buy-course-btn mb-3 text-center">
-                                            @auth()
-                                                @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
-                                                    <a class="theme-btn w-100 mb-3 addToCart-{{$s_course->id}}"
-                                                       onclick="javascript:void(0)" data-toggle="modal"
-                                                       data-target=".coupon-modal-form">@translate(Buy)</a>
-                                                @else
+                                            @if($s_course->is_free == false)
+                                                @auth()
+                                                    @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
+                                                        <a class="theme-btn w-100 mb-3 addToCart-{{$s_course->id}}"
+                                                        onclick="javascript:void(0)" data-toggle="modal"
+                                                        data-target=".coupon-modal-form">@translate(Buy)</a>
+                                                    @else
+                                                        <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
+                                                    @endif
+                                                @endauth
+                                                @guest
                                                     <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
-                                                @endif
-                                            @endauth
-                                            @guest
-                                                <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
 
-                                            @endguest
+                                                @endguest
+                                            @else
+                                                @auth()
+                                                    @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
+                                                        <a onclick="enrollCourse" class="enroll-course theme-btn w-100 mb-3 addToCart-{{$s_course->id}}">@translate(Enroll Course)</a>
+                                                    @else
+                                                        <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Enroll Course)</a>
+                                                    @endif
+                                                @endauth
+                                                @guest
+                                                    <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Enroll Course)</a>
+                                                @endguest
+                                            @endif
                                         </div>
 
                                     </div><!-- end preview-course-content -->
@@ -964,9 +977,12 @@
                                     @if(\Illuminate\Support\Facades\Auth::user()->user_type == 'Student')
                                     <div style="display:none;" id="user_id">{{\Illuminate\Support\Facades\Auth::user()->id}}</div>
                                     @endif
+
+                                    <input class="form-control" type="text" name="code" id="coupon_code" placeholder="Enter Coupon Code Here">
+                                    <button id="apply_coupon" class="btn btn-primary mt-2">@translate(Apply Coupon)</button>
+                                    <hr>
+                                    <button id="buy_wallet" class="btn btn-primary mt-2">@translate(Buy with Wallet) ({{ walletBalance() }})</button>
                                 @endauth
-                                <input class="form-control" type="text" name="code" id="coupon_code" placeholder="Enter Coupon Code Here">
-                                <button id="apply_coupon" class="btn btn-primary mt-2">@translate(Apply Coupon)</button>
                             </div>
                         </div><!-- end input-box -->
                     </div>
@@ -994,30 +1010,67 @@
                 method: 'POST',
                 data: {code: coupon_code, user_id: user_id, course_id : course_id},
                 success: function (result) {
-                    
-                    // $("#result_error").hide();
-                    // $("#result_success").hide();
-
+                
                     $.notify.defaults({
                         elementPosition: 'middle right',
                         globalPosition: 'right middle',
                     })
                     
                     if(result.error){
-                        // $("#result_error").show();
-                        // $("#result_error").text(result.error);
                         $.notify(result.error, 'error')
                     }
 
                     if(result.success){
-                        // $("#result_error").show();
-                        // $("#result_error").text(result.success);
                         $.notify(result.success, 'success');
                         $(".coupon-modal-form").modal('hide');
                     }
                 }
             });
         });
+
+        $("#buy_wallet").click(function(){
+            var url = "/api/v1/buyCourseWithWallet";
+            var user_id = $("#user_id").text();
+            var course_id = $("#course_id").text();
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: { user_id: user_id, course_id : course_id},
+                success: function (result) {
+                
+                    $.notify.defaults({
+                        elementPosition: 'middle right',
+                        globalPosition: 'right middle',
+                    })
+                    
+                    if(result.error){
+                        $.notify(result.error, 'error')
+                    }
+
+                    if(result.success){
+                        $.notify(result.success, 'success');
+                        $(".coupon-modal-form").modal('hide');
+                    }
+                }
+            });
+        });
+
+        $(".enroll-course").click(function(){
+            var url = "/api/v1/enrollFreeCourse";
+            var user_id = $("#user_id").text();
+            var course_id = $("#course_id").text();
+
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: { user_id: user_id, course_id : course_id},
+                success: function (result) {
+                    console.log(result);
+                    enrollCourse();
+                }
+            });
+        })
     });
 </script>
 @endsection

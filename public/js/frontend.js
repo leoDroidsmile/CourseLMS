@@ -38,7 +38,6 @@ function removeShoppingCartButton(){
 function resetAddToCart(){
     var add_cart = $('a:contains("Add to cart")');
     
-    console.log("dklsjfklsd ", add_cart.length);
     $('a:contains("Add to cart")').each(function(item){
         var course_detail_url = $(this).parent().parent().parent().find("a").prop("href");
         $(this).text("Course Detail");

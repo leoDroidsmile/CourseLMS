@@ -242,4 +242,8 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
         Route::get('contentWithVideo', 'CourseApiController@singleContentWithVideo');
 
         Route::post('coupon_apply', 'CourseApiController@coupon_apply');
+
+        Route::post('buyCourseWithWallet', 'CourseApiController@buyCourseWithWallet');
+
+        Route::post('enrollFreeCourse', 'CourseApiController@enrollFreeCourse');
     });
