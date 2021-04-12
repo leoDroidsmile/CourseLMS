@@ -994,19 +994,25 @@
                 method: 'POST',
                 data: {code: coupon_code, user_id: user_id, course_id : course_id},
                 success: function (result) {
-                    console.log(result);
                     
                     $("#result_error").hide();
                     $("#result_success").hide();
 
+                    $.notify.defaults({
+                        elementPosition: 'middle right',
+                        globalPosition: 'right middle',
+                    })
+                    
                     if(result.error){
                         $("#result_error").show();
                         $("#result_error").text(result.error);
+                        $.notify(result.error, 'error')
                     }
 
                     if(result.success){
                         $("#result_error").show();
-                        $("#result_error").text(result.error);
+                        $("#result_error").text(result.success);
+                        $.notify(result.success, 'success')
                     }
                 }
             });

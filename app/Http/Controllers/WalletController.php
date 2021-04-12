@@ -183,6 +183,10 @@ class WalletController extends Controller
             return buyWallet($request->wallet_amount);
        }
 
+       public function addAmount(Request $request){
+            addWallet($request->amount, translate('Course Purchased'));
+        }
+
        public function gateway(Request $request)
        {
             $request->validate([

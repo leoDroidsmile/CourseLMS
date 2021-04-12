@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 use App\Model\Demo;
 use App\Coupon;
 use Carbon\Carbon;
+use App\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -278,7 +279,23 @@ class CourseApiController extends Controller
              $enrollment->course_id = $request->course_id;
              $enrollment->save();
 
-             return redirect()->route('my.courses');
+             $remaining = $coupon->rate - $course->discount_price;
+
+             
+             // Add remained amount to user's wallet
+            $user = User::where('id', $request->user_id)->first();
+            $amount = $remaining; // (Double) Can be a negative value
+            $message = "Courses have been purchased"; //The reason for this transaction
+
+            //Optional (if you modify the point_transaction table)
+            $data = [
+                'ref_id' => 'someReferId',
+            ];
+
+            $transaction = $user->addPoints($amount,$message,$data);
+
+
+             return response(['success' => 'Courses have been purchased successfully.'], 200);
             }else {
               return response(['error' => 'Minimum Amount '. ' ' . $min_value . ' '  .'needed'], 200);
            }
