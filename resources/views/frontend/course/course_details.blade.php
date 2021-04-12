@@ -1051,6 +1051,7 @@
                     if(result.success){
                         $.notify(result.success, 'success');
                         $(".coupon-modal-form").modal('hide');
+                        enrollCourse();
                     }
                 }
             });
