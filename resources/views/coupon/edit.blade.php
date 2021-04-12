@@ -40,11 +40,11 @@
         </div>
 
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label>@translate(Minimum Shopping Amount)</label>
             <input type="number" name="min_value" value="{{ $single_coupon->min_value }}" class="form-control" min="0"
                    placeholder="@translate(Minimum Shopping Amount)" required>
-        </div>
+        </div> --}}
 
         <div class="form-group">
             <input type="checkbox" name="is_published"

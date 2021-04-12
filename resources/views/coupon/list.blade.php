@@ -42,7 +42,7 @@
                     <th>@translate(S/L)</th>
                     <th>@translate(Code)</th>
                     <th>@translate(Discount)</th>
-                    <th>@translate(Minimum Shopping)</th>
+                    {{-- <th>@translate(Minimum Shopping)</th> --}}
                     <th>@translate(Start Date)</th>
                     <th>@translate(End Date)</th>
                     <th>@translate(Status)</th>
@@ -56,7 +56,7 @@
                         <td>{{ $loop->index++ + 1 }}</td>
                         <td>{{ $coupon->code }}</td>
                         <td>{{ formatPrice($coupon->rate) }}</td>
-                        <td>{{ formatPrice($coupon->min_value) }}</td>
+                        {{-- <td>{{ formatPrice($coupon->min_value) }}</td> --}}
                         <td>{{ $coupon->start_day }}</td>
                         <td>{{ $coupon->end_day }}</td>
                         <td>
