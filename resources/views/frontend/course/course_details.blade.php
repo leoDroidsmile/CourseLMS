@@ -125,8 +125,8 @@
                     @endauth
                     @guest
                         <a href="{{route('login')}}" class="theme-btn w-100 mb-3">@translate(Buy)</a>
-
                     @endguest
+                    <div style="display:none;" id="course_id">{{$s_course->id}}</div>
                 </div>
             </div><!-- end preview-course-content -->
         </div><!-- end preview-video-and-details -->
@@ -987,7 +987,7 @@
             var url = "/api/v1/coupon_apply";
             var coupon_code = $("#coupon_code").val();
             var user_id = $("#user_id").text();
-            var course_id = "{{$moreCourseItem->id}}";
+            var course_id = $("#course_id").text();
 
             $.ajax({
                 url: url,
@@ -995,8 +995,8 @@
                 data: {code: coupon_code, user_id: user_id, course_id : course_id},
                 success: function (result) {
                     
-                    $("#result_error").hide();
-                    $("#result_success").hide();
+                    // $("#result_error").hide();
+                    // $("#result_success").hide();
 
                     $.notify.defaults({
                         elementPosition: 'middle right',
@@ -1004,15 +1004,16 @@
                     })
                     
                     if(result.error){
-                        $("#result_error").show();
-                        $("#result_error").text(result.error);
+                        // $("#result_error").show();
+                        // $("#result_error").text(result.error);
                         $.notify(result.error, 'error')
                     }
 
                     if(result.success){
-                        $("#result_error").show();
-                        $("#result_error").text(result.success);
-                        $.notify(result.success, 'success')
+                        // $("#result_error").show();
+                        // $("#result_error").text(result.success);
+                        $.notify(result.success, 'success');
+                        $(".coupon-modal-form").hide();
                     }
                 }
             });

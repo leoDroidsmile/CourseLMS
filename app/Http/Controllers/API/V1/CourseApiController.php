@@ -19,6 +19,7 @@ use App\Model\Demo;
 use App\Coupon;
 use Carbon\Carbon;
 use App\User;
+use App\Model\CoursePurchaseHistory;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -257,16 +258,20 @@ class CourseApiController extends Controller
 
     public function coupon_apply(Request $request)
     {
-      $coupon = Coupon::where('code',$request->code)->Published()->select('code')->first();
+      $coupon = Coupon::where('code',$request->code)->Published()->first();
       $course = Course::where('id', $request->course_id)->first();
 
       if ($coupon != null) {
           $start_day  = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->start_day);
           $end_day    = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->end_day);
           $min_value  = Coupon::where('code',$request->code)->Published()->first()->min_value;
-          
+        
+        //   return response(['error' => $coupon], 200);
+
+
          if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
-           if ($course->discount_price > $coupon->min_value) {
+           if ($course->is_discount == 1 && $course->discount_price < $coupon->min_value 
+                || $course->is_discount == 0 && $course->price < $coupon->min_value) {
             //  session()->put('coupon',[
             //    'name' => $coupon->code,
             //    'discount' => $coupon->discount($coupon->rate),
@@ -279,7 +284,18 @@ class CourseApiController extends Controller
              $enrollment->course_id = $request->course_id;
              $enrollment->save();
 
-             $remaining = $coupon->rate - $course->discount_price;
+             if($course->is_discount == 1)
+                $course_price = $course->discount_price;
+            else
+                $course_price = $course->price;
+
+            $history = new CoursePurchaseHistory();
+            $history->enrollment_id = $enrollment->id;
+            $history->amount = $course_price;
+            $history->payment_method = "Copupon";
+            $history->save();
+
+            $remaining = $coupon->rate - $course_price;
 
              
              // Add remained amount to user's wallet
