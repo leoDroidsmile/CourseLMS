@@ -964,7 +964,7 @@
                     @if($s_course->is_discount == 1 && $s_course->discount_price > walletBalance() 
                         || $s_course->is_discount == 0 && $s_course->price > walletBalance())
                         <div class="modal-top not-enough-balance">
-                            <h5 class="modal-title" >Your current balance is not enough</h5>
+                            <h5 class="modal-title" >Your current balance ({{formatPrice(walletBalance())}}) is not enough</h5>
                             <button type="button" id="coupon_modal_close" class="close close-arrow" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="la la-close"></span>
                             </button>
@@ -985,7 +985,7 @@
                         </div>
                     @else
                         <div class="modal-top  enough-balance">
-                            <h5 class="modal-title">Your current balance is enough</h5>
+                            <h5 class="modal-title">Your current balance ({{formatPrice(walletBalance())}}) is enough</h5>
                             <button type="button" id="coupon_modal_close" class="close close-arrow" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="la la-close"></span>
                             </button>
@@ -1052,6 +1052,7 @@
 
                     if(result.success){
                         $.notify(result.success, 'success');
+                        enrollCourse();
                         $(".coupon-modal-form").modal('hide');
                     }
                 }
@@ -1080,8 +1081,8 @@
 
                     if(result.success){
                         $.notify(result.success, 'success');
-                        $(".coupon-modal-form").modal('hide');
                         enrollCourse();
+                        $(".coupon-modal-form").modal('hide');
                     }
                 }
             });
