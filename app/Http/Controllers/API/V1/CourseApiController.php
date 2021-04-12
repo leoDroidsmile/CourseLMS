@@ -261,6 +261,9 @@ class CourseApiController extends Controller
       $coupon = Coupon::where('code',$request->code)->Published()->first();
       $course = Course::where('id', $request->course_id)->first();
 
+      if($coupon->is_used)
+        return response(['error' => 'The coupon was already used.'], 200);
+
       if ($coupon != null) {
           $start_day  = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->start_day);
           $end_day    = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->end_day);
@@ -268,16 +271,10 @@ class CourseApiController extends Controller
         
         //   return response(['error' => $coupon], 200);
 
-
          if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
            if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
                 || $course->is_discount == 0 && $course->price < $coupon->rate) {
-            //  session()->put('coupon',[
-            //    'name' => $coupon->code,
-            //    'discount' => $coupon->discount($coupon->rate),
-            //    'total' => $request->total,
-            //  ]);
-
+            
              //save in enrolments table
              $enrollment = new Enrollment();
              $enrollment->user_id = $request->user_id; //this is student id
