@@ -66,6 +66,7 @@ function enrollCourse() {
             url: url,
             method: 'GET',
             success: function (result) {
+                console.log("frontend =====");
                 result.data.forEach(function (item, index) {
 
                     $(".love-" + item.course_id).empty();

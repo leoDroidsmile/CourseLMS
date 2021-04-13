@@ -1029,6 +1029,11 @@
 @section('js')
 <script type="text/javascript">
     $(function () {
+        
+        $(document).ready(function () {
+            enrollCourseBuyButtons();
+        });
+
         $("#apply_coupon").click(function(){
             var url = "/api/v1/coupon_apply";
             var coupon_code = $("#coupon_code").val();
@@ -1052,7 +1057,7 @@
 
                     if(result.success){
                         $.notify(result.success, 'success');
-                        enrollCourse();
+                        enrollCourseBuyButtons();
                         $(".coupon-modal-form").modal('hide');
                     }
                 }
@@ -1081,7 +1086,7 @@
 
                     if(result.success){
                         $.notify(result.success, 'success');
-                        enrollCourse();
+                        enrollCourseBuyButtons();
                         $(".coupon-modal-form").modal('hide');
                     }
                 }
@@ -1099,11 +1104,35 @@
                 data: { user_id: user_id, course_id : course_id},
                 success: function (result) {
                     console.log(result);
-                    enrollCourse();
+                    enrollCourseBuyButtons();
                 }
             });
         })
     });
+
+
+    /*enroll course*/
+    function enrollCourseBuyButtons() {
+        var url = $('#enrollUrl').val();
+        if (url != null && url != undefined) {
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (result) {
+                    result.data.forEach(function (item, index) {
+                        $(".love-" + item.course_id).empty();
+                        
+                        $(".addToCart-" + item.course_id).prop("onclick", null);
+                        $(".addToCart-" + item.course_id).prop("href", item.link);
+                        $(".addToCart-" + item.course_id).text(item.message);
+
+                        $(".addToCart-" + item.course_id).removeAttr("data-toggle");
+                        $(".addToCart-" + item.course_id).removeAttr("data-target");
+                    })
+                }
+            })
+        }
+    }
 </script>
 
 <style>
