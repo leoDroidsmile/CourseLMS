@@ -17,6 +17,7 @@ use App\Model\SeenContent;
 use Illuminate\Support\Str;
 use App\Model\Demo;
 use App\Coupon;
+use App\TeacherCoupon;
 use Carbon\Carbon;
 use App\User;
 use App\Model\CoursePurchaseHistory;
@@ -261,62 +262,86 @@ class CourseApiController extends Controller
       $coupon = Coupon::where('code',$request->code)->Published()->first();
       $course = Course::where('id', $request->course_id)->first();
 
-      if($coupon->is_used)
-        return response(['error' => 'The coupon was already used.'], 200);
-
       if ($coupon != null) {
-          $start_day  = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->start_day);
-          $end_day    = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->end_day);
-          $min_value  = Coupon::where('code',$request->code)->Published()->first()->min_value;
+
+        if($coupon->is_used)
+            return response(['error' => 'The coupon was already used.'], 200);
+
+
+        $start_day  = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->start_day);
+        $end_day    = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->end_day);
+        $min_value  = Coupon::where('code',$request->code)->Published()->first()->min_value;
         
         //   return response(['error' => $coupon], 200);
 
-         if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
-           if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
+        if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
+            if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
                 || $course->is_discount == 0 && $course->price < $coupon->rate) {
             
-             //save in enrolments table
-             $enrollment = new Enrollment();
-             $enrollment->user_id = $request->user_id; //this is student id
-             $enrollment->course_id = $request->course_id;
-             $enrollment->save();
+                //save in enrolments table
+                $enrollment = new Enrollment();
+                $enrollment->user_id = $request->user_id; //this is student id
+                $enrollment->course_id = $request->course_id;
+                $enrollment->save();
 
-             if($course->is_discount == 1)
-                $course_price = $course->discount_price;
+                if($course->is_discount == 1)
+                    $course_price = $course->discount_price;
+                else
+                    $course_price = $course->price;
+
+                $history = new CoursePurchaseHistory();
+                $history->enrollment_id = $enrollment->id;
+                $history->amount = $course_price;
+                $history->payment_method = "Copupon";
+                $history->save();
+
+                $remaining = $coupon->rate - $course_price;
+
+             
+                // Add remained amount to user's wallet
+                $user = User::where('id', $request->user_id)->first();
+                $amount = $remaining; // (Double) Can be a negative value
+                $message = "Courses have been purchased with Coupon"; //The reason for this transaction
+
+                //Optional (if you modify the point_transaction table)
+                $data = [
+                    'ref_id' => 'someReferId',
+                ];
+
+                $transaction = $user->addPoints($amount,$message,$data);
+
+
+                return response(['success' => 'Courses have been purchased successfully.'], 200);
+            }else {
+                return response(['error' => 'Not enough money for the coupon '], 200);
+            }
+        }
+        else {
+            return response(['error' => translate('Coupon expired.')], 200);
+        }
+      }else {
+        // Check Teacher Coupon
+        $coupon = TeacherCoupon::where('code', $request->code)->where('course_id', $request->course_id)->first();
+        if ($coupon != null) {
+            $enrollment = new Enrollment();
+            $enrollment->user_id = $request->user_id; //this is student id
+            $enrollment->course_id = $request->course_id;
+            $enrollment->save();
+
+            if($course->is_discount == 1)
+               $course_price = $course->discount_price;
             else
                 $course_price = $course->price;
 
             $history = new CoursePurchaseHistory();
             $history->enrollment_id = $enrollment->id;
             $history->amount = $course_price;
-            $history->payment_method = "Copupon";
+            $history->payment_method = "Teacher Copupon";
             $history->save();
 
-            $remaining = $coupon->rate - $course_price;
-
-             
-             // Add remained amount to user's wallet
-            $user = User::where('id', $request->user_id)->first();
-            $amount = $remaining; // (Double) Can be a negative value
-            $message = "Courses have been purchased with Coupon"; //The reason for this transaction
-
-            //Optional (if you modify the point_transaction table)
-            $data = [
-                'ref_id' => 'someReferId',
-            ];
-
-            $transaction = $user->addPoints($amount,$message,$data);
-
-
-             return response(['success' => 'Courses have been purchased successfully.'], 200);
-            }else {
-              return response(['error' => 'Not enough money for the coupon '], 200);
-           }
+            return response(['success' => 'Courses have been purchased successfully.'], 200);
         }
-        else {
-          return response(['error' => translate('Coupon expired.')], 200);
-        }
-      }else {
+  
         return response(['error' => translate('Invalid Coupon Code.')], 200);
       }
     }
