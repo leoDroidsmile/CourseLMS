@@ -112,21 +112,28 @@
                                             class="feather icon-chevron-right"></i>
                                     </a>
                                     <ul class="vertical-submenu">
-                                        <li>
+                                        {{-- <li>
                                             <a href="{{route('coupon.index')}}"
                                                class="{{request()->is('dashboard/coupon/new')
                                                     ?'active':null}}">
                                                 @translate(New Coupon)
                                             </a>
-                                        </li>
+                                        </li> --}}
                                         <li>
                                             <a href="{{route('coupon.all')}}"
                                                class="{{request()->is('dashboard/coupons')
                                                     ?'active':null}}">
-                                                @translate(All Coupons)
+                                                @translate(Coupons)
                                             </a>
                                         </li>
                                     
+                                        <li>
+                                            <a href="{{route('teachercoupon.all')}}"
+                                               class="{{request()->is('dashboard/teachercoupons')
+                                                    ?'active':null}}">
+                                                @translate(Teacher Coupons)
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                             @endif

@@ -95,6 +95,7 @@ class RouteServiceProvider extends ServiceProvider
 
         if (couponRoute()) {
             $this->mapCouponRoutes();
+            $this->mapTeacherCouponRoutes();
         }
 
         /**
@@ -241,6 +242,18 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/coupon.php'));
+        }
+    }
+
+
+    /* Teacher Coupon Route */
+
+    protected function mapTeacherCouponRoutes()
+    {
+        if (couponRoute()) {
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/teachercoupon.php'));
         }
     }
 
