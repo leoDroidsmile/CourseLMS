@@ -308,7 +308,13 @@ class CourseApiController extends Controller
                     'ref_id' => 'someReferId',
                 ];
 
-                $transaction = $user->addPoints($amount,$message,$data);
+                // Save remaining amount to student's wallet
+                if($remaining > 0)
+                    $transaction = $user->addPoints($amount,$message,$data);
+
+                // Save course price amount to teacher's wallet
+                $instructor = User::where('id', $course->user_id)->first();
+                $transaction = $instructor->addPoints($course_price,$message,$data);
 
 
                 return response(['success' => 'Courses have been purchased successfully.'], 200);
