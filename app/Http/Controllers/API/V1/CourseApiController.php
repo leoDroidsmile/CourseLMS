@@ -21,7 +21,10 @@ use App\TeacherCoupon;
 use Carbon\Carbon;
 use App\User;
 use App\Model\Instructor;
+use App\Model\InstructorEarning;
 use App\Model\CoursePurchaseHistory;
+use App\Model\Package;
+use App\Model\AdminEarning;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -279,10 +282,6 @@ class CourseApiController extends Controller
             if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
                 || $course->is_discount == 0 && $course->price < $coupon->rate) {
             
-                // Set the Coupon used
-                $coupon->is_used = true;
-                $coupon->save();
-
                 //save in enrolments table
                 $enrollment = new Enrollment();
                 $enrollment->user_id = $request->user_id; //this is student id
@@ -300,10 +299,9 @@ class CourseApiController extends Controller
                 $history->payment_method = "Copupon";
                 $history->save();
 
-                $remaining = $coupon->rate - $course_price;
 
-             
                 // Add remained amount to user's wallet
+                $remaining = $coupon->rate - $course_price;
                 $user = User::where('id', $request->user_id)->first();
                 $amount = $remaining; // (Double) Can be a negative value
                 $message = "Courses have been purchased with Coupon"; //The reason for this transaction
@@ -317,11 +315,36 @@ class CourseApiController extends Controller
                 if($remaining > 0)
                     $transaction = $user->addPoints($remaining,$message,$data);
 
+                
                 // Save course price amount to teacher's wallet
                 $instructor = Instructor::where('user_id', $course->user_id)->first();
-                $instructor->balance += $course_price;
+                $instructor_package = Package::findOrFail($instructor->package_id);
+                
+                // Save Admin Earning
+                $admin_earning_price = $course_price * $instructor_package->commission / 100;
+                $admin_earning = new AdminEarning();
+                $admin_earning->amount = $admin_earning_price;
+                $admin_earning->purposes = "Commission from enrolment";
+                $admin_earning->save();
+                
+                $instructor_earning_price = $course_price - $admin_earning_price;
+                $instructor->balance += $instructor_earning_price;
                 $instructor->save();
 
+
+                // Save instructor earning
+                $instructor_earning = new InstructorEarning();
+                $instructor_earning->enrollment_id = $enrollment->id;
+                $instructor_earning->course_price = $course_price;
+                $instructor_earning->package_id = $instructor->package_id;
+                $instructor_earning->will_get = $instructor_earning_price;
+                $instructor_earning->user_id = $course->user_id;
+                $instructor_earning->save();
+
+                
+                // Set the Coupon used
+                $coupon->is_used = true;
+                $coupon->save();
 
                 return response(['success' => 'Courses have been purchased successfully.'], 200);
             }else {
@@ -396,11 +419,34 @@ class CourseApiController extends Controller
                 'ref_id' => 'someReferId',
             ];
 
+
+            // Sub student's wallet
             $transaction = $user->subPoints($course_price,$message,$data);
+
             // Save course price amount to teacher's wallet
             $instructor = Instructor::where('user_id', $course->user_id)->first();
-            $instructor->balance += $course_price;
+            $instructor_package = Package::findOrFail($instructor->package_id);
+            
+            // Save Admin Earning
+            $admin_earning_price = $course_price * $instructor_package->commission / 100;
+            $admin_earning = new AdminEarning();
+            $admin_earning->amount = $admin_earning_price;
+            $admin_earning->purposes = "Commission from enrolment";
+            $admin_earning->save();
+            
+            $instructor_earning_price = $course_price - $admin_earning_price;
+            $instructor->balance += $instructor_earning_price;
             $instructor->save();
+
+
+            // Save instructor earning
+            $instructor_earning = new InstructorEarning();
+            $instructor_earning->enrollment_id = $enrollment->id;
+            $instructor_earning->course_price = $course_price;
+            $instructor_earning->package_id = $instructor->package_id;
+            $instructor_earning->will_get = $instructor_earning_price;
+            $instructor_earning->user_id = $course->user_id;
+            $instructor_earning->save();
 
 
             return response(['success' => 'Courses have been purchased successfully.'], 200);
