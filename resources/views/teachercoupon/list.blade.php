@@ -40,6 +40,7 @@
                 <thead>
                 <tr>
                     <th>@translate(S/L)</th>
+                    <th>@translate(Group Name)</th>
                     <th>@translate(Code)</th>
                     <th>@translate(Status)</th>
                     <th>@translate(Teacher)</th>
@@ -53,6 +54,7 @@
                 @forelse ($coupons as $coupon)
                     <tr>
                         <td>{{ $loop->index++ + 1 }}</td>
+                        <td>{{ $coupon->group }}</td>
                         <td>{{ $coupon->code }}</td>
                         <td>
                             <div class="form-group">

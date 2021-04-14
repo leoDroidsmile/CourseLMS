@@ -42,6 +42,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label>@translate(Group Name)</label>
+                                <input type="text" name="group_name" value="{{ old('group_name') }}" class="form-control"
+                                    placeholder="@translate(Group Name)" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="control-label">@translate(Select Instructor) <span class="text-danger">*</span></label>
                                 <div class="">
                                     <select class="form-control lang" name="user_id" id="select_instructor" required>
