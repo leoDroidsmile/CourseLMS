@@ -35,7 +35,6 @@ class TeacherCouponController extends Controller
     //store coupons
     public function store(Request $request)
     {
-        $new_coupon_ids = array();
         // Generate random coupon code with 13 digits
         for($i = 0 ; $i < $request->vouchers; $i++){
           $coupon = new TeacherCoupon();
@@ -49,12 +48,7 @@ class TeacherCouponController extends Controller
           $coupon->user_id    = $request->user_id;
           $coupon->course_id  = $request->course_id;  
           $coupon->save();
-
-          $new_coupon_ids[] = $coupon->id;
         }
-
-        // 
-        return Excel::download(new TeacherCouponExport($new_coupon_ids), 'teachercoupons.xlsx');
 
         Alert::success(translate('Done'), translate('Teacher Coupon Created Successfully'));
         return back();
@@ -156,8 +150,10 @@ class TeacherCouponController extends Controller
       return back();
     }
 
-
-    
-
+      
+    public function downloadTeacherCoupons(Request $request){
+      return Excel::download(new TeacherCouponExport(), 'teachercoupons.xls');
+    }
+  
     //END
 }

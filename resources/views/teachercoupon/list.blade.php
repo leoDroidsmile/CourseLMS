@@ -34,6 +34,10 @@
                         <div class="card">
         <div class="card-header">
             <h3 class="card-title">@translate(Teacher Coupon Informations)</h3>
+            
+            <a class="btn btn-primary ml-3" id="btn_download" style="float:right; color:white;" title="@translate(Download)" href="{{ route("teachercoupon.download") }}">
+                <i class="fa fa-download"></i> @translate(Download)
+            </a>
         </div>
         <div class="card-body p-2">
             <table id="example1" class="table table-bordered table-striped">
@@ -124,6 +128,41 @@ $(".coupon_activation").on("change", function () {
         });
     }
 });
+
+// $("#btn_download").click(function(){
+//     var url = "/api/v1/downloadTeacherCoupons";
+
+//     $.ajax({
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         url: url,
+//         data: {},
+//         method: "GET",
+//         success: function (result) {
+//             //console.log(result);
+//             // download(result, "teachercoupons.xls", 'application/vnd.ms-excel');
+//         },
+//     });
+// });
+
+function download(data, filename, type) {
+    var file = new Blob([data]);
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0); 
+    }
+}
 </script>
 
 @stop

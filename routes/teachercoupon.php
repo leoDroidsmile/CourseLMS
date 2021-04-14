@@ -14,6 +14,7 @@ Route::group(['middleware' => ['installed', 'auth', 'activity'], 'prefix' => 'da
     Route::get('/edit/{id}', 'TeacherCouponController@edit')->name('teachercoupon.edit');
     Route::post('/update/{id}', 'TeacherCouponController@update')->name('teachercoupon.update');
     Route::post('/activation', 'TeacherCouponController@coupon_activation')->name('teachercoupon.activation'); //api ajax
+    Route::get('/download', 'TeacherCouponController@downloadTeacherCoupons')->name('teachercoupon.download'); 
 
     /**
      * FRONTEND
