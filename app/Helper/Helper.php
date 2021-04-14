@@ -1086,7 +1086,8 @@ function subWallet($point, $message)
 
 function walletBalance()
 {
-    $user = User::where('id', Auth::user()->id)->where('user_type', 'Student')->first();
+    // $user = User::where('id', Auth::user()->id)->where('user_type', 'Student')->first();
+    $user = User::where('id', Auth::user()->id)->first();
     return $points = $user->currentPoints();
 }
 

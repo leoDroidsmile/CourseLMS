@@ -20,6 +20,7 @@ use App\Coupon;
 use App\TeacherCoupon;
 use Carbon\Carbon;
 use App\User;
+use App\Model\Instructor;
 use App\Model\CoursePurchaseHistory;
 
 use Illuminate\Http\Request;
@@ -278,6 +279,10 @@ class CourseApiController extends Controller
             if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
                 || $course->is_discount == 0 && $course->price < $coupon->rate) {
             
+                // Set the Coupon used
+                $coupon->is_used = true;
+                $coupon->save();
+
                 //save in enrolments table
                 $enrollment = new Enrollment();
                 $enrollment->user_id = $request->user_id; //this is student id
@@ -310,11 +315,12 @@ class CourseApiController extends Controller
 
                 // Save remaining amount to student's wallet
                 if($remaining > 0)
-                    $transaction = $user->addPoints($amount,$message,$data);
+                    $transaction = $user->addPoints($remaining,$message,$data);
 
                 // Save course price amount to teacher's wallet
-                $instructor = User::where('id', $course->user_id)->first();
-                $transaction = $instructor->addPoints($course_price,$message,$data);
+                $instructor = Instructor::where('user_id', $course->user_id)->first();
+                $instructor->balance += $course_price;
+                $instructor->save();
 
 
                 return response(['success' => 'Courses have been purchased successfully.'], 200);
@@ -391,6 +397,10 @@ class CourseApiController extends Controller
             ];
 
             $transaction = $user->subPoints($course_price,$message,$data);
+            // Save course price amount to teacher's wallet
+            $instructor = Instructor::where('user_id', $course->user_id)->first();
+            $instructor->balance += $course_price;
+            $instructor->save();
 
 
             return response(['success' => 'Courses have been purchased successfully.'], 200);
