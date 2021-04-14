@@ -44,7 +44,6 @@
                     <th>@translate(Status)</th>
                     <th>@translate(Teacher)</th>
                     <th>@translate(Course)</th>
-                    <th>@translate(Vouchers)</th>
                     <th>@translate(Action)</th>
                 </tr>
                 </thead>
@@ -68,7 +67,6 @@
                         </td>
                         <td>{{ $coupon->instructorName()->name }}</td>
                         <td>{{ $coupon->courseTitle()->title }}</td>
-                        <td>{{ $coupon->vouchers }}</td>
                         <td>
                             <a href="#!" class="btn btn-primary"
                                onclick="forModal('{{ route('teachercoupon.edit', $coupon->id) }}', '@translate(Edit)')">@translate(Edit)
