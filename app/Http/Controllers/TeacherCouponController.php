@@ -9,6 +9,9 @@ use App\TeacherCoupon;
 use App\Model\Cart;
 use App\Model\Course;
 use App\Model\Instructor;
+use App\TeacherCouponExport;
+use DB;
+use Excel;
 use Auth;
 use Session;
 
@@ -32,19 +35,27 @@ class TeacherCouponController extends Controller
     //store coupons
     public function store(Request $request)
     {
-        $coupon = new TeacherCoupon();
-        $coupon->code = $request->code;
+        $new_coupon_ids = array();
+        // Generate random coupon code with 13 digits
+        for($i = 0 ; $i < $request->vouchers; $i++){
+          $coupon = new TeacherCoupon();
 
-        if ($request->is_published == 'on') {
-            $coupon->is_published = true;
-        } else {
-            $coupon->is_published = false;
+          $coupon->code = mt_rand(1,9) . mt_rand(0,9) . mt_rand(0,9) . mt_rand(0,9) . mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9);
+          if ($request->is_published == 'on') {
+              $coupon->is_published = true;
+          } else {
+              $coupon->is_published = false;
+          }
+          $coupon->user_id    = $request->user_id;
+          $coupon->course_id  = $request->course_id;  
+          $coupon->save();
+
+          $new_coupon_ids[] = $coupon->id;
         }
-        $coupon->user_id    = $request->user_id;
-        $coupon->course_id  = $request->course_id;
-        $coupon->vouchers   = $request->vouchers;
 
-        $coupon->save();
+        // 
+        return Excel::download(new TeacherCouponExport($new_coupon_ids), 'teachercoupons.xlsx');
+
         Alert::success(translate('Done'), translate('Teacher Coupon Created Successfully'));
         return back();
     }
@@ -89,7 +100,6 @@ class TeacherCouponController extends Controller
 
         $coupon_update->user_id    = $request->user_id;
         $coupon_update->course_id  = $request->course_id;
-        $coupon_update->vouchers   = $request->vouchers;
 
         $coupon_update->save();
         Alert::success(translate('Done'), translate('Coupon Updated Successfully'));

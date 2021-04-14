@@ -46,12 +46,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label>@translate(Vouchers)</label>
-            <input type="number" name="vouchers" value="{{ $single_coupon->vouchers }}" class="form-control"
-                placeholder="@translate(Vouchers)" required>
-        </div>
-
         <button type="submit" class="btn btn-primary">@translate(Submit)</button>
 
     </form>

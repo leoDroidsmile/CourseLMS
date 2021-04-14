@@ -186,7 +186,8 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-        Mprince\Pointable\PointableServiceProvider::class
+        Mprince\Pointable\PointableServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         
     ),
@@ -247,6 +248,7 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
     ],

@@ -23,6 +23,7 @@
         "laravel/socialite": "^4.4.1",
         "laravel/tinker": "^2.x-dev",
         "laravel/ui": "2.0.0",
+        "maatwebsite/excel": "^3.1",
         "mckenziearts/laravel-notify": "^1.1.2",
         "mews/purifier": "^3.3.3",
         "milon/barcode": "^7.0.1",

@@ -34,15 +34,11 @@
                     <div class="card-body">
                         <form method="post" action="{{route('teachercoupon.store')}}" enctype="multipart/form-data">
                             @csrf
+                            
                             <div class="form-group">
-                                <label>@translate(Teacher Coupon Code)</label>
-                                <input type="text" name="code" value="{{ old('code') }}" class="form-control"
-                                    placeholder="@translate(Teacher Coupon Code)" required>
-                            </div>
-
-                            <div class="form-group">
-                                <input type="checkbox" name="is_published" id="published">
-                                <label for="published">@translate(Is published?)</label>
+                                <label>@translate(Vouchers)</label>
+                                <input type="number" name="vouchers" value="{{ old('vouchers') }}" class="form-control"
+                                    placeholder="@translate(Vouchers)" required>
                             </div>
 
                             <div class="form-group">
@@ -67,9 +63,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>@translate(Vouchers)</label>
-                                <input type="number" name="vouchers" value="{{ old('vouchers') }}" class="form-control"
-                                    placeholder="@translate(Vouchers)" required>
+                                <input type="checkbox" name="is_published" id="published">
+                                <label for="published">@translate(Is published?)</label>
                             </div>
 
                             <button type="submit" class="btn btn-primary">@translate(Submit)</button>
