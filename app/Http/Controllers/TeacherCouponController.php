@@ -152,7 +152,7 @@ class TeacherCouponController extends Controller
 
       
     public function downloadTeacherCoupons(Request $request){
-      return Excel::download(new TeacherCouponExport(), 'teachercoupons.xls');
+      return Excel::download(new TeacherCouponExport($request->id), 'teachercoupons.xls');
     }
   
     //END
