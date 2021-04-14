@@ -13,49 +13,54 @@
     <div class="wallet-box">
 
 
-        <form action="{{ route('wallet.gateway') }}" method="GET">
+        <div>
+            <div class="row row-2">
+                <label for="">Enter Couon Code:</label>
+                <input type="text" class="form-control" name="code"
+                    placeholder="Enter Code" required id="edit_code">
 
-            <div>
-                <div class="row row-2">
-                    <label for="">Enter {{ walletName() }} amount:</label>
-                    <input type="number" min="10" class="form-control" id="wallet-amount" name="amount"
-                        placeholder="Enter amount" required>
+                @error('amount')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
 
-                    @error('amount')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
-
-                </div>
             </div>
+        </div>
 
-
-            <div class="mt-3">
-                <div class="row row-2">
-                    <label for="">Payable Amount</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="h1">$</span>
-                        </div>
-
-                        <h1 class="wallet-pay">0</h1>
-
-                        <input type="hidden" readonly class="form-control" id="wallet-pay" name="payment" disabled
-                            placeholder="Payable Amount" required>
-
-                    </div>
-                    @error('payment')
-                    <p class="text-danger">{{ $message }}</p>
-                    @enderror
-
-                </div>
-            </div>
-
-            <button type="submit" class="btn d-flex mx-auto"><b>Next</b></button>
-        </form>
+        <button class="btn d-flex mx-auto" id="btn_charge"><b>Charge</b></button>
 
     </div>
 </div>
+@endsection
 
-<input type="hidden" value="{{ route('wallet.amount') }}" id="url">
+@section("js")
+
+<script>
+    $(document).ready(function(){
+        $("#btn_charge").click(function () {
+            var url = "/api/v1/charge";
+            var code = $("#edit_code").val();
+            var user_id = "{{ Auth::user()->id }}"
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                url: url,
+                data: { code: code, user_id : user_id },
+                method: "POST",
+                success: function (result) {
+                    if(result.error){
+                        $.notify(result.error, 'error')
+                    }
+
+                    if(result.success){
+                        $.notify(result.success, 'success');
+                        location.href = "/student/profile"
+                    }
+                }
+            });
+            
+        });
+    }) 
+    </script>
 
 @endsection

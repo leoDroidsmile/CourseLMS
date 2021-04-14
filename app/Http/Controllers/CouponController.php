@@ -140,9 +140,4 @@ class CouponController extends Controller
       Session::flash('error' ,translate('Coupon removed'));
       return back();
     }
-
-
-    
-
-    //END
 }

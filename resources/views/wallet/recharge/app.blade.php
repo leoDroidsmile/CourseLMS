@@ -30,6 +30,7 @@
 <script src="{{ asset('assets/js/popper.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
 <script src="{{ asset('wallet/main.js') }}"></script>
+<script src="{{ asset('js/notify.js') }}"></script>
 
 @yield('js')
 

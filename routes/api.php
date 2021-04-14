@@ -248,4 +248,7 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
         Route::post('enrollFreeCourse', 'CourseApiController@enrollFreeCourse');
 
         Route::get('getCoursesWithInstructor', 'TeacherCouponApiController@getCoursesForTeacher');
+
+        Route::post('charge', 'WalletApiController@charge');
+
     });
