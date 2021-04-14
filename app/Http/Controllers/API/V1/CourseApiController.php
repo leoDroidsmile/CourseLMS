@@ -321,25 +321,28 @@ class CourseApiController extends Controller
         }
       }else {
         // Check Teacher Coupon
-        $coupon = TeacherCoupon::where('code', $request->code)->where('course_id', $request->course_id)->first();
-        if ($coupon != null) {
-            $enrollment = new Enrollment();
-            $enrollment->user_id = $request->user_id; //this is student id
-            $enrollment->course_id = $request->course_id;
-            $enrollment->save();
+        $coupon = TeacherCoupon::where('code', $request->code)->first();
+        if ($coupon != null){
+            if($coupon->course_id == $request->course_id) {
+                $enrollment = new Enrollment();
+                $enrollment->user_id = $request->user_id; //this is student id
+                $enrollment->course_id = $request->course_id;
+                $enrollment->save();
 
-            if($course->is_discount == 1)
-               $course_price = $course->discount_price;
-            else
-                $course_price = $course->price;
+                if($course->is_discount == 1)
+                $course_price = $course->discount_price;
+                else
+                    $course_price = $course->price;
 
-            $history = new CoursePurchaseHistory();
-            $history->enrollment_id = $enrollment->id;
-            $history->amount = $course_price;
-            $history->payment_method = "Teacher Copupon";
-            $history->save();
+                $history = new CoursePurchaseHistory();
+                $history->enrollment_id = $enrollment->id;
+                $history->amount = $course_price;
+                $history->payment_method = "Teacher Copupon";
+                $history->save();
 
-            return response(['success' => 'Courses have been purchased successfully.'], 200);
+                return response(['success' => 'The Course have been purchased successfully.'], 200);
+            }else
+                return response(['error' => 'This coupon is for another course.'], 200);
         }
   
         return response(['error' => translate('Invalid Coupon Code.')], 200);
