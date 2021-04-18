@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Course;
 use App\Model\Enrollment;
 use App\Model\Student;
+use App\TeacherCoupon;
 use Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,23 @@ class StudentController extends Controller
         if (Auth::user()->user_type == "Admin") {
             /*if Authenticated  user is admin , admin can show all students */
             if ($request->get('search')) {
-                $students = Student::where('name', 'like', '%' . $request->get('search') . '%')
-                    ->orWhere('email', 'like', '%' . $request->get('search') . '%')
-                    ->orderBydesc('id')->paginate(10);
+                $student_id = TeacherCoupon::where('code', $request->get('search'))
+                    ->where('is_used', true)    
+                    ->first();
+                
+                if($student_id){
+                    $student_id = $student_id->student_id;
+
+                    // $students = Student::where('name', 'like', '%' . $request->get('search') . '%')
+                    //     ->orWhere('email', 'like', '%' . $request->get('search') . '%')
+                    //     ->orderBydesc('id')->paginate(10);
+    
+                    $students = Student::where('id', $student_id)
+                        ->orderBydesc('id')->paginate(10);
+                }
+                else 
+                    $students = Student::where('id', $student_id)
+                        ->orderBydesc('id')->paginate(10);
             } else {
                 $students = Student::orderBydesc('id')->paginate(10);
             }
