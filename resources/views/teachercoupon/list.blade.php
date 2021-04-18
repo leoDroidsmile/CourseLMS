@@ -45,6 +45,8 @@
                     <th>@translate(Status)</th>
                     <th>@translate(Teacher)</th>
                     <th>@translate(Course)</th>
+                    {{-- <th>@translate(Used)</th> --}}
+                    {{-- <th>@translate(By Student)</th> --}}
                     <th>@translate(Action)</th>
                     <th>@translate(Download)</th>
                 </tr>
@@ -70,6 +72,14 @@
                         </td>
                         <td>{{ $coupon->instructorName()->name }}</td>
                         <td>{{ $coupon->courseTitle()->title }}</td>
+                        {{-- <td>
+                            @if($coupon->is_used)
+                            <span class="badge badge-success p-2">Used</span></td>
+                        @else
+                            <span class="badge badge-warning p-2">Not Used</span></td>
+                        @endif
+                        </td> --}}
+                        {{-- <td>{{ $coupon->student_id }}</td> --}}
                         <td>
                             <a href="#!" class="btn btn-primary"
                                onclick="forModal('{{ route('teachercoupon.edit', $coupon->id) }}', '@translate(Edit)')">@translate(Edit)

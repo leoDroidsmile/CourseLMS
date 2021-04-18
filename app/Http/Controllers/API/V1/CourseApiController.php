@@ -375,6 +375,11 @@ class CourseApiController extends Controller
                 $history->payment_method = "Teacher Copupon";
                 $history->save();
 
+                // Set the Coupon used
+                $coupon->is_used = true;
+                $coupon->student_id = $request->user_id;
+                $coupon->save();
+
                 return response(['success' => 'The Course have been purchased successfully.'], 200);
             }else
                 return response(['error' => 'This coupon is for another course.'], 200);

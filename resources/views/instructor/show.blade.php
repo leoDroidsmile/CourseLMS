@@ -55,7 +55,7 @@
                             Commission: <span class="text-primary">{{formatPrice($instructor->relationBetweenPackage->commission)}}</span> --}}
                             Courses : <span class="text-primary">{{ sizeof($instructor->courses) }}</span>
                             <div class="em-separator separator-dashed"></div>
-                            Teacher Coupons : <span class="text-primary">{{ $teacher_coupons }}</span>
+                            Teacher Coupons : <span class="text-primary">{{$used_teacher_coupons}} / {{ $all_teacher_coupons }}</span>
                         </div>
                     </div>
                 </div>
