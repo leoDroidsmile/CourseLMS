@@ -10,6 +10,7 @@ use App\TeacherCoupon;
 use Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Model\CoursePurchaseHistory;
 
 class StudentController extends Controller
 {
@@ -36,7 +37,7 @@ class StudentController extends Controller
                     //     ->orWhere('email', 'like', '%' . $request->get('search') . '%')
                     //     ->orderBydesc('id')->paginate(10);
     
-                    $students = Student::where('id', $student_id)
+                    $students = Student::where('user_id', $student_id)
                         ->orderBydesc('id')->paginate(10);
                 }
                 else 
@@ -76,8 +77,21 @@ class StudentController extends Controller
     public function show($id)
     {
         $each_student = Student::where('user_id', $id)->first();
+        $enrolls = Enrollment::where('user_id', $id)
+            ->with('course')
+            ->get();
 
-        return view('module.students.show', compact('each_student'));
+        return view('module.students.show', compact('each_student', 'enrolls'));
+    }
+
+    public function deleteCourse($enrollment_id){
+        $enrollment = Enrollment::findOrFail($enrollment_id);
+
+        $course_purchase_hisgory = CoursePurchaseHistory::where('enrollment_id', $enrollment->id)->first();
+        $course_purchase_hisgory->delete();
+
+        $enrollment->delete();
+        return redirect()->back();
     }
 
     //END

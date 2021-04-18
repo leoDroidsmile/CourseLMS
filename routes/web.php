@@ -228,6 +228,7 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     //student
     Route::get('student/index', 'Module\StudentController@index')->name('students.index');
     Route::get('student/show/{id}', 'Module\StudentController@show')->name('students.show');
+    Route::get('student/deleteCourse/{enrollment_id}', 'Module\StudentController@deleteCourse')->name('students.deleteCourse');
 
     //all pages
     Route::get('pages/index', 'Module\PageController@index')->name('pages.index');

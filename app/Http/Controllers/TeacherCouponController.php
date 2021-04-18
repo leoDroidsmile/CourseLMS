@@ -48,6 +48,8 @@ class TeacherCouponController extends Controller
           $coupon->group      = $request->group_name;  
           $coupon->user_id    = $request->user_id;
           $coupon->course_id  = $request->course_id;  
+          $coupon->is_used    = false;  
+          $coupon->student_id = null;  
           $coupon->save();
         }
 

@@ -87,6 +87,48 @@
         <!-- End Row -->
     </div>
 </div>
+
+<div class="card mb-3">
+    <div class="py-2 px-3">
+        <div class="float-left">
+            <h3>@translate(Student Course Details)</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row flex-row">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>@translate(S/L)</th>
+                    <th>@translate(Instructor)</th>
+                    <th>@translate(Course Name)</th>
+                    <th>@translate(Action)</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @forelse ($enrolls as $enroll)
+                    <tr>
+                        <td>{{ $loop->index++ + 1 }}</td>
+                        <td>{{ $enroll->course->relationBetweenInstructorUser->name }}</td>
+                        <td>{{ $enroll->course->title }}</td>
+                        <td>
+                            <a class="btn btn-primary ml-3" id="btn_download" style="float:right; color:white;" title="@translate(Delete)" href="{{ route("students.deleteCourse", $enroll->id) }}">
+                                <i class="fa fa-remove"></i> @translate(Delete)
+                            </a>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <h4>@translate(NO Student Course FOUND)</h4>
+                        </td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <!-- END:content -->
 @endsection
