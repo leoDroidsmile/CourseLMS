@@ -47,12 +47,15 @@
                         <p class="text-center">@translate(Balance) : <span class="text-primary">{{ formatPrice($instructor->balance) }}</span></p>
                         <div class="em-separator separator-dashed"></div>
                         <div class="text-center">
-                            <h5>@translate(Package)</h5>
+                            {{-- <h5>@translate(Package)</h5>
                             <img src="{{ filePath($instructor->relationBetweenPackage->image) }}" class="img-fluid rounded-sm package-img">
                             <div class="em-separator separator-dashed"></div>
                             Price: <span class="text-primary">{{formatPrice($instructor->relationBetweenPackage->price)}}</span>
                             <div class="em-separator separator-dashed"></div>
-                            Commission: <span class="text-primary">{{formatPrice($instructor->relationBetweenPackage->commission)}}</span>
+                            Commission: <span class="text-primary">{{formatPrice($instructor->relationBetweenPackage->commission)}}</span> --}}
+                            Courses : <span class="text-primary">{{ sizeof($instructor->courses) }}</span>
+                            <div class="em-separator separator-dashed"></div>
+                            Teacher Coupons : <span class="text-primary">{{ $teacher_coupons }}</span>
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\NotificationUser;
+use App\TeacherCoupon;
 
 use phpseclib\Crypt\Hash;
 
@@ -56,6 +57,9 @@ class InstructorController extends Controller
                 ->with('courses')
                 ->first();
         }else{
+            $teacher_coupons = TeacherCoupon::where('user_id', $id)->get();
+            $teacher_coupons = sizeof($teacher_coupons);
+        
             $instructor = Instructor::where('user_id', $id)
                 ->with('purchaseHistory')
                 ->with('courses')
@@ -63,7 +67,7 @@ class InstructorController extends Controller
         }
 
 
-        return view('instructor.show', compact('instructor'));
+        return view('instructor.show', compact('instructor', 'teacher_coupons'));
     }
 
     /*Update profile */
