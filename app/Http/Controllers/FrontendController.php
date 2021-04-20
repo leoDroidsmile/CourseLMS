@@ -41,6 +41,8 @@ use App\Subscription;
 use App\SubscriptionCart;
 use App\SubscriptionEnrollment;
 use App\User;
+use App\TeacherCoupon;
+
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -81,7 +83,8 @@ class FrontendController extends Controller
         if ($request->key == null) {
             $courses = null;
         } else {
-            $courses = Course::Published()->where('title', 'LIKE', "%{$request->key}%")->get();
+            $teacherCoupon = TeacherCoupon::where('code', $request->key)->first();
+            $courses = Course::Published()->where('id', $teacherCoupon->course_id)->get();
         }
 
 
