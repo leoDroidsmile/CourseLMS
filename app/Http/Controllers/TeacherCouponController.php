@@ -26,10 +26,18 @@ class TeacherCouponController extends Controller
     }
 
     //coupon index
-    public function allCoupons()
+    public function allCoupons(Request $request)
     {
+      if ($request->get('search')) {
+        $coupons = TeacherCoupon::where('code', $request->get('search'))->get();
+        
+        if(sizeof($coupons) == 0)
+          $coupons = TeacherCoupon::where('id', $request->get('search'))->get();
+      } else {
         $coupons = TeacherCoupon::latest()->get();
-        return view('teachercoupon.list', compact('coupons'));
+      }
+
+      return view('teachercoupon.list', compact('coupons')); 
     }
 
     //store coupons

@@ -16,25 +16,31 @@
 <div class="card">
 
     <div class="card-header">
-        <span class="h1 card-title">@translate(Teacher Coupon Manager)</span>
-
+        <h3><span class="h1 card-title float-left">@translate(Teacher Coupon Manager)</span></h3>
         <a class="btn btn-primary ml-3" href="{{ route("teachercoupon.index") }}" title="@translate(Add New Teacher Coupon Code)">
             <i class="fa fa-plus-circle"></i> @translate(Add New Teacher Coupon Code)
         </a>
 
+        <div class="float-right">
+            <div class="row">
+                <div class="col">
+                    <form method="get" action="">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control col-12"
+                                   placeholder="@translate(Search by ID or name)"
+                                   value="{{Request::get('search')}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">@translate(Search)</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-        <!-- /.card-header -->
-        <div class="card-body p-2 mt-2">
-            <!-- Content starts here -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card-body">
 
-                        <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">@translate(Teacher Coupon Informations)</h3>
-        </div>
         <div class="card-body p-2">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>

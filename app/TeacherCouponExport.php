@@ -16,7 +16,7 @@ class TeacherCouponExport implements FromCollection
     {
         $coupon = TeacherCoupon::findOrFail($this->coupon_id);
         return DB::table('teacher_coupons')
-            ->select('teacher_coupons.code', 'users.name as Instructor', "courses.title as Course")
+            ->select('teacher_coupons.id', 'teacher_coupons.code', 'users.name as Instructor', "courses.title as Course")
             // ->whereIn('teacher_coupons.id', $this->new_coupon_ids)
             ->where('teacher_coupons.group', $coupon->group)
             ->leftJoin('users', 'teacher_coupons.user_id', '=', 'users.id')
