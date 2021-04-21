@@ -10,6 +10,9 @@ use App\Model\VerifyUser;
 use App\Notifications\StudentRegister;
 use App\Notifications\VerifyNotifications;
 use App\User;
+use App\Model\Instructor;
+
+use App\Model\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -199,6 +202,58 @@ class StudentApiController extends Controller
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
+    }
+
+
+    // ***********      Student API for Vue Dashboard       ************ //
+
+    public function getUserDetail(Request $request){
+        $user = User::findOrFail($request->user_id);
+        $balance = $user->currentPoints();
+        return response(
+                    [
+                        'detail' => $user,
+                        'balance' => $balance
+                    ], 
+                200);
+    }
+
+    public function getFreeCourses(Request $request){
+        
+    }
+
+
+    public function getAllTeachers(Request $request){
+        $teachers = Instructor::all();
+        foreach ($teachers as $teacher){
+            if(!$teacher->image)
+                $teacher->image = asset('uploads/user/user.png');
+        }
+        return response(['teachers' => $teachers], 200);
+    }
+
+    public function getTeacherCourses(Request $request){
+        if($request->teacher_id == 0){
+            $courses = Course::Published()
+                      ->latest()
+                      ->with('category')
+                      ->with('classes')
+                      ->where('is_free',true)
+                      ->get();
+        }
+        else
+            $courses = Course::Published()
+                    ->latest()
+                    ->with('category')
+                    ->with('classes')
+                    ->where('user_id', $request->teacher_id)
+                    ->get();
+
+        foreach ($courses as $course){
+            $course->image = asset($course->image);
+        }
+                    
+        return response(['courses' => $courses], 200);
     }
 
     //END

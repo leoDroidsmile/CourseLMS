@@ -32,8 +32,6 @@ use Illuminate\Support\Facades\Validator;
 
 class CourseApiController extends Controller
 {
-
-
     /*Show All Course An browse it*/
     public function allCourses(){
         $courses = Course::Published()

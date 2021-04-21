@@ -251,4 +251,10 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
 
         Route::post('charge', 'WalletApiController@charge');
 
+
+
+        /**** Student Vue Dashboard API ****/
+        Route::get('student/user/detail',       'StudentApiController@getUserDetail');
+        Route::get('student/all/teachers',      'StudentApiController@getAllTeachers');
+        Route::get('student/teacher/courses',   'StudentApiController@getTeacherCourses');
     });
