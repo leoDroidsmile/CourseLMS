@@ -161,6 +161,9 @@ Route::group(['middleware' => ['installed', 'check.frontend','demo', 'activity']
 
         // ============================== student route ===========================
 
+        // Main
+        Route::get('student/main', 'FrontendController@main')
+            ->name('student.main');
 
         //dashboard
         Route::get('student/dashboard', 'FrontendController@dashboard')

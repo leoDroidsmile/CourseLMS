@@ -1,0 +1,18 @@
+.route-card{
+  -webkit-box-shadow: 0 3px 7px -1px rgb(0 0 0 / 8%);
+  box-shadow: 0 3px 7px -1px rgb(0 0 0 / 8%);
+  padding: 12px!important;
+}
+
+
+.route-card > .btn-primary {
+  width: -webkit-fill-available;
+  background-color: #23afb1 !important;
+  border-color: #23afb1 !important;
+  color: #fff;
+  border-radius: initial;
+}
+
+.route-card .icon-img .icon > img{
+  padding:20px;
+}
