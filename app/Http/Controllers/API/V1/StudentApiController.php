@@ -11,7 +11,7 @@ use App\Notifications\StudentRegister;
 use App\Notifications\VerifyNotifications;
 use App\User;
 use App\Model\Instructor;
-
+use App\Model\Category;
 use App\Model\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -225,6 +225,15 @@ class StudentApiController extends Controller
                 $teacher->image = asset('uploads/user/user.png');
         }
         return response(['teachers' => $teachers], 200);
+    }
+
+    public function getAllCategories(Request $request){
+        $categories = Category::all();
+        foreach ($categories as $item){
+            if(!$item->icon)
+                $item->icon = asset($item->icon);
+        }
+        return response(['categories' => $categories], 200);
     }
 
     public function getTeacherCourses(Request $request){
