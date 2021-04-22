@@ -218,11 +218,6 @@ class StudentApiController extends Controller
                 200);
     }
 
-    public function getFreeCourses(Request $request){
-        
-    }
-
-
     public function getAllTeachers(Request $request){
         $teachers = Instructor::all();
         foreach ($teachers as $teacher){

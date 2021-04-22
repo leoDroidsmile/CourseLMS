@@ -52,7 +52,8 @@ class LoginController extends Controller
         }
 
         if ($user->user_type == "Student") {
-            return redirect()->to('/');
+            // return redirect()->to('http://localhost:8080');
+            return redirect()->to('http://student.olmaa.net');
         }
 
         /*check the instructor paid the package payment*/
