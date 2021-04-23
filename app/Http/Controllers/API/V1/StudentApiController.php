@@ -34,13 +34,15 @@ class StudentApiController extends Controller
         $customMessages = [
             'name.required' => 'The Name  is required .',
             'email.required' => 'The Email  is required.',
-
         ];
 
         $validator = Validator::make($request->all(), $rules,$customMessages);
         /*IF the validators fail*/
         if ($validator->fails()) {
-            return response($validator->errors(), 404);
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()
+            ], 200);
         }
         /*Add Student Details for Authentication*/
         $user = new User();
@@ -52,9 +54,10 @@ class StudentApiController extends Controller
             $user->provider_id = $request->provider_id;
         }else{
             if ($request->password == null){
-                return response([
-                    'error' => 'You Need password to register'
-                ], 404);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You Need password to register'
+                ], 200);
             }
             $user->password = Hash::make($request->password);
         }
@@ -66,8 +69,13 @@ class StudentApiController extends Controller
         $student->name = $request->name;
         $student->email = $request->email;
         $student->user_id = $user->id;
+        $student->phone = $request->phone;
+        $student->male = $request->male;
+        $student->school = $request->school;
+        $student->biotic = $request->biotic;
+        $student->science = $request->science;
+        $student->literary = $request->literary;
         $student->save();
-
 
         try {
             $user->notify(new StudentRegister());
@@ -84,8 +92,10 @@ class StudentApiController extends Controller
 
         }
 
-        return response()->json(['message' => 'Student Register Successfully,Check the Mail and verify the account',
-                'user'=>new StudentResource(Student::where('user_id',$user->id)->first())], 200);
+        return response()->json([
+            'success' => true,
+            'message' => 'Student Register Successfully',
+            'user'=>new StudentResource(Student::where('user_id',$user->id)->first())], 200);
     }
 
     /*Student User Login */
