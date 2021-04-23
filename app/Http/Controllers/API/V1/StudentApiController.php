@@ -47,6 +47,7 @@ class StudentApiController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->user_type = 'Student';
+        $user->verified = true;
         if($request->provider_id != null){
             $user->provider_id = $request->provider_id;
         }else{
@@ -96,8 +97,12 @@ class StudentApiController extends Controller
         $validator = Validator::make($request->all(), $rules);
         /*IF the validators fail*/
         if ($validator->fails()) {
-            return response($validator->errors(), 404);
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()
+            ], 200);
         }
+
         if ($request->provider_id != null){
 
             $user = User::where('email',$request->email)->where('provider_id',$request->provider_id)
@@ -105,7 +110,7 @@ class StudentApiController extends Controller
                 ->where('user_type', 'Student')->first();
             if (!$user) {
                 return response([
-                    'error' => 'The Provided credentials are incorrect'
+                    'message' => 'The Provided credentials are incorrect'
                 ], 404);
             }
 
@@ -116,14 +121,15 @@ class StudentApiController extends Controller
                 ->where('user_type', 'Student')->first();
 
             if (!$user || !Hash::check($request->password, $user->password)) {
-                return response([
-                    'error' => 'The Provided credentials are incorrect'
-                ], 404);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The Provided credentials are incorrect'                    
+                ], 200);
             }
         }
 
 
-     //todo::there are problem when verify the student
+        //todo::there are problem when verify the student
         if ($user->verified == false){
             $verifyuser = VerifyUser::where('user_id',$user->id)->first();
             if ($verifyuser){
@@ -136,11 +142,13 @@ class StudentApiController extends Controller
         }else{
             //there are the token generate
             $access_token = $user->createToken('Laravel Password Grant Client')->accessToken;
-            return response(['access_token'=>$access_token,
+            return response([
+                'success' => true,
+                'access_token'=>$access_token,
                 'user'=>new StudentResource(Student::where('user_id',$user->id)->first())]);
         }
-
     }
+
     /*
      *its for update student Profile
      *its match data id and email
@@ -230,7 +238,7 @@ class StudentApiController extends Controller
     public function getAllCategories(Request $request){
         $categories = Category::all();
         foreach ($categories as $item){
-            if(!$item->icon)
+            if($item->icon)
                 $item->icon = asset($item->icon);
         }
         return response(['categories' => $categories], 200);
@@ -251,6 +259,7 @@ class StudentApiController extends Controller
                     ->with('category')
                     ->with('classes')
                     ->where('user_id', $request->teacher_id)
+                    ->where('category_id', $request->category_id)
                     ->get();
 
         foreach ($courses as $course){
