@@ -70,6 +70,7 @@ class StudentApiController extends Controller
         $student->email = $request->email;
         $student->user_id = $user->id;
         $student->phone = $request->phone;
+        $student->city = $request->city;
         $student->male = $request->male;
         $student->school = $request->school;
         $student->major = $request->major;
