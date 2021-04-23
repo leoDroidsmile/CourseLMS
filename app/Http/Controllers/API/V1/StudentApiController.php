@@ -160,6 +160,9 @@ class StudentApiController extends Controller
             $access_token = $user->createToken('Laravel Password Grant Client')->accessToken;
             $student = Student::where('user_id',$user->id)->first();
             $student->balance = $user->currentPoints();
+            if(!$student->image)
+                $student->image = $user->image;
+                
             $user_resource = new StudentResource($student);
             return response([
                 'success' => true,
