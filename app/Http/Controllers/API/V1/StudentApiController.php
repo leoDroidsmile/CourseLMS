@@ -72,25 +72,23 @@ class StudentApiController extends Controller
         $student->phone = $request->phone;
         $student->male = $request->male;
         $student->school = $request->school;
-        $student->biotic = $request->biotic;
-        $student->science = $request->science;
-        $student->literary = $request->literary;
+        $student->major = $request->major;
         $student->save();
 
-        try {
-            $user->notify(new StudentRegister());
+        // try {
+        //     $user->notify(new StudentRegister());
 
-            //verify email
+        //     //verify email
 
-            $verifyUser = VerifyUser::create([
-                'user_id' => $user->id,
-                'token' => sha1(time())
-            ]);
-            $user->notify(new VerifyNotifications($user));
+        //     $verifyUser = VerifyUser::create([
+        //         'user_id' => $user->id,
+        //         'token' => sha1(time())
+        //     ]);
+        //     $user->notify(new VerifyNotifications($user));
 
-        }catch (\Exception $exception){
+        // }catch (\Exception $exception){
 
-        }
+        // }
 
         $student = Student::where('user_id',$user->id)->first();
         $student->balance = $user->currentPoints();
