@@ -24,8 +24,10 @@ class StudentResource extends JsonResource
             'image'=>filePath($this->image),
             'fb'=>$this->fb,
             'linked'=>$this->tw,
-            'join date'=>date('d-M-Y',strtotime($this->created_at))
+            'join date'=>date('d-M-Y',strtotime($this->created_at)),
 
+            // Student Panel API
+            'balance' => $this->balance
         ];
     }
 }

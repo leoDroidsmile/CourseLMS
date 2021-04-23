@@ -32,7 +32,7 @@ class StudentApiController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ];
         $customMessages = [
-            'name.required' => 'The Name  is required .',
+            'name.required' => 'The Name is required .',
             'email.required' => 'The Email  is required.',
         ];
 
@@ -92,10 +92,16 @@ class StudentApiController extends Controller
 
         }
 
+        $student = Student::where('user_id',$user->id)->first();
+        $student->balance = $user->currentPoints();
+        $user_resource = new StudentResource($student);
+
         return response()->json([
             'success' => true,
             'message' => 'Student Register Successfully',
-            'user'=>new StudentResource(Student::where('user_id',$user->id)->first())], 200);
+            'user'      => $user_resource
+        ], 
+        200);
     }
 
     /*Student User Login */
@@ -152,10 +158,14 @@ class StudentApiController extends Controller
         }else{
             //there are the token generate
             $access_token = $user->createToken('Laravel Password Grant Client')->accessToken;
+            $student = Student::where('user_id',$user->id)->first();
+            $student->balance = $user->currentPoints();
+            $user_resource = new StudentResource($student);
             return response([
                 'success' => true,
                 'access_token'=>$access_token,
-                'user'=>new StudentResource(Student::where('user_id',$user->id)->first())]);
+                'user'=> $user_resource
+                ]);
         }
     }
 
