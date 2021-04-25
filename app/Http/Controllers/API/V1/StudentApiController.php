@@ -293,5 +293,19 @@ class StudentApiController extends Controller
         return response(['courses' => $courses], 200);
     }
 
+    public function getCourseDetail(Request $request){
+        $course = Course::Published()
+            ->latest()
+            ->with('category')
+            ->with('classes')
+            ->where('id', $request->course_id)
+            ->first();
+
+        
+        $course->image = asset($course->image);
+                
+        return response(['course' => $course], 200);
+    }
+
     //END
 }

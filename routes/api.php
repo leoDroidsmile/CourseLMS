@@ -258,4 +258,5 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
         Route::get('student/all/teachers',      'StudentApiController@getAllTeachers');
         Route::get('student/all/categories',    'StudentApiController@getAllCategories');
         Route::get('student/teacher/courses',   'StudentApiController@getTeacherCourses');
+        Route::get('student/course/detail',     'StudentApiController@getCourseDetail');
     });
