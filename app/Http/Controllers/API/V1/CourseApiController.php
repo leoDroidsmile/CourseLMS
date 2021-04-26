@@ -267,7 +267,10 @@ class CourseApiController extends Controller
       if ($coupon != null) {
 
         if($coupon->is_used)
-            return response(['error' => 'The coupon was already used.'], 200);
+            return response()->json([
+                'success' => false,
+                'message' => 'The Coupon was already used.',
+            ], 200);
 
 
         $start_day  = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->start_day);
@@ -344,13 +347,26 @@ class CourseApiController extends Controller
                 $coupon->is_used = true;
                 $coupon->save();
 
-                return response(['success' => 'Courses have been purchased successfully.'], 200);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'The course have been purchased successfully.',
+                    'balance' => $user->currentPoints()
+                ], 200);
             }else {
-                return response(['error' => 'Not enough money for the coupon '], 200);
+                return 
+                    response()->json([
+                        'success' => false,
+                        'message' => 'Not enough money for the coupon.',
+                        'balance' => $user->currentPoints()
+                    ], 200);
             }
         }
         else {
-            return response(['error' => translate('Coupon expired.')], 200);
+            return 
+                response()->json([
+                    'success' => false,
+                    'message' => 'The coupone was expired.',
+                ], 200);
         }
       }else {
         // Check Teacher Coupon
@@ -378,12 +394,22 @@ class CourseApiController extends Controller
                 $coupon->student_id = $request->user_id;
                 $coupon->save();
 
-                return response(['success' => 'The Course have been purchased successfully.'], 200);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'The Course have been purchased successfully.',
+                    'balance' => $user->currentPoints()
+                ], 200);
             }else
-                return response(['error' => 'This coupon is for another course.'], 200);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The coupon is for another course.',
+                ], 200);                
         }
   
-        return response(['error' => translate('Invalid Coupon Code.')], 200);
+        return response()->json([
+            'success' => false,
+            'message' => translate('Invalid Coupon Code.'),
+        ], 200);
       }
     }
 
@@ -454,7 +480,8 @@ class CourseApiController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Courses have been purchased successfully.'
+                'message' => 'Courses have been purchased successfully.',
+                'balance' => $user->currentPoints()
             ], 200);
         }else {
             return response()->json([
