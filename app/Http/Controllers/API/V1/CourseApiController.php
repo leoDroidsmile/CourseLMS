@@ -25,7 +25,7 @@ use App\Model\InstructorEarning;
 use App\Model\CoursePurchaseHistory;
 use App\Model\Package;
 use App\Model\AdminEarning;
-
+use Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -259,7 +259,7 @@ class CourseApiController extends Controller
         return response()->json($demo);
     }
 
-    public function coupon_apply(Request $request)
+    public function couponApply(Request $request)
     {
       $coupon = Coupon::where('code',$request->code)->Published()->first();
       $course = Course::where('id', $request->course_id)->first();
@@ -391,7 +391,7 @@ class CourseApiController extends Controller
     public function buyCourseWithWallet(Request $request)
     {
         $course = Course::where('id', $request->course_id)->first();
-        $user = User::where('id', $request->user_id)->first();
+        $user   = User::where('id', $request->user_id)->first();
       
         if($course->is_discount == 1)
             $course_price = $course->discount_price;
