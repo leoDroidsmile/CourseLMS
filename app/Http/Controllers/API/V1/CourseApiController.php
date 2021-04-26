@@ -277,8 +277,6 @@ class CourseApiController extends Controller
         $end_day    = Carbon::create(Coupon::where('code',$request->code)->Published()->first()->end_day);
         $min_value  = Coupon::where('code',$request->code)->Published()->first()->min_value;
         
-        //   return response(['error' => $coupon], 200);
-
         if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
             if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
                 || $course->is_discount == 0 && $course->price < $coupon->rate) {
