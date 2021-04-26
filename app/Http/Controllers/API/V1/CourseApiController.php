@@ -452,9 +452,15 @@ class CourseApiController extends Controller
             $instructor_earning->save();
 
 
-            return response(['success' => 'Courses have been purchased successfully.'], 200);
+            return response()->json([
+                'success' => true,
+                'message' => 'Courses have been purchased successfully.'
+            ], 200);
         }else {
-            return response(['error' => 'Not enough money in Your wallet'], 200);
+            return response()->json([
+                'success' => false,
+                'message' => 'Not enough money in Your wallet.'
+            ], 200);
         }
     }
 
