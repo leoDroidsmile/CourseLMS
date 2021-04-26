@@ -254,12 +254,14 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
 
 
         /**** Student Vue Dashboard API ****/
-        Route::get('student/user/detail',       'StudentApiController@getUserDetail');
-        Route::get('student/all/teachers',      'StudentApiController@getAllTeachers');
-        Route::get('student/all/categories',    'StudentApiController@getAllCategories');
-        Route::get('student/teacher/courses',   'StudentApiController@getTeacherCourses');
-        Route::get('student/course/detail',     'StudentApiController@getCourseDetail');
-        Route::get('student/coupon/apply',      'CourseApiController@couponApply');
-        Route::get('student/course/buyWallet',  'CourseApiController@buyCourseWithWallet');
 
+        Route::group(['middleware' => 'auth:api'], function(){
+            Route::get('student/user/detail',       'StudentApiController@getUserDetail');
+            Route::get('student/all/teachers',      'StudentApiController@getAllTeachers');
+            Route::get('student/all/categories',    'StudentApiController@getAllCategories');
+            Route::get('student/teacher/courses',   'StudentApiController@getTeacherCourses');
+            Route::get('student/course/detail',     'StudentApiController@getCourseDetail');
+            Route::get('student/coupon/apply',      'CourseApiController@couponApply');
+            Route::get('student/course/buyWallet',  'CourseApiController@buyCourseWithWallet');
+        });
     });

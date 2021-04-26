@@ -295,14 +295,17 @@ class StudentApiController extends Controller
 
     public function getCourseDetail(Request $request){
         $course = Course::Published()
-            ->latest()
             ->with('category')
             ->with('classes')
             ->where('id', $request->course_id)
             ->first();
 
-        
         $course->image = asset($course->image);
+
+        // $enroll_id = Enrollment::where('course_id', $request->course_id)
+        //     ->where('user_id', $userId)
+        //     ->first()->id;
+
                 
         return response(['course' => $course], 200);
     }
