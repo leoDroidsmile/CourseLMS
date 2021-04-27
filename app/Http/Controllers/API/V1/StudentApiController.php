@@ -315,5 +315,9 @@ class StudentApiController extends Controller
         return response(['course' => $course], 200);
     }
 
+    // Check whether or not User's token expired
+    public function checkAuth(Request $request){
+        return response('', 200); 
+    }
     //END
 }
