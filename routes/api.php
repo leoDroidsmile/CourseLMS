@@ -265,5 +265,6 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
             Route::post('student/coupon/apply',      'CourseApiController@couponApply');
             Route::post('student/course/buyWallet',  'CourseApiController@buyCourseWithWallet');
             Route::post('student/logout',           'StudentApiController@logout');
+            Route::post('student/charge',           'WalletApiController@charge');
         });
     });

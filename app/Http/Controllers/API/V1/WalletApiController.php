@@ -43,13 +43,21 @@ class WalletApiController extends Controller{
             $coupon->is_used = true;
             $coupon->save();
             
-            return response(['success' => 'Charged successfully.'], 200);
+            return response([
+                'success' => true,
+                'message' => 'Charged successfully.'
+                ], 
+              200);
         }
         else {
-            return response(['error' => translate('Coupon expired.')], 200);
+            return response(
+              [ 'success' => false,
+                'message' => translate('Coupon expired.')
+              ], 
+            200);
         }
       }else {
-        return response(['error' => translate('Invalid Coupon Code.')], 200);
+        return response(['success'=> false, 'message' => translate('Invalid Coupon Code.')], 200);
       }
     }
 
