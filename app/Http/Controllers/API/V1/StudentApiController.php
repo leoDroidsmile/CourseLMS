@@ -233,6 +233,7 @@ class StudentApiController extends Controller
     {
         $request->user()->token()->revoke();
         return response()->json([
+            'success' => true,
             'message' => 'Successfully logged out'
         ]);
     }
