@@ -242,12 +242,15 @@ class StudentApiController extends Controller
     // ***********      Student API for Vue Dashboard       ************ //
 
     public function getUserDetail(Request $request){
-        $user = User::findOrFail($request->user_id);
-        $balance = $user->currentPoints();
+        $user = $request->user();
+        if($user->image)
+            $user->image = asset($user->image);
+
+        $user->balance = $user->currentPoints();
         return response(
                     [
-                        'detail' => $user,
-                        'balance' => $balance
+                        'success' => true,
+                        'detail'  => $user,
                     ], 
                 200);
     }
