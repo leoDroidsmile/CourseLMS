@@ -331,6 +331,8 @@ class StudentApiController extends Controller
 
         $courses = [];
         foreach ($enrollments as $enrollment){
+            if($enrollment->course->image)
+                $enrollment->course->image = asset($enrollment->course->image);
             $courses[] = $enrollment->course;
         }
                     
