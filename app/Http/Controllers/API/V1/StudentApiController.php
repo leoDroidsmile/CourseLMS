@@ -10,6 +10,7 @@ use App\Model\VerifyUser;
 use App\Notifications\StudentRegister;
 use App\Notifications\VerifyNotifications;
 use App\User;
+use App\TeacherCoupon;
 use App\Model\Enrollment;
 use App\Model\Instructor;
 use App\Model\Category;
@@ -275,19 +276,24 @@ class StudentApiController extends Controller
 
     public function getTeacherCourses(Request $request){
         if($request->teacher_id == 0){
-            // $courses = Course::Published()
-            //           ->latest()
-            //           ->with('category')
-            //           ->with('classes')
-            //           ->where('is_free',true)
-            //           ->get();
-
+            
             $courses = Course::Published()
                       ->latest()
                       ->with('category')
                       ->with('classes')
                       ->where('title', 'LIKE', '%'.$request->search.'%')
                       ->get();
+
+            $teacherCoupon = TeacherCoupon::where('code', $request->search)->first();
+            if($teacherCoupon){
+                $courses_coupon = Course::Published()
+                        ->with('category')
+                        ->with('classes')
+                        ->where('id', $teacherCoupon->course_id)
+                        ->first();
+
+                $courses[] = $courses_coupon;
+            }
         }
         else
             $courses = Course::Published()
@@ -299,7 +305,8 @@ class StudentApiController extends Controller
                     ->get();
 
         foreach ($courses as $course){
-            $course->image = asset($course->image);
+            if($course->image)
+                $course->image = asset($course->image);
         }
                     
         return response(['courses' => $courses], 200);
