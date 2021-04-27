@@ -323,5 +323,20 @@ class StudentApiController extends Controller
     public function checkAuth(Request $request){
         return response('', 200); 
     }
+
+    public function getMyCourses(Request $request){
+        $enrollments = Enrollment::where('user_id', $request->user()->id)
+            ->with('course')
+            ->get();
+
+        $courses = [];
+        foreach ($enrollments as $enrollment){
+            $courses[] = $enrollment->course;
+        }
+                    
+        return response(['courses' => $courses], 200);
+    }
+
+
     //END
 }

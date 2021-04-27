@@ -492,7 +492,7 @@ class CourseApiController extends Controller
         }
     }
 
-    function enrollFreeCourse(Request $request){
+    public function enrollFreeCourse(Request $request){
         $course = Course::where('id', $request->course_id)->first();
         $user = User::where('id', $request->user_id)->first();
       
