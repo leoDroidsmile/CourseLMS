@@ -29,7 +29,7 @@ class WalletApiController extends Controller{
         if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
             
             // Add remained amount to user's wallet
-            $user = User::where('id', $request->user_id)->first();
+            $user = $request->user();
             $amount = $coupon->rate; // (Double) Can be a negative value
             $message = "Charge with Basic Coupon"; //The reason for this transaction
 
