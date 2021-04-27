@@ -276,24 +276,35 @@ class StudentApiController extends Controller
 
     public function getTeacherCourses(Request $request){
         if($request->teacher_id == 0){
-            
-            $courses = Course::Published()
+            // Free Courses
+            if($request->category_id == 0)
+                $courses = Course::Published()
                       ->latest()
                       ->with('category')
                       ->with('classes')
-                      ->where('title', 'LIKE', '%'.$request->search.'%')
+                      ->where('is_free',true)
                       ->get();
 
-            $teacherCoupon = TeacherCoupon::where('code', $request->search)->first();
-            if($teacherCoupon){
-                $courses_coupon = Course::Published()
-                        ->with('category')
-                        ->with('classes')
-                        ->where('id', $teacherCoupon->course_id)
-                        ->first();
+            // Search Course with title or Teacher Coupon
+            else{
+                $courses = Course::Published()
+                    ->latest()
+                    ->with('category')
+                    ->with('classes')
+                    ->where('title', 'LIKE', '%'.$request->search.'%')
+                    ->get();
 
-                $courses[] = $courses_coupon;
-            }
+                $teacherCoupon = TeacherCoupon::where('code', $request->search)->first();
+                if($teacherCoupon){
+                    $courses_coupon = Course::Published()
+                            ->with('category')
+                            ->with('classes')
+                            ->where('id', $teacherCoupon->course_id)
+                            ->first();
+
+                    $courses[] = $courses_coupon;
+                }
+            }  
         }
         else
             $courses = Course::Published()
