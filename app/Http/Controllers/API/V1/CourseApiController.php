@@ -263,6 +263,7 @@ class CourseApiController extends Controller
     {
       $coupon = Coupon::where('code',$request->code)->Published()->first();
       $course = Course::where('id', $request->course_id)->first();
+      $user   = $request->user();
 
       if ($coupon != null) {
 
@@ -283,7 +284,7 @@ class CourseApiController extends Controller
             
                 //save in enrolments table
                 $enrollment = new Enrollment();
-                $enrollment->user_id = $request->user_id; //this is student id
+                $enrollment->user_id = $user->id; //this is student id
                 $enrollment->course_id = $request->course_id;
                 $enrollment->save();
 
@@ -301,7 +302,6 @@ class CourseApiController extends Controller
 
                 // Add remained amount to user's wallet
                 $remaining = $coupon->rate - $course_price;
-                $user = User::where('id', $request->user_id)->first();
                 $amount = $remaining; // (Double) Can be a negative value
                 $message = "Courses have been purchased with Coupon"; //The reason for this transaction
 
@@ -348,7 +348,8 @@ class CourseApiController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'The course have been purchased successfully.',
-                    'balance' => $user->currentPoints()
+                    'balance' => $user->currentPoints(),
+                    'enrollment_id' => $enrollment->id
                 ], 200);
             }else {
                 return 
@@ -414,8 +415,9 @@ class CourseApiController extends Controller
 
     public function buyCourseWithWallet(Request $request)
     {
+        Log::error($request->all());
         $course = Course::where('id', $request->course_id)->first();
-        $user   = User::where('id', $request->user_id)->first();
+        $user   = $request->user();
       
         if($course->is_discount == 1)
             $course_price = $course->discount_price;
@@ -426,7 +428,7 @@ class CourseApiController extends Controller
         
             //save in enrolments table
             $enrollment = new Enrollment();
-            $enrollment->user_id = $request->user_id; //this is student id
+            $enrollment->user_id = $user->id; //this is student id
             $enrollment->course_id = $request->course_id;
             $enrollment->save();
             
@@ -479,7 +481,8 @@ class CourseApiController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Courses have been purchased successfully.',
-                'balance' => $user->currentPoints()
+                'balance' => $user->currentPoints(),
+                'enrollment_id' => $enrollment->id
             ], 200);
         }else {
             return response()->json([
