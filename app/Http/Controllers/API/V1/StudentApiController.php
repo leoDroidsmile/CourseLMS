@@ -10,6 +10,7 @@ use App\Model\VerifyUser;
 use App\Notifications\StudentRegister;
 use App\Notifications\VerifyNotifications;
 use App\User;
+use App\Model\Enrollment;
 use App\Model\Instructor;
 use App\Model\Category;
 use App\Model\Course;
@@ -302,10 +303,14 @@ class StudentApiController extends Controller
 
         $course->image = asset($course->image);
 
-        // $enroll_id = Enrollment::where('course_id', $request->course_id)
-        //     ->where('user_id', $userId)
-        //     ->first()->id;
+        $enrollment = Enrollment::where('course_id', $request->course_id)
+            ->where('user_id', $request->user()->id)
+            ->first();
 
+        if($enrollment)
+            $course->enrollment_id = $enrollment->id;
+        else
+            $course->enrollment_id = false;
                 
         return response(['course' => $course], 200);
     }
