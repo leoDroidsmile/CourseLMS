@@ -124,17 +124,20 @@ class ContentController extends Controller
         $content->save();
 
         $details = [
-            'body' => translate($content->title . ' new content uploaded by ' . Auth::user()->name),
+            'body' => translate($content->title . ' - new content uploaded to the courses that you have purchased, by ' . Auth::user()->name),
         ];
         //get course id
         $class = Classes::where('id', $content->class_id)->firstOrFail();
         //get all enroll student
         $enroll = Enrollment::where('course_id', $class->course_id)->with('user')->get();
-
+        foreach($enroll as $item){
+            /* sending instructor notification */
+            $this->userNotify($item->user_id,$details);
+        }
 
 
         /* sending instructor notification */
-        $notify = $this->userNotify(Auth::user()->id,$details);
+        // $notify = $this->userNotify(Auth::user()->id,$details);
 
         notify()->success(translate('Class content saved successfully '));
         return back();

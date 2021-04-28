@@ -69,15 +69,16 @@ class ClassController extends Controller
 
         //todo:class create notify
         $details = [
-            'body' => translate($class->title . ' new class uploaded by ' . Auth::user()->name),
+            'body' => translate($class->title . ' - new class uploaded to the courses that you have purchased, by ' . Auth::user()->name),
         ];
 
         //get all enroll student
         $enroll = Enrollment::where('course_id', $request->course_id)->with('user')->get();
-
-        /* sending instructor notification */
-        $this->userNotify(Auth::user()->id,$details);
-
+        foreach($enroll as $item){
+            /* sending instructor notification */
+            $this->userNotify($item->user_id,$details);
+        }
+        
         notify()->success(translate('Class created successfully'));
         return back();
     }
