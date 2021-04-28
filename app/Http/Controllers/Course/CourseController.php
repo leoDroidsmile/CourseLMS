@@ -285,6 +285,8 @@ class CourseController extends Controller
         foreach ($tag as $itemt){
             array_push($tagC,$itemt);
         }
+
+        $courses->is_private = $request->is_private == "on" ? true : false;
         $courses->is_free = $request->is_free == "on" ? true : false;
         if (!$courses->is_free) {
             $courses->price = $request->price;
