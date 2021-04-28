@@ -396,7 +396,8 @@ class CourseApiController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'The Course have been purchased successfully.',
-                    'balance' => $user->currentPoints()
+                    'balance' => $user->currentPoints(),
+                    'enrollment_id' => $enrollment->id
                 ], 200);
             }else
                 return response()->json([
