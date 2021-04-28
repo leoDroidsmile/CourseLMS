@@ -373,7 +373,7 @@ class CourseApiController extends Controller
         if ($coupon != null){
             if($coupon->course_id == $request->course_id) {
                 $enrollment = new Enrollment();
-                $enrollment->user_id = $request->user_id; //this is student id
+                $enrollment->user_id = $user->id; //this is student id
                 $enrollment->course_id = $request->course_id;
                 $enrollment->save();
 
@@ -390,7 +390,7 @@ class CourseApiController extends Controller
 
                 // Set the Coupon used
                 $coupon->is_used = true;
-                $coupon->student_id = $request->user_id;
+                $coupon->student_id = $user->id;
                 $coupon->save();
 
                 return response()->json([
