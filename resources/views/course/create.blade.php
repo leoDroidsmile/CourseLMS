@@ -163,6 +163,18 @@
                 </div>
             </div>
 
+            {{-- Private --}}
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label" for="">
+                    @translate(Private Course)</label>
+                <div class="col-lg-9">
+                  <div class="switchery-list">
+                      <input type="checkbox"   name="is_private" class="js-switch-success" id="val-is_private"/>
+                      @error('is_private') <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                  </div>
+                </div>
+            </div>
+
             {{-- Free --}}
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label" for="">
@@ -174,7 +186,6 @@
                   </div>
                 </div>
             </div>
-
 
             <div id="auto_hide">
                 {{-- Price --}}

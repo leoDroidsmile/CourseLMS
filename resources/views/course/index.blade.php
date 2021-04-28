@@ -78,6 +78,8 @@
                                                     <div class="d-flex justify-content-between">
                                                         <span
                                                             class="badge badge-{{ $course->is_published == true ? 'success'  : 'primary' }} p-2">{{ $course->is_published == true ? 'Published'  : 'Not Published' }}</span>
+                                                        <span
+                                                            class="badge badge-{{ $course->is_private == true ? 'warning'  : 'primary' }} p-2">{{ $course->is_private == true ? 'Private'  : 'Public' }}</span>
                                                         @if ($course->is_discount == true )
                                                             <span>{{ formatPrice($course->discount_price) }}</span>
                                                             <span> <del> {{ formatPrice($course->price) }} </del> </span>

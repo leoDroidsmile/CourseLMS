@@ -211,6 +211,20 @@
                 </div>
 
 
+                {{-- Private --}}
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label" for="val-is_free">
+                        @translate(Private Course)</label>
+                    <div class="col-lg-9">
+                        <div class="switchery-list">
+                            <input type="checkbox" name="is_private" class="js-switch-success"
+                                   id="val-is_free" {{ $each_course->is_private === 0 || $each_course->is_private === NULL ? ' ' : 'checked' }} {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}/>
+                            @error('is_private') <span class="invalid-feedback"
+                                                    role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                        </div>
+                    </div>
+                </div>
+                
                 {{-- Free --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-is_free">

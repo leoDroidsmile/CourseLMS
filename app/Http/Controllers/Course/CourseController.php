@@ -134,6 +134,7 @@ class CourseController extends Controller
             array_push($tagC,$itemt);
         }
         $courses->tag = json_encode($tagC);
+        $courses->is_private = $request->is_private == "on" ? true : false;
         $courses->is_free = $request->is_free == "on" ? true : false;
 
         if (!$courses->is_free) {
