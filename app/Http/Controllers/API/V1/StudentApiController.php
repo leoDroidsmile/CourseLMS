@@ -381,5 +381,12 @@ class StudentApiController extends Controller
         return response(['notifications' => $notifications], 200);
     }
 
+    public function markAsRead(Request $request){
+        $notification = NotificationUser::findOrFail($request->id);
+        $notification->is_read = true;
+        $notification->save();
+        return response(['success' => true], 200);
+    }
+
     //END
 }
