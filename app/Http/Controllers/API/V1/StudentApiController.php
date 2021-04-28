@@ -279,6 +279,7 @@ class StudentApiController extends Controller
             // Free Courses
             if($request->category_id == 0)
                 $courses = Course::Published()
+                      ->Public()
                       ->latest()
                       ->with('category')
                       ->with('classes')
@@ -288,6 +289,7 @@ class StudentApiController extends Controller
             // Search Course with title or Teacher Coupon
             else{
                 $courses = Course::Published()
+                    ->Public()
                     ->latest()
                     ->with('category')
                     ->with('classes')
@@ -308,6 +310,7 @@ class StudentApiController extends Controller
         }
         else
             $courses = Course::Published()
+                    ->Public()
                     ->latest()
                     ->with('category')
                     ->with('classes')

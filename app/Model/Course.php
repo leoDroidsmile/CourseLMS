@@ -20,6 +20,12 @@ class Course extends Model
         return $query->where('is_published', true);
     }
 
+    /*Check the course is Public*/
+    public function scopePublic($query)
+    {
+        return $query->where('is_private', false);
+    }
+
 
     /*Check the course is published*/
     public function scopeNotFree($query)
