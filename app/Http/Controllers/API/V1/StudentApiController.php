@@ -370,7 +370,14 @@ class StudentApiController extends Controller
     }
 
     public function getNotifications(Request $request){
-        $notifications = NotificationUser::where('user_id', $request->user()->id)->get();
+        if($request->is_read != 'all')
+            $notifications = NotificationUser::where('user_id', $request->user()->id)
+                ->where('is_read', false)
+                ->get();
+        else
+            $notifications = NotificationUser::where('user_id', $request->user()->id)
+                ->get();
+
         return response(['notifications' => $notifications], 200);
     }
 
