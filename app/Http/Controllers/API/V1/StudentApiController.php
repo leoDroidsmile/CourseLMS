@@ -15,6 +15,8 @@ use App\Model\Enrollment;
 use App\Model\Instructor;
 use App\Model\Category;
 use App\Model\Course;
+use App\NotificationUser;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -367,6 +369,10 @@ class StudentApiController extends Controller
         return response(['courses' => $courses], 200);
     }
 
+    public function getNotifications(Request $request){
+        $notifications = NotificationUser::where('user_id', $request->user()->id)->get();
+        return response(['notifications' => $notifications], 200);
+    }
 
     //END
 }
