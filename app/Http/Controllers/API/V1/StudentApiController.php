@@ -277,7 +277,7 @@ class StudentApiController extends Controller
     public function getTeacherCourses(Request $request){
         if($request->teacher_id == 0){
             // Free Courses
-            if($request->category_id == 0)
+            if(!$request->search)
                 $courses = Course::Published()
                       ->Public()
                       ->latest()
