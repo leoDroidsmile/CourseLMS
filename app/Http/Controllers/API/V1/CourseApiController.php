@@ -275,7 +275,15 @@ class CourseApiController extends Controller
       $course = Course::where('id', $request->course_id)->first();
       $user   = $request->user();
 
+
       if ($coupon != null) {
+
+        // Check whether course is private
+        if($course->is_private)
+            return response()->json([
+                    'success' => false,
+                    'message' => 'This course is private, You must write to a teacher.',
+                ], 200);
 
         if($coupon->is_used)
             return response()->json([
@@ -441,8 +449,16 @@ class CourseApiController extends Controller
     public function buyCourseWithWallet(Request $request)
     {
         Log::error($request->all());
+
         $course = Course::where('id', $request->course_id)->first();
         $user   = $request->user();
+
+        // Check whether course is private
+        if($course->is_private)
+            return response()->json([
+                    'success' => false,
+                    'message' => 'This course is private, You must write to a teacher.',
+                ], 200);
       
         if($course->is_discount == 1)
             $course_price = $course->discount_price;
