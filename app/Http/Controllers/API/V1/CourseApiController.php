@@ -20,6 +20,8 @@ use App\Coupon;
 use App\TeacherCoupon;
 use Carbon\Carbon;
 use App\User;
+use App\NotificationUser;
+
 use App\Model\Instructor;
 use App\Model\InstructorEarning;
 use App\Model\CoursePurchaseHistory;
@@ -32,6 +34,14 @@ use Illuminate\Support\Facades\Validator;
 
 class CourseApiController extends Controller
 {
+    function userNotify($user_id,$details)
+    {
+        $notify = new NotificationUser();
+        $notify->user_id = $user_id;
+        $notify->data = $details;
+        $notify->save();
+    }
+
     /*Show All Course An browse it*/
     public function allCourses(){
         $courses = Course::Published()
@@ -345,6 +355,13 @@ class CourseApiController extends Controller
                 $coupon->is_used = true;
                 $coupon->save();
 
+
+                // Notify User
+                $details = [
+                    'body' => translate('You purchased course - ' . $course->title),
+                ];
+                $this->userNotify($user->id,$details);
+
                 return response()->json([
                     'success' => true,
                     'message' => 'The course have been purchased successfully.',
@@ -392,6 +409,13 @@ class CourseApiController extends Controller
                 $coupon->is_used = true;
                 $coupon->student_id = $user->id;
                 $coupon->save();
+
+                
+                // Notify User
+                $details = [
+                    'body' => translate('You purchased course - ' . $course->title),
+                ];
+                $this->userNotify($user->id,$details);
 
                 return response()->json([
                     'success' => true,
