@@ -264,6 +264,8 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
             Route::get('student/my/courses',        'StudentApiController@getMyCourses');
             Route::get('student/course/detail',     'StudentApiController@getCourseDetail');
             Route::get('student/user/notifications','StudentApiController@getNotifications');
+            Route::get('student/main/sliders',      'StudentApiController@getSliders');
+
             Route::post('student/notification/mark','StudentApiController@markAsRead');
             Route::post('student/coupon/apply',      'CourseApiController@couponApply');
             Route::post('student/course/buyWallet',  'CourseApiController@buyCourseWithWallet');

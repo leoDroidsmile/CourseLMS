@@ -15,6 +15,7 @@ use App\Model\Enrollment;
 use App\Model\Instructor;
 use App\Model\Category;
 use App\Model\Course;
+use App\Model\Slider;
 use App\NotificationUser;
 
 use Illuminate\Http\Request;
@@ -388,5 +389,14 @@ class StudentApiController extends Controller
         return response(['success' => true], 200);
     }
 
+    public function getSliders(Request $request){
+        $slider = Slider::findOrFail($request->id);
+        if($slider)
+            $slider->image = asset($slider->image);
+
+        $sliders = [$slider, $slider]; 
+        
+        return response(['slider' => $sliders], 200);
+    }
     //END
 }
