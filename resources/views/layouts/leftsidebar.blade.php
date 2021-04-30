@@ -203,19 +203,18 @@
 
 
                             {{--Certificate start--}}
-                            @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin" && certificate())
+                            {{-- @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin" && certificate())
                                 <li><a href="{{route('certificate.setup')}}"
                                        class="{{request()->is('dashboard/certificate*') ?'active':null}}">
                                         <i class="fa fa-certificate"></i> <span>@translate(Certificate Setting)</span>
                                     </a>
                                 </li>
-                            @endif
+                            @endif --}}
                             {{--Certificate end--}}
 
 
 
-                            @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin")
-                                {{-- Package area --}}
+                            {{-- @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin")
                                 <li><a href="{{route('packages.index')}}"
                                        class="{{request()->is('dashboard/package*') ?'active':null}}">
                                         <i class="fa fa-briefcase"></i> <span>@translate(Instructor Package)</span></a>
@@ -235,7 +234,7 @@
                                     </a>
                                 </li>
 
-                            @endif
+                            @endif --}}
 
 
                             @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Instructor")
@@ -279,7 +278,7 @@
 
 
                             {{--affiliate--}}
-                            @if(affiliateStatus() && \Illuminate\Support\Facades\Auth::user()->user_type == 'Admin')
+                            {{-- @if(affiliateStatus() && \Illuminate\Support\Facades\Auth::user()->user_type == 'Admin')
                                 <li class="{{request()->is('dashboard/affiliate*') ? 'active' : null}}">
                                     <a href="javaScript:void();">
                                         <i class="la la-adn"></i>
@@ -290,7 +289,6 @@
                                         @endif
                                     </a>
                                     <ul class="vertical-submenu">
-                                        {{--settings --}}
                                         <li><a href="{{route('affiliate.setting.create')}}"
                                                class="{{request()->is('dashboard/affiliate/setting*') ?'active':null}}">@translate(Settings)</a>
                                         </li>
@@ -319,12 +317,12 @@
 
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
 
 
+                            {{-- Admin Earning area --}}
                             @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin")
-                                {{-- Admin Earning area --}}
-                                <li><a href="{{route('admin.earning.index')}}"
+                                {{-- <li><a href="{{route('admin.earning.index')}}"
                                        class="{{request()->is('dashboard/admin*') ?'active':null}}">
                                         <i class="fa fa-history"></i> <span>@translate(Admin's Earning)</span>
                                     </a>
@@ -336,7 +334,7 @@
                                             <i class="fa fa-sticky-note"></i> <span>@translate(Home Page Content)</span>
                                         </a>
                                     </li>
-                                    @endif
+                                @endif --}}
 
                                 @if(env('BLOG_ACTIVE') == "YES")
                                     <li><a href="{{route('blog.index')}}"
@@ -357,7 +355,7 @@
 
 
                             {{-- Settings Area --}}
-                            <li class="{{request()->is('dashboard/smtp*')
+                            {{-- <li class="{{request()->is('dashboard/smtp*')
                                    || request()->is('dashboard/language*')
                                    || request()->is('dashboard/slider*')
                                    || request()->is('dashboard/site*')
@@ -404,7 +402,6 @@
 
 
                                     @else
-                                        {{-- Instructor Earning area --}}
                                         <li><a href="{{route('account.create')}}"
                                                class="{{request()->is('dashboard/account*') ?'active':null}}">@translate(Payment
                                                 Account Setup)
@@ -412,10 +409,11 @@
                                         </li>
                                     @endif
                                 </ul>
-                            </li>
+                            </li> --}}
 
-                            @if(env('FORUM_PANEL') == "YES")
-                                {{-- Forum manager --}}
+                                                        
+                            {{-- Forum manager --}}
+                            {{-- @if(env('FORUM_PANEL') == "YES")
                                 @if(Auth::user()->user_type === "Admin" || Auth::user()->user_type === "Instructor")
                                     <li class="{{request()->is('dashboard/forum*') ? 'active' : null}}">
                                         <a href="javaScript:void();">
@@ -437,11 +435,12 @@
                                         </ul>
                                     </li>
                                 @endif
-                            @endif
+                            @endif --}}
 
-
+    
+                            {{-- Zoom manager --}}
+                                
                             @if(env('SUBSCRIPTION_ACTIVE') == "YES")
-                                {{-- Zoom manager --}}
                                 @if(Auth::user()->user_type === "Admin" || Auth::user()->user_type === "Instructor")
                                     <li class="{{request()->is('dashboard/subscription*') ? 'active' : null}}">
                                         <a href="javaScript:void();">
@@ -534,22 +533,17 @@
                                 @endif
                             @endif
 
-                            @if(env('ADDONS_MANAGER') == "YES")
-                                {{-- Zoom manager --}}
+                            {{-- @if(env('ADDONS_MANAGER') == "YES")
                                 @if(Auth::user()->user_type === "Admin")
-
-
-                                    {{-- Addons manager --}}
                                     <li><a href="{{route('addons.manager.index')}}"
                                            class="{{request()->is('dashboard/addon*') ?'active':null}}">
                                             <i class="fa fa-puzzle-piece"></i> <span>@translate(Addon Manager)</span>
                                         </a>
                                     </li>
                                 @endif
-                            @endif
+                            @endif --}}
 
-                            @if(env('WALLET_ACTIVE') == "YES")
-                                {{-- Forum manager --}}
+                            {{-- @if(env('WALLET_ACTIVE') == "YES")
                                 @if(Auth::user()->user_type === "Admin")
                                     <li class="{{request()->is('dashboard/wallet*') ? 'active' : null}}">
                                         <a href="javaScript:void();">
@@ -567,23 +561,24 @@
                                         </ul>
                                     </li>
                                 @endif
-                            @endif
+                            @endif --}}
 
 
-                            @if(env('THEME_MANAGER') == "YES")
+    
+                            {{-- THEME manager --}}                                
+                            {{-- @if(env('THEME_MANAGER') == "YES")
                                 @if(Auth::user()->user_type === "Admin")
-                                    {{-- THEME manager --}}
                                     <li><a href="{{route('theme.manager.index')}}"
                                            class="{{request()->is('dashboard/theme*') ?'active':null}}">
                                             <i class="fa  fa-pie-chart"></i> <span>@translate(Theme Manager)</span>
                                         </a>
                                     </li>
                                 @endif
-                            @endif
+                            @endif --}}
 
 
                             {{-- Activity Log Manager --}}
-                            @if(Auth::user()->user_type === "Admin" || Auth::user()->user_type === "Instructor")
+                            {{-- @if(Auth::user()->user_type === "Admin" || Auth::user()->user_type === "Instructor")
                                 <li class="{{request()->is('dashboard/forum*') ? 'active' : null}}">
                                     <a href="javaScript:void();">
                                         <i class="fa fa-bus"></i>
@@ -596,7 +591,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
 
 
                         </ul>
