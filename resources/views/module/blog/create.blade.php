@@ -28,7 +28,7 @@
                     <input class="form-control" name="name" placeholder="@translate(Title)" required>
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label>@translate(Select Category)</label>
                     <select class="form-control select2 w-100" name="category_id" required>
                         <option value="">@translate(Category Select)</option>
@@ -36,7 +36,7 @@
                             <option value="{{$item->id}}">{{$item->name}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label class="col-form-label text-md-right">@translate(Primary Image)</label>
                     <div class="custom-file">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-tag">
                         @translate(Tags) <span class="text-danger">*</span></label>
                     <div class="col-lg-9">
@@ -65,7 +65,7 @@
                             @error('tag') <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Big description --}}
                 <div class="form-group row">

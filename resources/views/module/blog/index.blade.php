@@ -37,7 +37,7 @@
                 <tr>
                     <th>S/L</th>
                     <th>@translate(Title)</th>
-                    <th>@translate(Category)</th>
+                    {{-- <th>@translate(Category)</th> --}}
                     <th>@translate(Image)</th>
                     <th>@translate(Body)</th>
                     <th>@translate(Active)</th>
@@ -52,18 +52,18 @@
                             {{$item->title}}
 
                         </td>
-                        <td>{{$item->category->name}}</td>
+                        {{-- <td>{{$item->category->name}}</td> --}}
                         <td>
                             @if($item->img != null)
                                 <img src="{{filePath($item->img)}}"
                                      class="img-thumbnail rounded-circle avatar-lg" alt="{{$item->img}}">
                             @endif
                         </td>
-                        <td>
+                        {{-- <td>
                             @foreach(json_decode($item->tags) as $tag)
                             <span class="badge badge-dark">{{$tag}}</span>
                             @endforeach
-                        </td>
+                        </td> --}}
                         <td>{{\Illuminate\Support\Str::limit($item->body,50)}}</td>
                         <td>
                             <div class="switchery-list">
