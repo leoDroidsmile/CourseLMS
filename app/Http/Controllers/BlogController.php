@@ -25,8 +25,9 @@ class BlogController extends Controller
 
     public function create()
     {
-        $categories = Category::where('is_item', 0)->get();
-        return view('module.blog.create', compact('categories'));
+        // $categories = Category::where('is_item', 0)->get();
+        // return view('module.blog.create', compact('categories'));
+        return view('module.blog.create');
     }
 
     public function store(Request $request)
@@ -38,16 +39,17 @@ class BlogController extends Controller
       }
 
         $blog = new Blog();
-        $blog->category_id = $request->category_id;
+        $blog->category_id = 0;
         $blog->title = $request->name;
         $blog->img = $request->icon;
         $blog->body = $request->desc;
-        $tag = explode(',', $request->tag);
-        $tagC = array();
-        foreach ($tag as $itemt) {
-            array_push($tagC, $itemt);
-        }
-        $blog->tags = json_encode($tagC);
+        // $tag = explode(',', $request->tag);
+        // $tagC = array();
+        // foreach ($tag as $itemt) {
+        //     array_push($tagC, $itemt);
+        // }
+        // $blog->tags = json_encode($tagC);
+        $blog->tags = NULL;
         $blog->save();
         notify()->success(translate('Blog Content created successfully'));
         return back();
@@ -69,16 +71,9 @@ class BlogController extends Controller
       }
 
         $blog = Blog::findOrFail($request->id);
-        $blog->category_id = $request->category_id;
         $blog->title = $request->name;
         $blog->img = $request->icon;
         $blog->body = $request->desc;
-        $tag = explode(',', $request->tag);
-        $tagC = array();
-        foreach ($tag as $itemt) {
-            array_push($tagC, $itemt);
-        }
-        $blog->tags = json_encode($tagC);
         $blog->save();
         notify()->success(translate('Blog Content update successfully'));
         return back();
