@@ -402,11 +402,17 @@ class StudentApiController extends Controller
 
     public function getBlogs(Request $request){
         $blogs = Blog::all();
+        foreach ($blogs as $blog){
+            if($blog->img)
+                $blog->img = asset($blog->img);
+        }
         return response(['blogs' => $blogs], 200);
     }
 
     public function getBlogDetail(Request $request){
         $blog = Blog::findOrFail($request->id);
+        if($blog->img)
+            $blog->img = asset($blog->img);
         return response(['blog' => $blog], 200);
     }
     //END
