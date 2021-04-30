@@ -10,6 +10,7 @@ use App\Model\VerifyUser;
 use App\Notifications\StudentRegister;
 use App\Notifications\VerifyNotifications;
 use App\User;
+use App\Blog;
 use App\TeacherCoupon;
 use App\Model\Enrollment;
 use App\Model\Instructor;
@@ -397,6 +398,16 @@ class StudentApiController extends Controller
         $sliders = [$slider, $slider]; 
         
         return response(['slider' => $sliders], 200);
+    }
+
+    public function getBlogs(Request $request){
+        $blogs = Blog::all();
+        return response(['blogs' => $blogs], 200);
+    }
+
+    public function getBlogDetail(Request $request){
+        $blog = Blog::findOrFail($request->id);
+        return response(['blog' => $blog], 200);
     }
     //END
 }
