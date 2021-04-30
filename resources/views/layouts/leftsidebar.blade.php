@@ -336,14 +336,16 @@
                                             <i class="fa fa-sticky-note"></i> <span>@translate(Home Page Content)</span>
                                         </a>
                                     </li>
-                                    @if(env('BLOG_ACTIVE') == "YES")
-                                        <li><a href="{{route('blog.index')}}"
-                                               class="{{request()->is('dashboard/blog*') ?'active':null}}">
-                                                <i class="fa fa-contao"></i> <span>@translate(Blog)</span>
-                                            </a>
-                                        </li>
                                     @endif
+
+                                @if(env('BLOG_ACTIVE') == "YES")
+                                    <li><a href="{{route('blog.index')}}"
+                                            class="{{request()->is('dashboard/blog*') ?'active':null}}">
+                                            <i class="fa fa-contao"></i> <span>@translate(Blog)</span>
+                                        </a>
+                                    </li>
                                 @endif
+                               
                             @endif
 
                             {{-- Support Ticket --}}

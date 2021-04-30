@@ -265,7 +265,7 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     }
 
 
-    if (themeManager() == "rumbok"){
+    // if (themeManager() == "rumbok"){
 
         /*know about module*/
         Route::get('know/index','KnowAboutController@index')->name('know.index');
@@ -283,7 +283,7 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
         Route::post('blog/update','BlogController@update')->name('blog.update');
         Route::get('blog/delete/{id}','BlogController@destroy')->name('blog.destroy');
         Route::get('blog/publish','BlogController@isActive')->name('blog.active');
-    }
+    // }
 });
 
 
