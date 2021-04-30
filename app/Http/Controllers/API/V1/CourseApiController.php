@@ -395,6 +395,13 @@ class CourseApiController extends Controller
       }else {
         // Check Teacher Coupon
         $coupon = TeacherCoupon::where('code', $request->code)->first();
+
+        if($coupon->is_used)
+            return response()->json([
+                'success' => false,
+                'message' => 'The Coupon was already used.',
+            ], 200);  
+            
         if ($coupon != null){
             if($coupon->course_id == $request->course_id) {
                 $enrollment = new Enrollment();
