@@ -8,6 +8,7 @@ use App\Model\Enrollment;
 use App\Model\Student;
 use App\TeacherCoupon;
 use Alert;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\CoursePurchaseHistory;
@@ -40,9 +41,10 @@ class StudentController extends Controller
                     $students = Student::where('user_id', $student_id)
                         ->orderBydesc('id')->paginate(10);
                 }
-                else 
-                    $students = Student::where('id', $student_id)
-                        ->orderBydesc('id')->paginate(10);
+                else {
+                    $user = User::findOrFail($request->search);
+                    $students = Student::where('user_id', $user->id)->orderBydesc('id')->paginate(10);;
+                }
             } else {
                 $students = Student::orderBydesc('id')->paginate(10);
             }
