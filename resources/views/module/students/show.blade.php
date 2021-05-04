@@ -55,24 +55,28 @@
                                         <td>{{ $each_student->phone }}</td>
                                     </tr>
                                     <tr class="text-center">
-                                        <td>@translate(Address)</td>
-                                        <td>{{ $each_student->address }}</td>
+                                        <td>@translate(City)</td>
+                                        <td>{{ $each_student->city }}</td>
                                     </tr>
                                     <tr class="text-center">
-                                        <td>@translate(Linked In)</td>
-                                        <td><a href={{ $each_student->linked }} target="_blank">{{ $each_student->linked }}</a></td>
+                                        <td>@translate(Male)</td>
+                                        <td>
+                                            @if($each_student->male)
+                                                {{ "Male" }}
+                                            @else
+                                                {{ "Female" }}
+                                            @endif
+                                        </td>
                                     </tr>
+
                                     <tr class="text-center">
-                                        <td>@translate(Facebook)</td>
-                                        <td><a href={{ $each_student->fb }} target="_blank">{{ $each_student->fb }}</a></td>
+                                        <td>@translate(School)</td>
+                                        <td>{{ $each_student->school }}</td>
                                     </tr>
+
                                     <tr class="text-center">
-                                        <td>@translate(Twitter)</td>
-                                        <td><a href={{ $each_student->tw }} target="_blank">{{ $each_student->tw }}</a></td>
-                                    </tr>
-                                    <tr class="text-center">
-                                        <td>@translate(Skype)</td>
-                                        <td><a href={{ $each_student->skype }} target="_blank">{{ $each_student->skype }}</a></td>
+                                        <td>@translate(Major)</td>
+                                        <td>{{ $each_student->major }}</td>
                                     </tr>
                                     </tbody>
                                     <tfoot>
