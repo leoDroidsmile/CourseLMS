@@ -276,5 +276,7 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
             Route::post('student/logout',           'StudentApiController@logout');
             Route::post('student/charge',           'WalletApiController@charge');
             Route::post('student/user/updateProfile','StudentApiController@updateProfile');
+
+            Route::post('student/teacher/sendMessage', 'StudentApiController@sendMessage');
         });
     });

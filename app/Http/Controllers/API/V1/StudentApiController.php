@@ -12,6 +12,7 @@ use App\Notifications\VerifyNotifications;
 use App\User;
 use App\Blog;
 use Log;
+use App\Model\Massage;
 use App\TeacherCoupon;
 use App\Model\Enrollment;
 use App\Model\Instructor;
@@ -443,9 +444,25 @@ class StudentApiController extends Controller
         $student->save();
 
         return response()->json([
-            'message'      => "Your profile updated successfully."
+            'message'      => "Profile updated successfully."
         ], 
         200);
     }
+
+    public function sendMessage(Request $request){
+        
+        // Enrollment_id is Teacher ID 
+        $message = new Massage();
+        $message->enroll_id = $request->teacher_id;
+        $message->user_id = $request->user()->id;
+        $message->content = $request->message;
+        $message->save();
+
+        return response()->json([
+            'message'      => "Message sent successfully."
+        ], 
+        200);
+    }
+    
     //END
 }
