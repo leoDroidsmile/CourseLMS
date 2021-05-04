@@ -265,7 +265,8 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
             Route::get('student/course/detail',     'StudentApiController@getCourseDetail');
             Route::get('student/user/notifications','StudentApiController@getNotifications');
             Route::get('student/main/sliders',      'StudentApiController@getSliders');
-
+            Route::get('student/user/profile',      'StudentApiController@getUserProfile');
+            
             Route::get('student/blogs',             'StudentApiController@getBlogs');
             Route::get('student/blog/detail',       'StudentApiController@getBlogDetail');
 
@@ -274,5 +275,6 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
             Route::post('student/course/buyWallet',  'CourseApiController@buyCourseWithWallet');
             Route::post('student/logout',           'StudentApiController@logout');
             Route::post('student/charge',           'WalletApiController@charge');
+            Route::post('student/user/updateProfile','StudentApiController@updateProfile');
         });
     });

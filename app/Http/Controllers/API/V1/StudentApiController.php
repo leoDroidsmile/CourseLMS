@@ -415,5 +415,22 @@ class StudentApiController extends Controller
             $blog->img = asset($blog->img);
         return response(['blog' => $blog], 200);
     }
+
+    public function getUserProfile(Request $request){
+        $student = Student::where('user_id',$request->user()->id)->first();
+        $user = User::findOrFail($request->user()->id);
+
+        if(!$student->image)
+            $student->image = asset($user->image);
+
+        return response()->json([
+            'user'      => $student
+        ], 
+        200);
+    }
+
+    public function updateProfile(Request $request){
+        
+    }
     //END
 }
