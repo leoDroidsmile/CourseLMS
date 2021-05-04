@@ -11,6 +11,7 @@ use App\Notifications\StudentRegister;
 use App\Notifications\VerifyNotifications;
 use App\User;
 use App\Blog;
+use Log;
 use App\TeacherCoupon;
 use App\Model\Enrollment;
 use App\Model\Instructor;
@@ -430,7 +431,21 @@ class StudentApiController extends Controller
     }
 
     public function updateProfile(Request $request){
-        
+        $student = Student::where('user_id', $request->user()->id)->first();
+
+        $student->email = $request->email;
+        $student->name = $request->name;
+        $student->city = $request->city;
+        $student->phone = $request->phone;
+        $student->male = $request->male;
+        $student->school = $request->school;
+        $student->major = $request->major;
+        $student->save();
+
+        return response()->json([
+            'message'      => "Your profile updated successfully."
+        ], 
+        200);
     }
     //END
 }
