@@ -17,36 +17,27 @@
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>S/L</th>
+                    {{-- <th>S/L</th> --}}
                     <th>@translate(Student)</th>
-                    <th>@translate(Last Message)</th>
+                    <th>@translate(Message)</th>
                     <th>@translate(Date)</th>
-                    <th>@translate(Action)</th>
+                    {{-- <th>@translate(Action)</th> --}}
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($enroll as  $item)
-                    @if($item->messagesForInbox == !null)
+                @forelse($messages as $item)
                     <tr>
-                        <td>{{ ($loop->index+1) + ($enroll->currentPage() - 1)*$enroll->perPage() }}</td>
+                        {{-- <td>{{ ($loop->index+1) + ($enroll->currentPage() - 1)*$enroll->perPage() }}</td> --}}
                         <td>
-                          @translate(Student): <a target="_blank" href="{{route('students.show',$item->user_id)}}">{{studentDetails($item->user_id)->name ?? 'N/A'}}</a>
-                            <br />
-                           @translate(Course): <a target="_blank" href="{{ route('course.show',[$item->course_id,$item->enrollCourse->slug]) }}">{{$item->enrollCourse->title ?? 'N/A'}}</a>
+                          {{studentDetails($item->user_id)->name ?? 'N/A'}}
                         </td>
                         <td>
-                            <a target="_blank" href="{{ route('messages.show', $item->id) }}">
-                                {{$item->messagesForInbox->content}}
-                                <span class="badge badge-dark">
-                                  {{ $item->messagesForInbox->user_id == \Illuminate\Support\Facades\Auth::id() ? '@translate(Send)' : '@translate(Reply)'}}
-                              </span>
-                            </a>
-
+                            {{$item->content}}
                         </td>
                         <td>
                             {{date('d-M-y',strtotime($item->created_at))}}
                         </td>
-                        <td>
+                        {{-- <td>
                             <div class="kanban-menu">
                                 <div class="dropdown">
                                     <button class="btn btn-link p-0 m-0 border-0 l-h-20 font-16" type="button"
@@ -61,9 +52,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
+                        </td> --}}
                     </tr>
-                    @endif
+                    
                 @empty
                     <tr></tr>
                     <tr>
@@ -74,9 +65,9 @@
                     <tr></tr>
                 @endforelse
                 </tbody>
-                <div class="float-left">
+                {{-- <div class="float-left">
                     {{ $enroll->links() }}
-                </div>
+                </div> --}}
             </table>
         </div>
     </div>

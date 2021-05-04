@@ -29,24 +29,28 @@ class MessageController extends Controller
     /*Show all message list send add by register student*/
     public function index()
     {
-        $course_id = array();
-        $course = Course::where('user_id', Auth::user()->id)->get();
-        foreach ($course as $id) {
-            $course_id = array_merge($course_id, [$id->id]);
-        }
-        $enrolls = Enrollment::whereIn('course_id', $course_id)->with('messages')->get();
+        // $course_id = array();
+        // $course = Course::where('user_id', Auth::user()->id)->get();
+        // foreach ($course as $id) {
+        //     $course_id = array_merge($course_id, [$id->id]);
+        // }
+        // $enrolls = Enrollment::whereIn('course_id', $course_id)->with('messages')->get();
 
-        $ids = array();
-        foreach ($enrolls as $item){
-            if($item->messages->count() > 0){
-                $ids = array_merge($ids,[$item->course_id]);
+        // $ids = array();
+        // foreach ($enrolls as $item){
+        //     if($item->messages->count() > 0){
+        //         $ids = array_merge($ids,[$item->course_id]);
 
-            }
-        }
-        $enroll = Enrollment::whereIn('course_id', $ids)->with('enrollCourse')
-            ->with('messagesForInbox')->paginate(10);
+        //     }
+        // }
+        // $enroll = Enrollment::whereIn('course_id', $ids)->with('enrollCourse')
+        //     ->with('messagesForInbox')->paginate(10);
 
-        return view('module.message.inbox', compact('enroll'));
+        $messages = Massage::where('enroll_id', Auth::user()->id)
+            ->with('user')
+            ->get();
+
+        return view('module.message.inbox', compact('messages'));
     }
 
     /*Show single enrolled student messages chat */
