@@ -13,7 +13,6 @@ class Category extends Model
         return $query->where('is_published', 1);
     }
 
-
     public function parent(){
         return $this->hasOne(Category::class,'id','parent_category_id');
     }
