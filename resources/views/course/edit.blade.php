@@ -46,7 +46,7 @@
                 </div>
 
                 {{-- Level --}}
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-provider">
                         @translate(Course Level) <span class="text-danger">*</span></label>
                     <div class="col-lg-9">
@@ -65,7 +65,7 @@
                     </div>
                     @error('level') <span class="invalid-feedback"
                                           role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                </div>
+                </div> --}}
 
                 {{-- Description --}}
                 <div class="form-group row">
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 {{-- Overview URL --}}
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-website">
                         @translate(Overview URL) <span class="text-danger">*</span></label>
                     <div class="col-lg-9">
@@ -138,7 +138,7 @@
                         @error('overview_url') <span class="invalid-feedback"
                                                      role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                     </div>
-                </div>
+                </div> --}}
                 {{-- Provider --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-provider">

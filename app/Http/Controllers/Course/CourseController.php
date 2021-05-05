@@ -79,20 +79,20 @@ class CourseController extends Controller
             'title' => 'required',
             'slug' => 'required|unique:courses',
             'image' => 'required',
-            'overview_url' => 'required',
+            // 'overview_url' => 'required',
             'provider' => 'required',
             'requirement' => 'required',
             'outcome' => 'required',
             'tag' => 'required',
             'language' => 'required',
             'category_id' => 'required',
-            'level' => 'required',
+            // 'level' => 'required',
         ], [
             'title.required' => translate('Title is required'),
-            'level.required' => translate('Course Level is required'),
+            // 'level.required' => translate('Course Level is required'),
             'slug.unique' => translate('Slug must be unique'),
             'slug.required' => translate('Slug must be Required'),
-            'overview_url.required' => translate('Overview Url is required'),
+            // 'overview_url.required' => translate('Overview Url is required'),
             'provider.required' => translate('Provider is required'),
             'requirement.required' => translate('Requirement is required'),
             'outcome.required' => translate('Outcome is required'),
@@ -110,10 +110,13 @@ class CourseController extends Controller
         if ($request->has('image')) {
             $courses->image = $request->image;
         }
-        $courses->overview_url = $request->overview_url;
-        $courses->provider = $request->provider;
-        $courses->level = $request->level;
 
+        $courses->provider = $request->provider;
+        
+        // Unnecessary Fields
+        $courses->level = 1;
+        $courses->overview_url = '';
+        
         $req = explode(',',$request->requirement);
         $reqC = array();
         foreach ($req as $item){
@@ -231,19 +234,19 @@ class CourseController extends Controller
         $request->validate([
             'title' => 'required',
             'slug' => 'required',
-            'overview_url' => 'required',
+            // 'overview_url' => 'required',
             'provider' => 'required',
             'requirement' => 'required',
             'outcome' => 'required',
             'tag' => 'required',
             'language' => 'required',
             'category_id' => 'required',
-            'level' => 'required',
+            // 'level' => 'required',
         ], [
             'title.required' => translate('Title is required'),
-            'level.required' => translate('Level is required'),
+            // 'level.required' => translate('Level is required'),
             'slug.required' => translate('Slug is required'),
-            'overview_url.required' => translate('Overview Url is required'),
+            // 'overview_url.required' => translate('Overview Url is required'),
             'provider.required' => translate('Provider is required'),
             'requirement.required' => translate('Requirement is required'),
             'outcome.required' => translate('Outcome is required'),
@@ -262,8 +265,13 @@ class CourseController extends Controller
         if ($request->has('image')) {
             $courses->image = $request->image;
         }
-        $courses->overview_url = $request->overview_url;
-        $courses->level = $request->level;
+
+
+        // Unnecessary Fields
+        $courses->overview_url = '';
+        $courses->level = 1;
+        
+        
         $courses->provider = $request->provider;
 
         $req = explode(',',$request->requirement);

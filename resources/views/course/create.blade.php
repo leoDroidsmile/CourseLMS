@@ -41,7 +41,7 @@
             </div>
 
             {{-- Provider --}}
-            <div class="form-group row">
+            {{-- <div class="form-group row">
                 <label class="col-lg-3 col-form-label" for="val-provider">
                     @translate(Course Level) <span class="text-danger">*</span></label>
                 <div class="col-lg-9">
@@ -57,7 +57,7 @@
                     </select>
                 </div>
                 @error('level') <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-            </div>
+            </div> --}}
 
             {{-- Description --}}
             <div class="form-group row">
@@ -99,14 +99,14 @@
             </div>
 
             {{-- Overview URL --}}
-            <div class="form-group row">
+            {{-- <div class="form-group row">
                 <label class="col-lg-3 col-form-label" for="val-website">
                     @translate(Overview URL) <span class="text-danger">*</span></label>
                 <div class="col-lg-9">
                     <input type="url" required value="{{ old('overview_url') }}" class="form-control @error('overview_url') is-invalid @enderror" id="val-website" name="overview_url" placeholder="Overview URL" aria-required="true">
                       @error('overview_url') <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Provider --}}
             <div class="form-group row">
