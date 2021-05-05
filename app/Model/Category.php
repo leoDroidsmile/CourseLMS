@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Model;
-
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,6 +24,10 @@ class Category extends Model
 
    public function courses(){
         return $this->hasMany(Course::class,'category_id','id')->Published();
+   }
+
+   public function teacher(){
+    return $this->hasOne(User::class,'id','teacher_id');
    }
 
 }

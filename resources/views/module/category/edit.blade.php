@@ -3,6 +3,18 @@
         @csrf
         <input type="hidden" name="id" value="{{$category->id}}">
         <div class="form-group">
+            <label>@translate(Teacher)<span class="text-danger">*</span></label>
+            <select class="form-control select2 w-100" name="teacher_id">
+                @foreach($teachers as $item)
+                    @if($item->user_id == $category->teacher_id)
+                        <option value="{{$item->user_id}}" selected>{{$item->name}}</option>
+                    @else
+                        <option value="{{$item->user_id}}">{{$item->name}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label>@translate(Name) <span class="text-danger">*</span></label>
             <input class="form-control" name="name" placeholder="@translate(Name)" required value="{{$category->name}}">
         </div>

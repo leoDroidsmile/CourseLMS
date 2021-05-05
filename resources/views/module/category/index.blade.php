@@ -37,6 +37,7 @@
                 <thead>
                 <tr>
                     <th>S/L</th>
+                    <th>@translate(Teacher)</th>
                     <th>@translate(Icon)</th>
                     <th>@translate(Category)</th>
                     <th>@translate(Parent Category)</th>
@@ -50,6 +51,7 @@
                 @forelse($categories as  $item)
                     <tr>
                         <td>{{ ($loop->index+1) + ($categories->currentPage() - 1)*$categories->perPage() }}</td>
+                        <td>@if($item->teacher) {{$item->teacher->name}} @endif</td>
                         <td>
                             @if($item->icon != null)
                                 <img src="{{filePath($item->icon)}}"

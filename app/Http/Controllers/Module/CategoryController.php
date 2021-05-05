@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Module;
 use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Course;
+use App\Model\Instructor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Alert;
@@ -25,9 +26,10 @@ class CategoryController extends Controller
             $search = $request->search;
             $categories = Category::where('name', 'like', '%' . $search . '%')
                 ->with('parent')
+                ->with('teacher')
                 ->paginate(10);
         } else {
-            $categories = Category::with('parent')->paginate(10);
+            $categories = Category::with('parent')->with('teacher')->paginate(10);
         }
         return view('module.category.index', compact('categories'));
     }
@@ -36,7 +38,8 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::published()->where('parent_category_id', 0)->get();
-        return view('module.category.create', compact('categories'));
+        $teachers = Instructor::get();
+        return view('module.category.create', compact('categories', 'teachers'));
     }
 
     //store the category
@@ -57,6 +60,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = Str::slug($request->name);
         $category->parent_category_id = $request->parent_category_id ?? 0;
+        $category->teacher_id = $request->teacher_id ?? 0;
 
         //store the icon
         if ($request->has('icon')) {
@@ -74,7 +78,8 @@ class CategoryController extends Controller
         $categories = Category::published()
             ->where('parent_category_id', 0)
             ->get();
-        return view('module.category.edit', compact('category', 'categories'));
+        $teachers = Instructor::get();
+        return view('module.category.edit', compact('category', 'categories', 'teachers'));
     }
 
     //update the category
@@ -98,6 +103,7 @@ class CategoryController extends Controller
         $update_category->slug = Str::slug($update_category->name) . $update_category->id;
         $update_category->parent_category_id = $request->parent_category_id ?? 0;
         $update_category->icon = $request->icon;
+        $update_category->teacher_id = $request->teacher_id;
         $update_category->save();
 
         notify()->success(translate('Category updated successfully'));

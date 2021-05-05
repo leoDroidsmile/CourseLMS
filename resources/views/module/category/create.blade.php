@@ -2,6 +2,14 @@
     <form action="{{route('categories.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
+            <label>@translate(Teacher)<span class="text-danger">*</span></label>
+            <select class="form-control select2 w-100" name="teacher_id">
+                @foreach($teachers as $item)
+                    <option value="{{$item->user_id}}">{{$item->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label>@translate(Name) <span class="text-danger">*</span></label>
             <input class="form-control" name="name" placeholder="@translate(Name)" required>
         </div>
