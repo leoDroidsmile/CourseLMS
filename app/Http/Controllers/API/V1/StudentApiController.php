@@ -215,6 +215,24 @@ class StudentApiController extends Controller
 
     }
 
+
+    public function resetPassword(Request $request){
+        if (Hash::check($request->current_password, $request->user()->password)) {
+            $request->user()->fill([
+                'password' => Hash::make($request->new_password)
+            ])->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully Reset Password'
+            ]);
+        }else
+            return response()->json([
+                'success' => false,
+                'message' => 'Current Password is not matched'
+            ]);
+    }
+
     /*Verify the Student account and active it*/
     public function verifyUser($token)
     {
