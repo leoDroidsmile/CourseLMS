@@ -55,6 +55,7 @@
                     {{-- <th>@translate(By Student)</th> --}}
                     <th>@translate(Action)</th>
                     <th>@translate(Download)</th>
+                    <th>@translate(Delete)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -88,12 +89,18 @@
                         {{-- <td>{{ $coupon->student_id }}</td> --}}
                         <td>
                             <a href="#!" class="btn btn-primary"
-                               onclick="forModal('{{ route('teachercoupon.edit', $coupon->id) }}', '@translate(Edit)')">@translate(Edit)
+                               onclick="forModal('{{ route('teachercoupon.edit', $coupon->id) }}', '@translate(Edit)')">
+                               <i class="fa fa-pencil"></i>
                             </a>
                         </td>
                         <td>
                             <a class="btn btn-primary ml-3" id="btn_download" style="float:right; color:white;" title="@translate(Download)" href="{{ route("teachercoupon.download", $coupon->id) }}">
-                                <i class="fa fa-download"></i> @translate(Download)
+                                <i class="fa fa-download"></i> 
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary ml-3" id="btn_delete" style="float:right; color:white;" title="@translate(Download)" href="{{ route("teachercoupon.delete", $coupon->id) }}">
+                                <i class="fa fa-remove"></i> 
                             </a>
                         </td>
                     </tr>
