@@ -20,6 +20,9 @@
         <a class="btn btn-primary ml-3" href="{{ route("teachercoupon.index") }}" title="@translate(Add New Teacher Coupon Code)">
             <i class="fa fa-plus-circle"></i> @translate(Add New Teacher Coupon Code)
         </a>
+        <a class="btn btn-primary ml-3" href="{{ route("teachercoupon.delete.all") }}" title="@translate(Delete All Teacher Coupons)">
+            <i class="fa fa-remove"></i> @translate(Delete All Teacher Coupons)
+        </a>
 
         <div class="float-right">
             <div class="row">
@@ -53,7 +56,7 @@
                     <th>@translate(Course)</th>
                     {{-- <th>@translate(Used)</th> --}}
                     {{-- <th>@translate(By Student)</th> --}}
-                    <th>@translate(Action)</th>
+                    <th>@translate(Edit)</th>
                     <th>@translate(Download)</th>
                     <th>@translate(Delete)</th>
                 </tr>
@@ -106,7 +109,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center">
+                        <td colspan="9" class="text-center">
                             <h4>@translate(NO TEACHER COUPON FOUND)</h4>
                         </td>
                     </tr>

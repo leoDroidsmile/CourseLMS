@@ -116,10 +116,16 @@ class TeacherCouponController extends Controller
     public function delete(Request $request, $id){
       $coupon = TeacherCoupon::findOrFail($id);
       $coupon->delete();
-      Alert::success(translate('Done'), translate('Coupon Delete Successfully'));
+      Alert::success(translate('Done'), translate('Coupon Deleted Successfully'));
       return back();
     }
 
+
+    public function deleteAll(Request $request){
+      TeacherCoupon::truncate();
+      Alert::success(translate('Done'), translate('All Teacher Coupons Deleted Successfully'));
+      return back();
+    }
 
     /**
      * FRONTEND

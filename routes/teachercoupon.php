@@ -16,6 +16,7 @@ Route::group(['middleware' => ['installed', 'auth', 'activity'], 'prefix' => 'da
     Route::post('/activation', 'TeacherCouponController@coupon_activation')->name('teachercoupon.activation'); //api ajax
     Route::get('/download/{id}', 'TeacherCouponController@downloadTeacherCoupons')->name('teachercoupon.download'); 
     Route::get('/delete/{id}', 'TeacherCouponController@delete')->name('teachercoupon.delete');
+    Route::get('/empty', 'TeacherCouponController@deleteAll')->name('teachercoupon.delete.all');
 
     /**
      * FRONTEND
