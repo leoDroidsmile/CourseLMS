@@ -32,10 +32,10 @@
                 {{-- Slug --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-slug">
-                        @translate(Slug) <span class="text-danger">*</span></label>
+                        @translate(Slug) </label>
                     <div class="col-lg-9">
                         <input type="text"
-                               required value="{{ $each_course->slug}}"
+                               value="{{ $each_course->slug}}"
                                class="form-control @error('slug') is-invalid @enderror" id="val-slug" name="slug"
                                placeholder="Enter Slug"
                                aria-required="true" {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}>
@@ -73,7 +73,7 @@
                         @translate(Description)</label>
                     <div class="col-lg-9">
                         @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Instructor")
-                            <textarea required
+                            <textarea 
                                       class="form-control summernote @error('short_description') is-invalid @enderror"
                                       name="short_description"
                                       rows="5">{!!  $each_course->short_description !!}</textarea>
@@ -91,7 +91,7 @@
                         @translate(Big Description)</label>
                     <div class="col-lg-9">
                         @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Instructor")
-                            <textarea required
+                            <textarea 
                                       class="form-control summernote @error('big_description') is-invalid @enderror"
                                       name="big_description"
                                       rows="5">{!! $each_course->big_description !!}</textarea>
@@ -107,12 +107,12 @@
                 {{-- Course Thumbnail --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="img">
-                        @translate(Course Thumbnail) <span class="text-danger">*</span></label>
+                        @translate(Course Thumbnail) </label>
                     <div class="col-lg-9">
                     <img src="{{ filePath($each_course->image) }}" width="200" height="auto" alt="photo">
                     <br>
 
-                    <input type="hidden" required value="{{$each_course->image}}" class="form-control course_image @error('image') is-invalid @enderror" id="val-img" name="image">
+                    <input type="hidden" value="{{$each_course->image}}" class="form-control course_image @error('image') is-invalid @enderror" id="val-img" name="image">
                     <img class="course_thumb_preview rounded shadow-sm d-none" src="" alt="#Course thumbnail" width="200" height="auto">
                     @error('image') <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
 
@@ -142,10 +142,10 @@
                 {{-- Provider --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-provider">
-                        @translate(Provider) <span class="text-danger">*</span></label>
+                        @translate(Provider) </label>
                     <div class="col-lg-9">
                         <select class="form-control lang @error('provider') is-invalid @enderror" id="val-provider"
-                                name="provider" required {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}>
+                                name="provider" {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}>
                             <option value="Youtube" {{ $each_course->provider === "Youtube" ? "selected" : "" }}>
                                 @translate(Youtube)
                             </option>
@@ -164,7 +164,7 @@
                 {{-- Requirements --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-requirement">
-                        @translate(Requirements) <span class="text-danger">*</span></label>
+                        @translate(Requirements) </label>
                     <div class="col-lg-9">
                         <div class="bootstrap-tagsinput">
                             <input type="text" class="@error('requirement') is-invalid @enderror" value="
@@ -181,7 +181,7 @@
                 {{-- Outcome --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-outcome">
-                        @translate(Outcome) <span class="text-danger">*</span></label>
+                        @translate(Outcome) </label>
                     <div class="col-lg-9">
                         <div class="bootstrap-tagsinput">
                             <input type="text" class="@error('outcome') is-invalid @enderror" placeholder=""
@@ -197,7 +197,7 @@
                 {{-- Tags --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-tag">
-                        @translate(Tags) <span class="text-danger">*</span></label>
+                        @translate(Tags) </label>
                     <div class="col-lg-9">
                         <div class="bootstrap-tagsinput">
                             <input type="text" class="@error('tag') is-invalid @enderror" placeholder="" value="
@@ -298,10 +298,10 @@
                 {{-- language --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-language">
-                        @translate(Language) <span class="text-danger">*</span></label>
+                        @translate(Language) </label>
                     <div class="col-lg-9">
                         <select class="form-control lang @error('language') is-invalid @enderror" id="val-language"
-                                name="language" required {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}>
+                                name="language" {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}>
                             @foreach ($languages as $language)
                                 <option
                                     value="{{ $language->name }}" {{$each_course->language == $language->name ?'selected':null}}>{{ $language->name }}</option>

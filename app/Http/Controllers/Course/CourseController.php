@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Exception;
 use App\Model\Course;
+use Log;
 use Auth;
 use Alert;
 use App\Model\Category;
@@ -77,29 +78,29 @@ class CourseController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'slug' => 'required|unique:courses',
-            'image' => 'required',
+            // 'slug' => 'required|unique:courses',
+            // 'image' => 'required',
             // 'overview_url' => 'required',
-            'provider' => 'required',
-            'requirement' => 'required',
-            'outcome' => 'required',
-            'tag' => 'required',
-            'language' => 'required',
+            // 'provider' => 'required',
+            // 'requirement' => 'required',
+            // 'outcome' => 'required',
+            // 'tag' => 'required',
+            // 'language' => 'required',
             'category_id' => 'required',
             // 'level' => 'required',
         ], [
             'title.required' => translate('Title is required'),
             // 'level.required' => translate('Course Level is required'),
-            'slug.unique' => translate('Slug must be unique'),
-            'slug.required' => translate('Slug must be Required'),
+            // 'slug.unique' => translate('Slug must be unique'),
+            // 'slug.required' => translate('Slug must be Required'),
             // 'overview_url.required' => translate('Overview Url is required'),
-            'provider.required' => translate('Provider is required'),
-            'requirement.required' => translate('Requirement is required'),
-            'outcome.required' => translate('Outcome is required'),
-            'tag.required' => translate('Tag is required'),
-            'language.required' => translate('Language is required'),
+            // 'provider.required' => translate('Provider is required'),
+            // 'requirement.required' => translate('Requirement is required'),
+            // 'outcome.required' => translate('Outcome is required'),
+            // 'tag.required' => translate('Tag is required'),
+            // 'language.required' => translate('Language is required'),
             'category_id.required' => translate('You must choose a category'),
-            'image.required' => translate('Course thumbnail is required'),
+            // 'image.required' => translate('Course thumbnail is required'),
         ]);
 
         $courses = new Course();
@@ -108,10 +109,17 @@ class CourseController extends Controller
         $courses->short_description = $request->short_description;
         $courses->big_description = $request->big_description;
         if ($request->has('image')) {
-            $courses->image = $request->image;
-        }
+            if($request->image)
+                $courses->image = $request->image;
+            else 
+                $courses->image = 0;
+        }else
+            $courses->image = 0;
 
-        $courses->provider = $request->provider;
+        if($request->provider)
+            $courses->provider = $request->provider;
+        else 
+            $courses->provider = 1;
         
         // Unnecessary Fields
         $courses->level = 1;
@@ -150,7 +158,10 @@ class CourseController extends Controller
             $courses->discount_price = $request->discount_price;
         }
 
-        $courses->language = $request->language;
+        if($request->language)
+            $courses->language = $request->language;
+        else 
+            $courses->language = 0;
 
         $meta = explode(',',$request->meta_title);
         $metaC = array();
@@ -173,7 +184,7 @@ class CourseController extends Controller
         $notify = $this->userNotify(Auth::user()->id,$details);
 
         notify()->success(translate($request->title . ' created successfully'));
-        return redirect()->route('course.show',[$courses->id,$courses->slug]);
+        return redirect()->route('course.show',[$courses->id]);
 
     }
 
@@ -227,33 +238,35 @@ class CourseController extends Controller
     {
 
         if (env('DEMO') === "YES") {
-        Alert::warning('warning', 'This is demo purpose only');
-        return back();
-      }
+            Alert::warning('warning', 'This is demo purpose only');
+            return back();
+        }
 
         $request->validate([
             'title' => 'required',
-            'slug' => 'required',
+            // 'slug' => 'required|unique:courses',
+            // 'image' => 'required',
             // 'overview_url' => 'required',
-            'provider' => 'required',
-            'requirement' => 'required',
-            'outcome' => 'required',
-            'tag' => 'required',
-            'language' => 'required',
+            // 'provider' => 'required',
+            // 'requirement' => 'required',
+            // 'outcome' => 'required',
+            // 'tag' => 'required',
+            // 'language' => 'required',
             'category_id' => 'required',
             // 'level' => 'required',
         ], [
             'title.required' => translate('Title is required'),
-            // 'level.required' => translate('Level is required'),
-            'slug.required' => translate('Slug is required'),
+            // 'level.required' => translate('Course Level is required'),
+            // 'slug.unique' => translate('Slug must be unique'),
+            // 'slug.required' => translate('Slug must be Required'),
             // 'overview_url.required' => translate('Overview Url is required'),
-            'provider.required' => translate('Provider is required'),
-            'requirement.required' => translate('Requirement is required'),
-            'outcome.required' => translate('Outcome is required'),
-            'tag.required' => translate('Tag is required'),
-            'language.required' => translate('Language is required'),
+            // 'provider.required' => translate('Provider is required'),
+            // 'requirement.required' => translate('Requirement is required'),
+            // 'outcome.required' => translate('Outcome is required'),
+            // 'tag.required' => translate('Tag is required'),
+            // 'language.required' => translate('Language is required'),
             'category_id.required' => translate('You must choose a category'),
-
+            // 'image.required' => translate('Course thumbnail is required'),
         ]);
 
 
@@ -267,9 +280,17 @@ class CourseController extends Controller
         }
 
 
+        if ($request->has('image')) {
+            if($request->image)
+                $courses->image = $request->image;
+            else 
+                $courses->image = 0;
+        }else
+            $courses->image = 0;
+        
         // Unnecessary Fields
-        $courses->overview_url = '';
         $courses->level = 1;
+        $courses->overview_url = '';
         
         
         $courses->provider = $request->provider;
