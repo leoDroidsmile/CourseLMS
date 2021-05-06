@@ -9,6 +9,7 @@ use App\Model\Enrollment;
 use App\Model\Massage;
 use App\User;
 use Alert;
+use Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\NotificationUser;
@@ -56,7 +57,9 @@ class MessageController extends Controller
     /*Show single enrolled student messages chat */
     public function show($id)
     {
-        $messages = Massage::where('enroll_id', $id)->get();
+        // $messages = Massage::where('enroll_id', $id)->get();
+        Log::debug($id);
+        $messages = Massage::where('id', $id)->get();
 
         $enroll_id = $id;
         $student = User::where('id', $messages->first()->user_id)->first();

@@ -61,7 +61,7 @@ class CourseController extends Controller
     public function create()
     {
         //Todo::There have twist only Register instructor can show his/her course
-        $categories = Category::all();
+        $categories = Category::where('teacher_id', Auth()->user()->id)->get();
         $languages = Language::all();
         return view('course.create', compact('categories', 'languages'));
     }
