@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Model\CoursePurchaseHistory;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -85,6 +86,17 @@ class StudentController extends Controller
 
         return view('module.students.show', compact('each_student', 'enrolls'));
     }
+
+    public function resetPassword(Request $request){
+
+        $user = User::findOrFail($request->student_id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        notify()->success(translate('Password reset successfully'));
+        return back();
+    }
+
 
     public function deleteCourse($enrollment_id){
         $enrollment = Enrollment::findOrFail($enrollment_id);

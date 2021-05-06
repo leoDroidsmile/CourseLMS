@@ -95,6 +95,29 @@
 <div class="card mb-3">
     <div class="py-2 px-3">
         <div class="float-left">
+            <h3>@translate(Reset Password)</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="{{route('students.reset.password')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="student_id" value="{{$each_student->user_id}}">
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <input class="form-control" placeholder="@translate(New Password)" type="text"  name="password" required>
+                </div>
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" type="submit">@translate(Reset Password)</button>
+                </div>
+            </div>
+    
+        </form>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="py-2 px-3">
+        <div class="float-left">
             <h3>@translate(Student Course Details)</h3>
         </div>
     </div>
