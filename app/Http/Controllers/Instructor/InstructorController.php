@@ -69,6 +69,7 @@ class InstructorController extends Controller
             $instructor = Instructor::where('user_id', $id)
                 ->with('purchaseHistory')
                 ->with('courses')
+                ->with('user')
                 ->first();
         }
 

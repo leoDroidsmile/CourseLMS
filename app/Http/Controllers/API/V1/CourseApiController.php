@@ -350,14 +350,17 @@ class CourseApiController extends Controller
 
 
                 // Save instructor earning
-                $instructor_earning = new InstructorEarning();
-                $instructor_earning->enrollment_id = $enrollment->id;
-                $instructor_earning->course_price = $course_price;
-                $instructor_earning->package_id = $instructor->package_id;
-                $instructor_earning->will_get = $instructor_earning_price;
-                $instructor_earning->user_id = $course->user_id;
-                $instructor_earning->save();
-
+                if($course_price && $course_price != 0){
+                    $instructor_earning = new InstructorEarning();
+                    $instructor_earning->enrollment_id = $enrollment->id;
+                    $instructor_earning->course_price = $course_price;
+                    
+                    $instructor_earning->package_id = $instructor->package_id;
+                    $instructor_earning->will_get = $instructor_earning_price;
+                    $instructor_earning->user_id = $course->user_id;
+                    $instructor_earning->save();    
+                }
+            
                 
                 // Set the Coupon used
                 $coupon->is_used = true;
