@@ -28,29 +28,31 @@ class StudentController extends Controller
         if (Auth::user()->user_type == "Admin") {
             /*if Authenticated  user is admin , admin can show all students */
             if ($request->get('search')) {
+
+                // Search by Teacher Coupon used
                 $student_id = TeacherCoupon::where('code', $request->get('search'))
                     ->where('is_used', true)    
                     ->first();
                 
                 if($student_id){
                     $student_id = $student_id->student_id;
-
-                    // $students = Student::where('name', 'like', '%' . $request->get('search') . '%')
-                    //     ->orWhere('email', 'like', '%' . $request->get('search') . '%')
-                    //     ->orderBydesc('id')->paginate(10);
-    
                     $students = Student::where('user_id', $student_id)
                         ->orderBydesc('id')->paginate(10);
                 }
                 else {
-                    $user = User::findOrFail($request->search);
-                    $students = Student::where('user_id', $user->id)->orderBydesc('id')->paginate(10);;
+                    // Search by ID
+                    $user = User::where('id', $request->search)->first();
+                    if($user)
+                        $students = Student::where('user_id', $user->id)->orderBydesc('id')->paginate(10);
+                    else {
+                        $students = Student::where('name', 'like', '%' . $request->get('search') . '%')
+                            ->orWhere('email', 'like', '%' . $request->get('search') . '%')
+                            ->orderBydesc('id')->paginate(10);
+                    }
                 }
             } else {
                 $students = Student::orderBydesc('id')->paginate(10);
             }
-
-
         } else {
             /*There are the Instructor show only his/her register Students list*/
             $courses = Course::where('user_id', Auth::id())->get();
