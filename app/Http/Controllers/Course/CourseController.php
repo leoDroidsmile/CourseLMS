@@ -215,9 +215,9 @@ class CourseController extends Controller
     {
 
         if (env('DEMO') === "YES") {
-        Alert::warning('warning', 'This is demo purpose only');
-        return back();
-      }
+            Alert::warning('warning', 'This is demo purpose only');
+            return back();
+        }
 
         Course::findOrFail($course_id)->delete();
         notify()->success(translate('Course deleted successfully'));

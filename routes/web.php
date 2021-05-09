@@ -50,15 +50,15 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     Route::get('/home', 'Dashboard\DashboardController@index')->name('dashboard');
 
     //course
-    Route::get('course/create', 'Course\CourseController@create')->name('course.create');
-    Route::post('course/store', 'Course\CourseController@store')->name('course.store')->middleware('demo');
-    Route::get('course/index', 'Course\CourseController@index')->name('course.index');
-    Route::get('course/index/{course_id}', 'Course\CourseController@show')->name('course.show');
-    Route::get('course/edit/{course_id}/{slug}', 'Course\CourseController@edit')->name('course.edit');
-    Route::post('course/update', 'Course\CourseController@update')->name('course.update')->middleware('demo');
-    Route::get('course/trash/{course_id}/{slug}', 'Course\CourseController@destroy')->name('course.destroy');
-    Route::get('course/published', 'Course\CourseController@published')->name('course.publish');
-    Route::get('course/rating', 'Course\CourseController@rating')->name('course.rating');
+    Route::get('course/create',                     'Course\CourseController@create')->name('course.create');
+    Route::post('course/store',                     'Course\CourseController@store')->name('course.store')->middleware('demo');
+    Route::get('course/index',                      'Course\CourseController@index')->name('course.index');
+    Route::get('course/index/{course_id}',          'Course\CourseController@show')->name('course.show');
+    Route::get('course/edit/{course_id}/{slug}',    'Course\CourseController@edit')->name('course.edit');
+    Route::post('course/update',                    'Course\CourseController@update')->name('course.update')->middleware('demo');
+    Route::get('course/published',                  'Course\CourseController@published')->name('course.publish');
+    Route::get('course/rating',                     'Course\CourseController@rating')->name('course.rating');
+    Route::get('course/destroy/{id}',               'Course\CourseController@destroy')->name('course.destroy');
 
     // class
     Route::get('class/create/{id}', 'Course\ClassController@create')->name('classes.create');

@@ -104,11 +104,10 @@ class Course extends Model
             $item->delete();
         }
 
-
         // Delete Course Purchase History
-        $coursePusrchseHistory = CoursePurchaseHistory::where('course_id', $this->id)->get();
-        foreach($coursePusrchseHistory as $item)
-            $item->delete();
+        // $coursePusrchseHistory = CoursePurchaseHistory::where('course_id', $this->id)->get();
+        // foreach($coursePusrchseHistory as $item)
+        //     $item->delete();
 
         // Delete Classes
         $classes = Classes::where('course_id', $this->id)->get();

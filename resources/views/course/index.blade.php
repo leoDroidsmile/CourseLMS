@@ -50,9 +50,9 @@
                         <th data-breakpoints="xs">
                             @translate(Enrolled Students)
                         </th>
-                        @if(\Illuminate\Support\Facades\Auth::user()->user_type != "Admin")
+                        {{-- @if(\Illuminate\Support\Facades\Auth::user()->user_type != "Admin") --}}
                             <th>@translate(Action)</th>
-                        @endif
+                        {{-- @endif --}}
 
                     </tr>
                     </thead>
@@ -123,7 +123,6 @@
                             @endif
                             <td>{{ $s = App\Model\Enrollment::where('course_id' , $course->id)->count() }} </td>
 
-                             @if(\Illuminate\Support\Facades\Auth::user()->user_type != "Admin")
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-link p-0 font-18 float-right" type="button"
@@ -132,6 +131,8 @@
                                         <i class="feather icon-more-horizontal-"></i></button>
                                     <div class="dropdown-menu dropdown-menu-right st-drop"
                                          aria-labelledby="widgetRevenue" x-placement="bottom-end">
+
+                                        @if(\Illuminate\Support\Facades\Auth::user()->user_type != "Admin")
                                         <a class="dropdown-item font-13"
                                            href="{{ route('course.show',[$course->id,$course->slug])}}">
                                             @translate(Details)
@@ -140,17 +141,15 @@
                                            href="{{ route('course.edit',[$course->id,$course->slug])}}">
                                             {{ Auth::user()->user_type == 'Admin' ? '@translate(Details)' : '@translate(Edit)' }}
                                         </a>
-                                        @if($s < 0)
-                                            <a class="dropdown-item font-13"
-                                               onclick="confirm_modal('{{ route('course.destroy',[$course->id,$course->slug,])}}"
-                                               href="#!">
-                                                @translate(Trash)
-                                            </a>
+                                        @else
+                                        <a class="dropdown-item"
+                                        onclick="confirm_modal('{{ route('course.destroy', $course->id) }}')"
+                                        href="#!">
+                                        <i class="feather icon-trash mr-2"></i>@translate(Delete)</a>     
                                         @endif
                                     </div>
                                 </div>
                             </td>
-                            @endif
                         </tr>
                         @empty
                         <tr>
