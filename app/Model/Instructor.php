@@ -37,6 +37,23 @@ class Instructor extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
+    public function delete(){
+        
+        // Delete Instructor earnings
+        $earnings = InstructorEarning::where('user_id', 21)->get();
+        foreach($earnings as $item)
+            $item->delete();
+
+        // Delete Courses
+        $courses = $this->hasMany(Course::class, 'user_id', 'user_id');
+        foreach($courses as $item)
+            $item->delete();
+
+        // Delete User
+        $this->user()->delete();
+        parent::delete();
+    }
+
 
     //END
 }

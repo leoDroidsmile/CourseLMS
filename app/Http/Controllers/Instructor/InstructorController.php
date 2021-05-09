@@ -89,9 +89,9 @@ class InstructorController extends Controller
     {
 
         if (env('DEMO') === "YES") {
-        Alert::warning('warning', 'This is demo purpose only');
-        return back();
-      }
+            Alert::warning('warning', 'This is demo purpose only');
+            return back();
+        }
 
         $instructor = Instructor::where('user_id', Auth::id())->firstOrFail();
         $instructor->phone = $request->phone;
@@ -153,6 +153,16 @@ class InstructorController extends Controller
             notify()->warning(translate('Please there are problem try again'));
         }
         $user->save();
+        return back();
+    }
+
+    /*Destroy the instructor*/
+    public function destroy($id){
+        $instructor = Instructor::findOrFail($id);
+        $instructor->delete();
+        
+        /* sending instructor notification */
+        notify()->success(translate('Deleted successfully'));
         return back();
     }
     //END

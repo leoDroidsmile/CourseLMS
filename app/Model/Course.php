@@ -97,5 +97,26 @@ class Course extends Model
     	return $this->hasOne('App\SubscriptionCourse','course_id','id');
     }
 
+    public function delete(){
+        // Delete Enrollment
+        $enrollments = $this->enrollment();
+        foreach($enrollments as $item){
+            $item->delete();
+        }
+
+
+        // Delete Course Purchase History
+        $coursePusrchseHistory = CoursePurchaseHistory::where('course_id', $this->id)->get();
+        foreach($coursePusrchseHistory as $item)
+            $item->delete();
+
+        // Delete Classes
+        $classes = Classes::where('course_id', $this->id)->get();
+        foreach($classes as $item){
+            $item->delete();
+        }
+
+        parent::delete();
+    }
     //END
 }

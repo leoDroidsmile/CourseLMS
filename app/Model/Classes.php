@@ -31,6 +31,12 @@ class Classes extends Model
     }
 
 
+    public function delete(){
+        foreach($this->contentsAll() as $item)
+            $item->delete();
+
+        parent::delete();
+    }
 
     //END
 }

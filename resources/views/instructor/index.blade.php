@@ -70,8 +70,11 @@
                                 <button class="btn btn-link p-0 m-0 border-0 l-h-20 font-16" type="button" id="KanbanBoardButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>
                                 <div class="dropdown-menu dropdown-menu-right action-btn" aria-labelledby="KanbanBoardButton1" x-placement="bottom-end">
                                     <a class="dropdown-item" href="{{ route('instructors.show', $item->user_id) }}">
-                                        <i class="feather icon-edit-2 mr-2"></i>
-                                        @translate(Details)</a>
+                                        <i class="feather icon-edit-2 mr-2"></i>@translate(Details)</a>
+                                    <a class="dropdown-item"
+                                        onclick="confirm_modal('{{ route('instructors.destroy', $item->id) }}')"
+                                        href="#!">
+                                        <i class="feather icon-trash mr-2"></i>@translate(Delete)</a>
                                 </div>
                             </div>
                         </div>
