@@ -204,7 +204,7 @@
                                     <div class="dropdown-item">
                                         <div class="profilename">
                                                 <h5>
-                                                    <i class="fa fa-money"></i> {{formatPrice(instructorDetails(\Illuminate\Support\Facades\Auth::id())->balance)}}
+                                                    <i class="fa fa-money"></i> {{  walletBalance() }}
                                                 </h5>
                                         </div>
                                     </div>
