@@ -231,6 +231,7 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     Route::get('student/show/{id}', 'Module\StudentController@show')->name('students.show');
     Route::get('student/deleteCourse/{enrollment_id}', 'Module\StudentController@deleteCourse')->name('students.deleteCourse');
     Route::post('student/reset/password', 'Module\StudentController@resetPassword')->name('students.reset.password');
+    Route::get('/student/destroy/{id}', 'Module\StudentController@destroy')->name('students.destroy');
 
     //all pages
     Route::get('pages/index', 'Module\PageController@index')->name('pages.index');

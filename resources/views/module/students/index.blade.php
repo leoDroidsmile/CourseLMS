@@ -66,6 +66,10 @@
                                          aria-labelledby="KanbanBoardButton1" x-placement="bottom-end">
                                         <a class="dropdown-item" href="{{ route('students.show', $item->user_id) }}">
                                             <i class="feather icon-edit-2 mr-2"></i>@translate(Details)</a>
+                                        <a class="dropdown-item"
+                                            onclick="confirm_modal('{{ route('students.destroy', $item->id) }}')"
+                                            href="#!">
+                                            <i class="feather icon-trash mr-2"></i>@translate(Delete)</a>
                                     </div>
                                 </div>
                             </div>
