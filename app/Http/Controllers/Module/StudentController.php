@@ -84,6 +84,7 @@ class StudentController extends Controller
         $each_student = Student::where('user_id', $id)->first();
         $enrolls = Enrollment::where('user_id', $id)
             ->with('course')
+            ->with('history')
             ->get();
 
         return view('module.students.show', compact('each_student', 'enrolls'));

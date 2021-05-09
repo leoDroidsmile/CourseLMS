@@ -314,7 +314,8 @@ class CourseApiController extends Controller
                 $history = new CoursePurchaseHistory();
                 $history->enrollment_id = $enrollment->id;
                 $history->amount = $course_price;
-                $history->payment_method = "Copupon";
+                $history->payment_method = "Normal Coupon";
+                $history->coupon_id = $coupon->id;
                 $history->save();
 
 
@@ -421,6 +422,7 @@ class CourseApiController extends Controller
                 $history->enrollment_id = $enrollment->id;
                 $history->amount = $course_price;
                 $history->payment_method = "Teacher Copupon";
+                $history->coupon_id = $coupon->id;
                 $history->save();
 
                 // Set the Coupon used

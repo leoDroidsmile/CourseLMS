@@ -129,6 +129,8 @@
                     <th>@translate(S/L)</th>
                     <th>@translate(Instructor)</th>
                     <th>@translate(Course Name)</th>
+                    <th>@translate(Payment Method)</th>
+                    <th>@translate(Coupon Code)</th>
                     <th>@translate(Action)</th>
                 </tr>
                 </thead>
@@ -139,6 +141,8 @@
                         <td>{{ $loop->index++ + 1 }}</td>
                         <td>{{ $enroll->course->relationBetweenInstructorUser->name }}</td>
                         <td>{{ $enroll->course->title }}</td>
+                        <td>{{ $enroll->history->payment_method }}</td>
+                        <td>{{ $enroll->history->CouponCode() }}</td>
                         <td>
                             <a class="btn btn-primary ml-3" id="btn_download" style="float:right; color:white;" title="@translate(Delete)" href="{{ route("students.deleteCourse", $enroll->id) }}">
                                 <i class="fa fa-remove"></i> @translate(Delete)
