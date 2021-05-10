@@ -92,9 +92,13 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     Route::post('/users/banned', 'Instructor\InstructorController@banned')->name('users.banned')->middleware('demo');
 
     //messages with student
-    Route::get('message/inbox', 'Module\MessageController@index')->name('messages.index');
-    Route::get('message/show/{id}', 'Module\MessageController@show')->name('messages.show');
-    Route::post('message/send', 'Module\MessageController@send')->name('messages.replay')->middleware('demo');
+    Route::get('message/inbox',         'Module\MessageController@index')->name('messages.index');
+    Route::get('message/show/{id}',     'Module\MessageController@show')->name('messages.show');
+    Route::get('message/create/{id}',   'Module\MessageController@create')->name('messages.create');
+    Route::post('message/send',         'Module\MessageController@send')->name('messages.send')->middleware('demo');
+
+
+
     Route::get('comments/index', 'Module\MessageController@allCommenting')->name('comments.index');
     Route::get('comments/show/{id}', 'Module\MessageController@commentShow')->name('comments.show');
     Route::get('comments/delete/{id}', 'Module\MessageController@commentDestroy')->name('comments.delete');

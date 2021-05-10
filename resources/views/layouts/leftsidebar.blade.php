@@ -236,6 +236,12 @@
 
                             @endif --}}
 
+                            {{-- Message with student --}}
+                            <li><a href="{{route('messages.index')}}"
+                                class="{{request()->is('dashboard/message*') ?'active':null}}">
+                                <i class="fa fa-envelope-o"></i> <span>@translate(Messages)</span>
+                            </a>
+                            </li>
 
                             @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Instructor")
 
@@ -243,12 +249,7 @@
                                        class="{{request()->is('dashboard/students*')  || request()->is('student*')?'active':null}}">
                                         <i class="fa fa-users"></i> <span>@translate(Students)</span></a>
                                 </li>
-                                {{-- Message with student --}}
-                                <li><a href="{{route('messages.index')}}"
-                                       class="{{request()->is('dashboard/message*') ?'active':null}}">
-                                        <i class="fa fa-envelope-o"></i> <span>@translate(Messages)</span>
-                                    </a>
-                                </li>
+                                
                                 {{-- Comment in Course --}}
                                 <li><a href="{{route('comments.index')}}"
                                        class="{{request()->is('dashboard/comments*') ?'active':null}}">
@@ -273,7 +274,6 @@
                                         <i class="fa fa-history"></i> <span>@translate(Earning History)</span>
                                     </a>
                                 </li>
-
                             @endif
 
 

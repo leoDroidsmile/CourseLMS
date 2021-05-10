@@ -5,12 +5,22 @@
     <div class="card m-2">
         <div class="card-header">
             <div class="float-left">
-                <h2 class="card-title">@translate(Student Message List)</h2>
+                <h2 class="">@translate(Student Message List)</h2>
             </div>
+
+            @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin")
+
             <div class="float-right">
                 <div class="row">
+                    <a href="#!"
+                        onclick="forModal('{{route('messages.create', 0)}}','@translate(To All Students)')"
+                        class="btn btn-primary">
+                        <i class="la la-mail"></i>
+                        @translate(Send Message to All Students)
+                    </a>
                 </div>
             </div>
+            @endif
         </div>
 
         <div class="card-body table-responsive">
@@ -32,7 +42,7 @@
                           {{studentDetails($item->user_id)->name ?? 'N/A'}}
                         </td>
                         <td>
-                            {{$item->content}}
+                            {!! $item->content !!}
                         </td>
                         <td>
                             {{date('d-M-y',strtotime($item->created_at))}}
@@ -49,7 +59,7 @@
                                             <i class="feather icon-delete mr-2"></i>@translate(Delete Message)</a>
                                         {{-- <a class="dropdown-item" href="{{ route('messages.show', $item->id) }}">
                                             <i class="feather icon-edit-2 mr-2"></i>@translate(Messages)</a> --}}
-                                        <a class="dropdown-item" href="{{ route('messages.reply', $item->id) }}">
+                                        <a class="dropdown-item" onclick="forModal('{{route('messages.create', $item->user_id)}}','@translate(New Message)')">
                                             <i class="feather icon-edit-2 mr-2"></i>@translate(Reply)</a>
                                     </div>
                                 </div>
@@ -58,13 +68,11 @@
                     </tr>
                     
                 @empty
-                    <tr></tr>
                     <tr>
-                        <td><h3 class="text-center">@translate(No Data Found)</h3></td>
+                        <td colspan="7" class="text-center">
+                            <h4>@translate(NO Student Message FOUND)</h4>
+                        </td>
                     </tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
                 @endforelse
                 </tbody>
                 {{-- <div class="float-left">

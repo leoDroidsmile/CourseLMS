@@ -7,6 +7,7 @@ use App\Model\Course;
 use App\Model\CourseComment;
 use App\Model\Enrollment;
 use App\Model\Massage;
+use App\Model\Student;
 use App\User;
 use Alert;
 use Log;
@@ -54,6 +55,16 @@ class MessageController extends Controller
         return view('module.message.inbox', compact('messages'));
     }
 
+    
+
+    /*message modal view this function need enroll id*/
+    public function create($id)
+    {
+        $receiver = User::where("id", $id)->first();
+        return view('module.message.create', compact('receiver'));
+    }
+
+
     /*Show single enrolled student messages chat */
     public function show($id)
     {
@@ -67,32 +78,45 @@ class MessageController extends Controller
         return view('module.message.show', compact('messages', 'enroll_id', 'student'));
     }
 
-    /*Send the message*/
+    /*Send the message to Students from Admin or Teachers */
     public function send(Request $request)
     {
 
-        if (env('DEMO') === "YES") {
-        Alert::warning('warning', 'This is demo purpose only');
-        return back();
-      }
+        // if (env('DEMO') === "YES") {
+        //     Alert::warning('warning', 'This is demo purpose only');
+        //     return back();
+        // }
 
-        $request->validate([
-            'enroll_id' => 'required',
-            'message'   => 'required',
-        ]);
+        // $request->validate([
+        //     'enroll_id' => 'required',
+        //     'message'   => 'required',
+        // ]);
 
-        //check the enroll course instructor in login
-        $e = Enrollment::where('id', $request->enroll_id)->with('enrollCourse')->first();
-        if ($e->enrollCourse->user_id != Auth::user()->id) {
-            notify()->warning(translate('you are doing some thing wrong, try later'));
-            return back();
+        // //check the enroll course instructor in login
+        // $e = Enrollment::where('id', $request->enroll_id)->with('enrollCourse')->first();
+        // if ($e->enrollCourse->user_id != Auth::user()->id) {
+        //     notify()->warning(translate('you are doing some thing wrong, try later'));
+        //     return back();
+        // }
+
+
+        if($request->receiver_id != 0){
+            $message = new Massage();
+            $message->enroll_id = $request->receiver_id;
+            $message->user_id = Auth::user()->id;
+            $message->content = $request->message;
+            $message->save();    
         }
-        $message = new Massage();
-        $message->enroll_id = $request->enroll_id;
-        $message->user_id = Auth::user()->id;
-        $message->content = $request->message;
-        $message->save();
-
+        else{
+            $students = Student::all();
+            foreach($students as $item){
+                $message = new Massage();
+                $message->enroll_id = $item->user_id;
+                $message->user_id = Auth::user()->id;
+                $message->content = $request->message;
+                $message->save();    
+            }
+        }
 
         notify()->success(translate('Message sent successfully'));
         return back();
