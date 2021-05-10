@@ -480,18 +480,38 @@ class StudentApiController extends Controller
         200);
     }
 
+
+    // Send Message to Admin or Teacher from Student
     public function sendMessage(Request $request){
         
         // Enrollment_id is Teacher ID 
         $message = new Massage();
         $message->enroll_id = $request->teacher_id;
         $message->user_id = $request->user()->id;
-        $message->content = $request->message;
+        $message->content = $request->content;
         $message->save();
 
         return response()->json([
             'message'      => "Message sent successfully."
         ], 
+        200);
+    }
+
+
+    // Get All Messages sent to Student
+    public function getAllMessages(Request $request){
+        $sentMessages       = Massage::where('user_id', $request->user()->id)
+            ->with('receiver')
+            ->get();
+            
+        $receivedMessages    = Massage::where('enroll_id', $request->user()->id)
+            ->with('sender')
+            ->get();
+
+        return response()->json([
+            'sentMessages'          => $sentMessages,
+            'receivedMessages'       => $receivedMessages
+            ], 
         200);
     }
     
