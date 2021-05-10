@@ -40,8 +40,13 @@ class Instructor extends Model
     public function delete(){
         
         // Delete Instructor earnings
-        $earnings = InstructorEarning::where('user_id', 21)->get();
+        $earnings = InstructorEarning::where('user_id', $this->id)->get();
         foreach($earnings as $item)
+            $item->delete();
+
+        // Delete Teacher Coupons
+        $coupons = TeahcerCoupon::where('user_id', $this->id)->get();
+        foreach($coupons as $item)
             $item->delete();
 
         // Delete Courses
