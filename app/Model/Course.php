@@ -3,6 +3,8 @@
 namespace App\Model;
 
 use App\User;
+use App\TeacherCouon;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -108,6 +110,12 @@ class Course extends Model
         // $coursePusrchseHistory = CoursePurchaseHistory::where('course_id', $this->id)->get();
         // foreach($coursePusrchseHistory as $item)
         //     $item->delete();
+
+        // Delete Teacher Coupons
+        $coupons = TeacherCoupon::where('course_id', $this->id)->get();
+        foreach($coupons as $item){
+            $item->delete();
+        }
 
         // Delete Classes
         $classes = Classes::where('course_id', $this->id)->get();
