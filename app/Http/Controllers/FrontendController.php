@@ -1140,18 +1140,18 @@ class FrontendController extends Controller
     {
 
         if (env('DEMO') === "YES") {
-        Alert::warning('warning', 'This is demo purpose only');
-        return back();
-      }
+            Alert::warning('warning', 'This is demo purpose only');
+            return back();
+        }
 
         $request->validate([
-            'package_id' => 'required',
+            // 'package_id' => 'required',
             'name' => 'required',
             'email' => ['required', 'unique:users'],
             'password' => ['required', 'min:8'],
             'confirm_password' => 'required|required_with:password|same:password',
         ], [
-            'package_id.required' => translate('Please select a package'),
+            // 'package_id.required' => translate('Please select a package'),
             'name.required' => translate('Name is required'),
             'email.required' => translate('Email is required'),
             'email.unique' => translate('Email is already exist.'),
@@ -1161,7 +1161,7 @@ class FrontendController extends Controller
             'confirm_password.same' => translate('Password did not match'),
         ]);
         /*get package value*/
-        $package = Package::where('id', $request->package_id)->firstOrFail();
+        // $package = Package::where('id', $request->package_id)->firstOrFail();
         //create user for login
 
         $slug_name = Str::slug($request->name);
@@ -1182,31 +1182,31 @@ class FrontendController extends Controller
         $instructor = new Instructor();
         $instructor->name = $request->name;
         $instructor->email = $request->email;
-        $instructor->package_id = $request->package_id;
+        $instructor->package_id = 1;
         $instructor->user_id = $user->id;
         $instructor->save();
 
         /*get package payment*/
-        if ($package->price > 0) {
+        // if ($package->price > 0) {
 
-            return redirect()->route('instructor.payment', $user->slug);
-        } else {
+        //     return redirect()->route('instructor.payment', $user->slug);
+        // } else {
             /**/
 
             //add purchase history
-            $purchase = new PackagePurchaseHistory();
-            $purchase->amount = $package->price;
-            $purchase->payment_method = $request->payment_method;
-            $purchase->package_id = $request->package_id;
-            $purchase->user_id = $user->id;
-            $purchase->save();
+            // $purchase = new PackagePurchaseHistory();
+            // $purchase->amount = $package->price;
+            // $purchase->payment_method = $request->payment_method;
+            // $purchase->package_id = $request->package_id;
+            // $purchase->user_id = $user->id;
+            // $purchase->save();
 
 
             //todo::admin Earning calculation
-            $admin = new AdminEarning();
-            $admin->amount = $package->price;
-            $admin->purposes = "Sale Package";
-            $admin->save();
+            // $admin = new AdminEarning();
+            // $admin->amount = $package->price;
+            // $admin->purposes = "Sale Package";
+            // $admin->save();
 
             try {
 
@@ -1221,7 +1221,7 @@ class FrontendController extends Controller
             } catch (\Exception $exception) {
 
             }
-        }
+        // }
 
         Session::flash('message', translate("Registration done successfully. Please verify your email before login."));
         return redirect()->route('login');

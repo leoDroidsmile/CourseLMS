@@ -17,7 +17,7 @@
                                 @csrf
                                 <div class="row">
                                     {{--Radio button--}}
-                                    <label class="label-text">@translate(Select A Package)<span class="primary-color-2 ml-1">*</span></label>
+                                    {{-- <label class="label-text">@translate(Select A Package)<span class="primary-color-2 ml-1">*</span></label>
                                     <div class="row">
                                         @foreach($packages as $item)
                                             <div class="col-lg-4 column-td-half instructor-register">
@@ -45,7 +45,7 @@
                                             </div>
 
                                         @endforeach
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-lg-12 ">
                                         <div class="input-box">

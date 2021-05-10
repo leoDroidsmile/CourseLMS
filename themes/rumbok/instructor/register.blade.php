@@ -27,7 +27,7 @@
         <div class="register-section padding-top-80 padding-bottom-120">
             <div class="container ">
                 <div class="register-form p-5">
-                    <section class="package-section padding-top-120">
+                    {{-- <section class="package-section padding-top-120">
                         <div class="container">
                             <div class="row">
                                 @foreach($packages as $item)
@@ -64,7 +64,7 @@
                     <div class="invalid-feedback alert alert-danger" id="mess" >
                         @translate(Please select the package )
                     </div>
-                    <hr>
+                    <hr> --}}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="input-box">
