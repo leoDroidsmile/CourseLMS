@@ -398,7 +398,9 @@ class CourseApiController extends Controller
         }
       }else {
         // Check Teacher Coupon
-        $coupon = TeacherCoupon::where('code', $request->code)->first();
+        $coupon = TeacherCoupon::where('code', $request->code)
+            ->where('course_id', $request->course_id)
+            ->first();
 
         if($coupon->is_used)
             return response()->json([
@@ -414,7 +416,7 @@ class CourseApiController extends Controller
                 $enrollment->save();
 
                 if($course->is_discount == 1)
-                $course_price = $course->discount_price;
+                    $course_price = $course->discount_price;
                 else
                     $course_price = $course->price;
 
