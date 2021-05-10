@@ -144,7 +144,9 @@
                         <td>{{ $enroll->history->payment_method }}</td>
                         <td>{{ $enroll->history->CouponCode() }}</td>
                         <td>
-                            <a class="btn btn-primary ml-3" id="btn_download" style="float:right; color:white;" title="@translate(Delete)" href="{{ route("students.deleteCourse", $enroll->id) }}">
+                            <a class="btn btn-primary ml-3" id="btn_download" 
+                                style="float:right; color:white;" title="@translate(Delete)" 
+                                onclick="confirm_modal('{{ route('students.deleteCourse', $enroll->id) }}')">
                                 <i class="fa fa-remove"></i> @translate(Delete)
                             </a>
                         </td>
