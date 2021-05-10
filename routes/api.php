@@ -261,6 +261,7 @@ Route::group(['namespace' => 'API\V1', 'prefix' => 'v1' ,'middleware'=>'install.
             Route::get('student/all/teachers',      'StudentApiController@getAllTeachers');
             Route::get('student/all/categories',    'StudentApiController@getAllCategories');
             Route::get('student/all/messages',      'StudentApiController@getAllMessages');
+            Route::get('student/all/receivers',     'StudentApiController@getAllReceivers');
 
             Route::get('student/teacher/courses',   'StudentApiController@getTeacherCourses');
             Route::get('student/my/courses',        'StudentApiController@getMyCourses');

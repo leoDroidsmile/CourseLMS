@@ -293,6 +293,19 @@ class StudentApiController extends Controller
         return response(['teachers' => $teachers], 200);
     }
 
+    public function getAllReceivers(Request $request){
+        $teachers = Instructor::all();
+        
+        $admin = User::where("user_type", "Admin")->first();
+        $admin_instructor = new Instructor();
+        $admin_instructor->user_id = $admin->id;
+        $admin_instructor->name = $admin->name;
+
+        $teachers[] = $admin_instructor;
+
+        return response(['receivers' => $teachers], 200);
+    }
+
     public function getAllCategories(Request $request){
         $categories = Category::where('teacher_id', $request->teacher_id)->with('courses')->get();
         foreach ($categories as $key=>$item){
