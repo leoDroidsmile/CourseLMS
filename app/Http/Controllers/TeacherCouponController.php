@@ -95,20 +95,45 @@ class TeacherCouponController extends Controller
     public function update(Request $request, $id)
     {
         $coupon_update = TeacherCoupon::findOrFail($id);
-        $coupon_update->code = $request->code;
+
+        // Update Teacher Coupon when Current Course ID and submitted Course ID
+        if($coupon_update->course_id == $request->course_id){
+          $coupon_update->code = $request->code;
         
-        if ($request->is_published == 'on') {
-            $coupon_update->is_published = true;
-        } else {
-            $coupon_update->is_published = false;
+          if ($request->is_published == 'on') {
+              $coupon_update->is_published = true;
+          } else {
+              $coupon_update->is_published = false;
+          }
+  
+          $coupon_update->user_id    = $request->user_id;
+          $coupon_update->course_id  = $request->course_id;
+  
+          $coupon_update->save();
+
+          Alert::success(translate('Done'), translate('Coupon Updated Successfully'));
+          return back();
         }
+        // Create new Teacher Coupon when Current Course ID and submitted Course ID
+        else{
+          $coupon = new TeacherCoupon();
+          
+          if ($request->is_published == 'on') {
+            $coupon->is_published = true;
+          } else {
+              $coupon->is_published = false;
+          }
+          $coupon->group      = $coupon_update->group;  
+          $coupon->code       = $coupon_update->code;  
+          $coupon->user_id    = $request->user_id;
+          $coupon->course_id  = $request->course_id;  
+          $coupon->is_used    = false;  
+          $coupon->student_id = null;  
+          $coupon->save();
 
-        $coupon_update->user_id    = $request->user_id;
-        $coupon_update->course_id  = $request->course_id;
-
-        $coupon_update->save();
-        Alert::success(translate('Done'), translate('Coupon Updated Successfully'));
-        return back();
+          Alert::success(translate('Done'), translate('New Coupon Created with Same Code Successfully'));
+          return back();
+        }
     }
 
 
