@@ -55,7 +55,7 @@
                     <tr>
                         <td>{{ $loop->index++ + 1 }}</td>
                         <td>{{ $coupon->code }}</td>
-                        <td>{{ formatPrice($coupon->rate) }}</td>
+                        <td>{{ $coupon->rate }}</td>
                         <td>{{ $coupon->start_day }}</td>
                         <td>{{ $coupon->end_day }}</td>
                         <td>

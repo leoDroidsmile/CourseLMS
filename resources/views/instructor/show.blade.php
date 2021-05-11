@@ -44,7 +44,7 @@
                           <img src="{{filePath($instructor->image)}}" alt="avatar" class="img-fluid rounded-circle avatar-xl">
                         </div>
                         <h3 class="text-center mt-3 mb-1">{{ $instructor->name }}</h3>
-                        <p class="text-center">@translate(Balance) : <span class="text-primary">{{ formatPrice($instructor->balance) }}</span></p>
+                        <p class="text-center">@translate(Balance) : <span class="text-primary">{{ $instructor->balance? $instructor->balance : 0 }}</span></p>
                         <div class="em-separator separator-dashed"></div>
                         <div class="text-center">
                             {{-- <h5>@translate(Package)</h5>

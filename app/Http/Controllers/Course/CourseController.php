@@ -227,9 +227,6 @@ class CourseController extends Controller
     public function destroyStudents($course_id){
         // Delete Enrollment
         Enrollment::where('course_id', $course_id)->delete();
-        // foreach($enrollments as $item){
-        //     $item->delete();
-        // }
         notify()->success(translate('All Students were deleted successfully'));
         return back();
     }

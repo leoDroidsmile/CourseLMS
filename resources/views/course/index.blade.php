@@ -81,10 +81,10 @@
                                                         <span
                                                             class="badge badge-{{ $course->is_private == true ? 'warning'  : 'primary' }} p-2">{{ $course->is_private == true ? 'Private'  : 'Public' }}</span>
                                                         @if ($course->is_discount == true )
-                                                            <span>{{ formatPrice($course->discount_price) }}</span>
-                                                            <span> <del> {{ formatPrice($course->price) }} </del> </span>
+                                                            <span>{{ $course->discount_price }}</span>
+                                                            <span> <del> {{ $course->price }} </del> </span>
                                                         @else
-                                                            <span>{{ $course->price != null ? formatPrice($course->price)  : 'Free' }}</span>
+                                                            <span>{{ $course->price != null ? $course->price  : 'Free' }}</span>
                                                         @endif
                                                     </div>
                                                 </div>

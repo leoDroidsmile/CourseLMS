@@ -60,7 +60,7 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->email ?? 'N/A'}}</td>
                     <td>{{$item->phone ?? 'N/A'}}</td>
-                    <td>{{formatPrice($item->balance)}}
+                    <td>{{$item->balance? $item->balance : 0}}
                     </td>
                     <td>{!! $item->about !!}
                     </td>
