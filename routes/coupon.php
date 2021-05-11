@@ -20,8 +20,8 @@ Route::group(['middleware' => ['installed', 'auth', 'activity'], 'prefix' => 'da
      * FRONTEND
      */
 
-    Route::post('/coupon', 'CouponController@coupon_store')->name('checkout.coupon.store');
-    Route::post('/coupon/destroy', 'CouponController@coupon_destroy')->name('checkout.coupon.destroy');
+    Route::post('/coupon',                      'CouponController@coupon_store')->name('checkout.coupon.store');
+    Route::post('/coupon/destroy',              'CouponController@coupon_destroy')->name('checkout.coupon.destroy');
 
 });
 

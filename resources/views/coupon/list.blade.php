@@ -16,7 +16,7 @@
 <div class="card">
 
     <div class="card-header">
-        <span class="h1 card-title">@translate(Coupon Manager)</span>
+        <span class="h3">@translate(Coupon Manager)</span>
 
         <a class="btn btn-primary ml-3" href="{{ route("coupon.index") }}" title="@translate(Add New Coupon Code)">
             <i class="fa fa-plus-circle"></i> @translate(Add New Coupon Code)
@@ -32,9 +32,7 @@
                     <div class="card-body">
 
                         <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">@translate(Coupon Informations)</h3>
-        </div>
+                            
         <div class="card-body p-2">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>

@@ -16,7 +16,7 @@
 <div class="card">
 
     <div class="card-header">
-        <h3><span class="h1 card-title float-left">@translate(Teacher Coupon Manager)</span></h3>
+        <h3>@translate(Teacher Coupon Manager)</h3>
         <a class="btn btn-primary ml-3" href="{{ route("teachercoupon.index") }}" title="@translate(Add New Teacher Coupon Code)">
             <i class="fa fa-plus-circle"></i> @translate(Add New Teacher Coupon Code)
         </a>
@@ -54,11 +54,9 @@
                     <th>@translate(Status)</th>
                     <th>@translate(Teacher)</th>
                     <th>@translate(Course)</th>
-                    {{-- <th>@translate(Used)</th> --}}
+                    <th>@translate(Used)</th>
                     {{-- <th>@translate(By Student)</th> --}}
-                    <th>@translate(Edit)</th>
-                    <th>@translate(Download)</th>
-                    <th>@translate(Delete)</th>
+                    <th>@translate(Action)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,29 +80,28 @@
                         </td>
                         <td>{{ $coupon->instructorName()->name }}</td>
                         <td>{{ $coupon->courseTitle()->title }}</td>
-                        {{-- <td>
+                        <td>
                             @if($coupon->is_used)
-                            <span class="badge badge-success p-2">Used</span></td>
+                            <span class="badge badge-success p-2">Not Used</span></td>
                         @else
-                            <span class="badge badge-warning p-2">Not Used</span></td>
+                            <span class="badge badge-warning p-2"> Used</span></td>
                         @endif
-                        </td> --}}
+                        </td>
                         {{-- <td>{{ $coupon->student_id }}</td> --}}
                         <td>
-                            <a href="#!" class="btn btn-primary"
-                               onclick="forModal('{{ route('teachercoupon.edit', $coupon->id) }}', '@translate(Edit)')">
-                               <i class="fa fa-pencil"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary ml-3" id="btn_download" style="float:right; color:white;" title="@translate(Download)" href="{{ route("teachercoupon.download", $coupon->id) }}">
-                                <i class="fa fa-download"></i> 
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary ml-3" id="btn_delete" style="float:right; color:white;" title="@translate(Download)" href="{{ route("teachercoupon.delete", $coupon->id) }}">
-                                <i class="fa fa-remove"></i> 
-                            </a>
+                            <div class="kanban-menu">
+                                <div class="dropdown">
+                                    <button class="btn btn-link p-0 m-0 border-0 l-h-20 font-16" type="button" id="KanbanBoardButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>
+                                    <div class="dropdown-menu dropdown-menu-right action-btn" aria-labelledby="KanbanBoardButton1" x-placement="bottom-end">
+                                        <a class="dropdown-item" onclick="forModal('{{ route('teachercoupon.edit', $coupon->id) }}', '@translate(Edit)')">
+                                            <i class="feather icon-edit-2 mr-2"></i>@translate(Edit)</a>
+                                        <a class="dropdown-item" href="{{ route("teachercoupon.download", $coupon->id) }}">
+                                            <i class="fa fa-download mr-2"></i>@translate(Download)</a>
+                                        <a class="dropdown-item" href="{{ route("teachercoupon.delete", $coupon->id) }}">
+                                            <i class="fa fa-remove mr-2"></i>@translate(Delete)</a>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @empty
