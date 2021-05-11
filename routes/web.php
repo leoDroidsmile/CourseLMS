@@ -59,6 +59,8 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     Route::get('course/published',                  'Course\CourseController@published')->name('course.publish');
     Route::get('course/rating',                     'Course\CourseController@rating')->name('course.rating');
     Route::get('course/destroy/{id}',               'Course\CourseController@destroy')->name('course.destroy');
+    Route::get('course/destroy/students/{id}',      'Course\CourseController@destroyStudents')->name('course.destroy.students');
+
 
     // class
     Route::get('class/create/{id}', 'Course\ClassController@create')->name('classes.create');

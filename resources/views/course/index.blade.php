@@ -145,7 +145,12 @@
                                         <a class="dropdown-item"
                                         onclick="confirm_modal('{{ route('course.destroy', $course->id) }}')"
                                         href="#!">
-                                        <i class="feather icon-trash mr-2"></i>@translate(Delete)</a>     
+                                        <i class="feather icon-trash mr-2"></i>@translate(Delete Course)</a>     
+
+                                        <a class="dropdown-item"
+                                        onclick="confirm_modal('{{ route('course.destroy.students', $course->id) }}')"
+                                        href="#!">
+                                        <i class="feather icon-trash mr-2"></i>@translate(Delete All Students)</a>     
                                         @endif
                                     </div>
                                 </div>
