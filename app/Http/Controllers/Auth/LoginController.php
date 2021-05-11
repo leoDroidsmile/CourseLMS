@@ -51,9 +51,10 @@ class LoginController extends Controller
             return back()->with('warning', translate('You are banned By The Admin, Please Contact with admin'));
         }
 
+
         if ($user->user_type == "Student") {
             // return redirect()->to('http://localhost:8080');
-            return redirect()->to('http://student.olmaa.net');
+            return redirect()->to('http://lmsiq.com');
         }
 
         /*check the instructor paid the package payment*/

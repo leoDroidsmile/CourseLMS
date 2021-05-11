@@ -12,6 +12,7 @@ use App\Notifications\VerifyNotifications;
 use App\User;
 use App\Blog;
 use Log;
+use DB;
 use App\Model\Massage;
 use App\TeacherCoupon;
 use App\Model\Enrollment;
@@ -21,6 +22,7 @@ use App\Model\Course;
 use App\Model\Slider;
 use App\NotificationUser;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -169,6 +171,17 @@ class StudentApiController extends Controller
                 'message' => 'A fresh verification link has been sent to your email address.'
             ]);
         }else{
+            // Logout Old User with same credentials
+            
+            // if($accessToken){
+                DB::table('oauth_access_tokens')
+                    ->where('user_id', $user->id)
+                    ->update([
+                        'revoked' => true
+                    ]);
+            // }
+            
+    
             //there are the token generate
             $access_token = $user->createToken('Laravel Password Grant Client')->accessToken;
             $student = Student::where('user_id',$user->id)->first();
@@ -177,6 +190,9 @@ class StudentApiController extends Controller
                 $student->image = $user->image;
                 
             $user_resource = new StudentResource($student);
+            // $user->remember_token = $access_token;
+            // $user->save();
+
             return response([
                 'success' => true,
                 'access_token'=>$access_token,
