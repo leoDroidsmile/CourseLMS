@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Instructor;
 
 use App\Http\Controllers\Controller;
-use App\Model\Instructor;
 use App\User;
+use App\NotificationUser;
+use App\TeacherCoupon;
+
+use App\Model\Instructor;
+use App\Model\Course;
+use App\Model\InstructorEarning;
+use App\Model\CoursePurchaseHistory;
+
 use Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\NotificationUser;
-use App\TeacherCoupon;
 
 use phpseclib\Crypt\Hash;
 
@@ -76,6 +81,21 @@ class InstructorController extends Controller
 
             return view('instructor.show', compact('instructor', 'all_teacher_coupons', 'used_teacher_coupons'));
         }
+    }
+
+    /*  All Courss that the instructor created */
+    public function courses($id){
+        $courses = Course::where('user_id', $id)->latest()->paginate(10);
+        return view('instructor.courses', compact('courses'));
+    }
+
+
+    /*  Courses that students bought   */
+    public function coursesInWallet($id){
+        $histories = InstructorEarning::where('user_id', $id)
+            ->with('enrollment')
+            ->latest()->paginate(1);
+        return view('instructor.courses-wallet', compact('histories'));
     }
 
     /*Update profile */

@@ -85,13 +85,16 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     //all payment
     Route::get('payment/request', 'Module\PaymentController@paymentRequest')->name('payments.request');
 
+
     //instructor
-    Route::get('instructor/index', 'Instructor\InstructorController@index')->name('instructors.index');
-    Route::get('instructor/show/{id}', 'Instructor\InstructorController@show')->name('instructors.show');
-    Route::get('/profile/{id}', 'Instructor\InstructorController@edit')->name('instructors.edit');
-    Route::get('/instructor/destroy/{id}', 'Instructor\InstructorController@destroy')->name('instructors.destroy');
-    Route::post('/profile/update', 'Instructor\InstructorController@update')->name('instructors.update')->middleware('demo');
-    Route::post('/users/banned', 'Instructor\InstructorController@banned')->name('users.banned')->middleware('demo');
+    Route::get('instructor/index',                  'Instructor\InstructorController@index')->name('instructors.index');
+    Route::get('instructor/show/{id}',              'Instructor\InstructorController@show')->name('instructors.show');
+    Route::get('instructor/courses/{id}',           'Instructor\InstructorController@courses')->name('instructors.courses');
+    Route::get('instructor/courses/wallet/{id}',    'Instructor\InstructorController@coursesInWallet')->name('instructors.courses.wallet');
+    Route::get('/profile/{id}',                     'Instructor\InstructorController@edit')->name('instructors.edit');
+    Route::get('/instructor/destroy/{id}',          'Instructor\InstructorController@destroy')->name('instructors.destroy');
+    Route::post('/profile/update',                  'Instructor\InstructorController@update')->name('instructors.update')->middleware('demo');
+    Route::post('/users/banned',                    'Instructor\InstructorController@banned')->name('users.banned')->middleware('demo');
 
 
     

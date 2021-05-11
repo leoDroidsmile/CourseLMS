@@ -9,7 +9,7 @@ class InstructorEarning extends Model
 
 
     public function enrollment(){
-        return $this->belongsTo(Enrollment::class)->with('enrollCourse');
+        return $this->belongsTo(Enrollment::class)->with('enrollCourse')->with('student');
     }
 
     public function package(){

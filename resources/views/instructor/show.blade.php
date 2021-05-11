@@ -44,7 +44,9 @@
                           <img src="{{filePath($instructor->image)}}" alt="avatar" class="img-fluid rounded-circle avatar-xl">
                         </div>
                         <h3 class="text-center mt-3 mb-1">{{ $instructor->name }}</h3>
-                        <p class="text-center">@translate(Balance) : <span class="text-primary">{{ $instructor->balance? $instructor->balance : 0 }}</span></p>
+                        <a href="{{route('instructors.courses.wallet', $instructor->user_id)}}">
+                            <p class="text-center">@translate(Balance) : <span class="text-primary">{{ $instructor->balance? $instructor->balance : 0 }}</span></p>
+                        </a>
                         <div class="em-separator separator-dashed"></div>
                         <div class="text-center">
                             {{-- <h5>@translate(Package)</h5>
@@ -53,7 +55,9 @@
                             Price: <span class="text-primary">{{formatPrice($instructor->relationBetweenPackage->price)}}</span>
                             <div class="em-separator separator-dashed"></div>
                             Commission: <span class="text-primary">{{formatPrice($instructor->relationBetweenPackage->commission)}}</span> --}}
-                            Courses : <span class="text-primary">{{ sizeof($instructor->courses) }}</span>
+                            <a href="{{route('instructors.courses', $instructor->user_id)}}">
+                                Courses : <span class="text-primary">{{ sizeof($instructor->courses) }}</span>
+                            </a>
                             <div class="em-separator separator-dashed"></div>
                             Teacher Coupons : <span class="text-primary">{{$used_teacher_coupons}} / {{ $all_teacher_coupons }}</span>
                         </div>

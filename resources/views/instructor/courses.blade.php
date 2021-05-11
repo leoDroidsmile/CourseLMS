@@ -11,7 +11,7 @@
     <div class="card m-b-30">
         <div class="row px-3 pt-3">
             <h3 class="col-md-6">
-                @translate(All Courses)
+                @translate(All Instructor Courses)
             </h3>
             <div class="col-md-6">
                 <form method="get" action="">
