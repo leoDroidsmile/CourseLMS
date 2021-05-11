@@ -7,8 +7,12 @@ use Alert;
 use Carbon\Carbon;
 use App\Coupon;
 use App\Model\Cart;
+use App\CouponExport;
+
 use Auth;
 use Session;
+use Excel;
+
 
 class CouponController extends Controller
 {
@@ -29,20 +33,31 @@ class CouponController extends Controller
     //store coupons
     public function store(Request $request)
     {
-        $coupon = new Coupon();
-        $coupon->code = $request->code;
-        $coupon->rate = $request->rate;
-        $coupon->start_day = Carbon::parse($request->start_day);
-        $coupon->end_day = Carbon::parse($request->end_day);
-        $coupon->min_value = $request->min_value;
+        // Generate random coupon code with 13 digits
+        for($i = 0 ; $i < $request->vouchers; $i++){
+            $coupon = new Coupon();
+  
+            $coupon->code = mt_rand(1,9) . mt_rand(0,9) . mt_rand(0,9) . mt_rand(0,9) . mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9). mt_rand(0,9);
+            if ($request->is_published == 'on') {
+                $coupon->is_published = true;
+            } else {
+                $coupon->is_published = false;
+            }
+            $coupon->group          = $request->group_name;  
+            $coupon->start_day      = Carbon::parse($request->start_day);
+            $coupon->end_day        = Carbon::parse($request->end_day);
+            $coupon->min_value      = $request->min_value;
+            $coupon->rate           = $request->rate;
+            $coupon->is_used        = false;
 
-        if ($request->is_published == 'on') {
-            $coupon->is_published = true;
-        } else {
-            $coupon->is_published = false;
-        }
+            if ($request->is_published == 'on') {
+                $coupon->is_published = true;
+            } else {
+                $coupon->is_published = false;
+            }
+            $coupon->save();
+        }        
 
-        $coupon->save();
         Alert::success(translate('Done'), translate('Coupon Created Successfully'));
         return back();
     }
@@ -53,6 +68,12 @@ class CouponController extends Controller
         $single_coupon = Coupon::findOrFail($id);
         return view('coupon.edit', compact('single_coupon'));
     }
+
+    // Download Coupon by Group
+    public function downloadGroup($id){
+        return Excel::download(new CouponExport($id), 'coupons.xls');
+    }
+
 
     // coupon_activation
     public function coupon_activation(Request $request)

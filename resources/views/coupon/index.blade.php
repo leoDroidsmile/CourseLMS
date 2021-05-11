@@ -35,9 +35,15 @@
                         <form method="post" action="{{route('coupon.store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label>@translate(Coupon Code)</label>
-                                <input type="text" name="code" value="{{ old('code') }}" class="form-control"
-                                    placeholder="@translate(Coupon Code)" required>
+                                <label>@translate(Vouchers)</label>
+                                <input type="number" name="vouchers" value="{{ old('vouchers') }}" class="form-control"
+                                    placeholder="@translate(Vouchers)" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@translate(Group Name)</label>
+                                <input type="text" name="group_name" value="{{ old('group_name') }}" class="form-control"
+                                    placeholder="@translate(Group Name)" required>
                             </div>
 
                             <div class="form-group">

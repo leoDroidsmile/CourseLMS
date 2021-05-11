@@ -8,12 +8,13 @@
 Route::group(['middleware' => ['installed', 'auth', 'activity'], 'prefix' => 'dashboard/coupon'], function () {
 
     //Coupon
-    Route::get('/new', 'CouponController@index')->name('coupon.index');
-    Route::get('/coupons', 'CouponController@allCoupons')->name('coupon.all');
-    Route::post('/store', 'CouponController@store')->name('coupon.store');
-    Route::get('/edit/{id}', 'CouponController@edit')->name('coupon.edit');
-    Route::post('/update/{id}', 'CouponController@update')->name('coupon.update');
-    Route::post('/activation', 'CouponController@coupon_activation')->name('coupon.activation'); //api ajax
+    Route::get('/new',                          'CouponController@index')->name('coupon.index');
+    Route::get('/coupons',                      'CouponController@allCoupons')->name('coupon.all');
+    Route::post('/store',                       'CouponController@store')->name('coupon.store');
+    Route::get('/edit/{id}',                    'CouponController@edit')->name('coupon.edit');
+    Route::get('/downloads/group/{id}',         'CouponController@downloadGroup')->name('coupon.download.group');
+    Route::post('/update/{id}',                 'CouponController@update')->name('coupon.update');
+    Route::post('/activation',                  'CouponController@coupon_activation')->name('coupon.activation'); //api ajax
 
     /**
      * FRONTEND

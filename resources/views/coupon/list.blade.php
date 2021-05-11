@@ -40,6 +40,7 @@
                 <thead>
                 <tr>
                     <th>@translate(S/L)</th>
+                    <th>@translate(Group)</th>
                     <th>@translate(Code)</th>
                     <th>@translate(Discount)</th>
                     <th>@translate(Start Date)</th>
@@ -54,6 +55,7 @@
                 @forelse ($coupons as $coupon)
                     <tr>
                         <td>{{ $loop->index++ + 1 }}</td>
+                        <td>{{ $coupon->group }}</td>
                         <td>{{ $coupon->code }}</td>
                         <td>{{ $coupon->rate }}</td>
                         <td>{{ $coupon->start_day }}</td>
@@ -77,9 +79,17 @@
                                 <span class="badge badge-success p-2">Not Used</span></td>
                             @endif
                         <td>
-                            <a href="#!" class="btn btn-primary"
-                               onclick="forModal('{{ route('coupon.edit', $coupon->id) }}', '@translate(Edit)')">@translate(Edit)
-                            </a>
+                            <div class="kanban-menu">
+                                <div class="dropdown">
+                                    <button class="btn btn-link p-0 m-0 border-0 l-h-20 font-16" type="button" id="KanbanBoardButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>
+                                    <div class="dropdown-menu dropdown-menu-right action-btn" aria-labelledby="KanbanBoardButton1" x-placement="bottom-end">
+                                        <a class="dropdown-item" onclick="forModal('{{ route('coupon.edit', $coupon->id) }}', '@translate(Edit)')">
+                                            <i class="feather icon-edit-2 mr-2"></i>@translate(Edit)</a>
+                                        <a class="dropdown-item" href="{{ route("coupon.download.group", $coupon->id) }}">
+                                            <i class="fa fa-download mr-2"></i>@translate(Download Group)</a>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @empty
