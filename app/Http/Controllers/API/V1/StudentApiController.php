@@ -325,10 +325,10 @@ class StudentApiController extends Controller
     public function getAllCategories(Request $request){
         $categories = Category::where('teacher_id', $request->teacher_id)->with('courses')->get();
         foreach ($categories as $key=>$item){
-            foreach($item->courses as $course_key => $course){
-                if($course->is_private)
-                    unset($item->courses[$course_key]);
-            }
+            // foreach($item->courses as $course_key => $course){
+            //     if($course->is_private)
+            //         unset($item->courses[$course_key]);
+            // }
             if(sizeof($item->courses) == 0){
                 unset($categories[$key]);
                 continue;

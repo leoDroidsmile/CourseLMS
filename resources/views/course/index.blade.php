@@ -76,10 +76,6 @@
                                                     <p class="text-secondary">{{$course->level}}</p>
                                                     <p class="card-text">{{ $course->relationBetweenInstructorUser->name }}</p>
                                                     <div class="d-flex justify-content-between">
-                                                        <span
-                                                            class="badge badge-{{ $course->is_published == true ? 'success'  : 'primary' }} p-2">{{ $course->is_published == true ? 'Published'  : 'Not Published' }}</span>
-                                                        <span
-                                                            class="badge badge-{{ $course->is_private == true ? 'warning'  : 'primary' }} p-2">{{ $course->is_private == true ? 'Private'  : 'Public' }}</span>
                                                         @if ($course->is_discount == true )
                                                             <span>{{ $course->discount_price }}</span>
                                                             <span> <del> {{ $course->price }} </del> </span>
