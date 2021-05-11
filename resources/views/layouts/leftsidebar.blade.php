@@ -237,10 +237,24 @@
                             @endif --}}
 
                             {{-- Message with student --}}
-                            <li><a href="{{route('messages.index')}}"
+                            {{-- <li><a href="{{route('messages.index')}}"
                                 class="{{request()->is('dashboard/message*') ?'active':null}}">
-                                <i class="fa fa-envelope-o"></i> <span>@translate(Messages)</span>
+                                
                             </a>
+                            </li> --}}
+
+                            <li class="{{request()->is('dashboard/message*') ?'active':null}}">
+                                <a href="javaScript:void();">
+                                    <i class="fa fa-envelope-o"></i> <span>@translate(Messages)</span>
+                                    <i class="feather icon-chevron-right"></i>
+                                </a>
+                                <ul class="vertical-submenu">
+                                    {{-- instructor's Nav --}}
+                                    <li><a href="{{route('messages.inbox')}}"
+                                           class="{{request()->is('messages/inbox*') ?'active':null}}">@translate(Inbox)</a></li>
+                                    <li><a href="{{route('messages.outbox')}}"
+                                           class="{{request()->is('messages/outbox*') ?'active':null}}">@translate(Outbox)</a></li>
+                                </ul>
                             </li>
 
                             @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Instructor")

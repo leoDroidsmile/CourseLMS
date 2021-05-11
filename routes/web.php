@@ -91,8 +91,11 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     Route::post('/profile/update', 'Instructor\InstructorController@update')->name('instructors.update')->middleware('demo');
     Route::post('/users/banned', 'Instructor\InstructorController@banned')->name('users.banned')->middleware('demo');
 
+
+    
     //messages with student
-    Route::get('message/inbox',         'Module\MessageController@index')->name('messages.index');
+    Route::get('message/inbox',         'Module\MessageController@index')->name('messages.inbox');
+    Route::get('message/outbox',        'Module\MessageController@outbox')->name('messages.outbox');
     Route::get('message/show/{id}',     'Module\MessageController@show')->name('messages.show');
     Route::get('message/create/{id}',   'Module\MessageController@create')->name('messages.create');
     Route::post('message/send',         'Module\MessageController@send')->name('messages.send')->middleware('demo');

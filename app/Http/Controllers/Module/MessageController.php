@@ -55,6 +55,15 @@ class MessageController extends Controller
         return view('module.message.inbox', compact('messages'));
     }
 
+
+    public function outbox(){
+        $messages = Massage::where('user_id', Auth::user()->id)
+            ->with('user')
+            ->get();
+
+        return view('module.message.outbox', compact('messages'));
+    }
+
     
 
     /*message modal view this function need enroll id*/

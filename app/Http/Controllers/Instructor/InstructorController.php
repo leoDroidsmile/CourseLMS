@@ -56,6 +56,8 @@ class InstructorController extends Controller
                 ->with('purchaseHistory')
                 ->with('courses')
                 ->first();
+
+            return view('instructor.show', compact('instructor'));
         }else{
             $teacher_coupons = TeacherCoupon::where('user_id', $id)->get();
             $all_teacher_coupons = sizeof($teacher_coupons);
@@ -71,10 +73,9 @@ class InstructorController extends Controller
                 ->with('courses')
                 ->with('user')
                 ->first();
+
+            return view('instructor.show', compact('instructor', 'all_teacher_coupons', 'used_teacher_coupons'));
         }
-
-
-        return view('instructor.show', compact('instructor', 'all_teacher_coupons', 'used_teacher_coupons'));
     }
 
     /*Update profile */
