@@ -23,10 +23,17 @@ class CouponController extends Controller
         return view('coupon.index');
     }
 
-        //coupon index
-    public function allCoupons()
+    //coupon index
+    public function allCoupons(Request $request)
     {
-        $coupons = Coupon::latest()->get();
+        if ($request->get('search')) {
+            $coupons = Coupon::where('code', $request->get('search'))->get();
+            
+            if(sizeof($coupons) == 0)
+                $coupons = Coupon::where('id', $request->get('search'))->get();
+        } else {
+            $coupons = Coupon::latest()->get();
+        }
         return view('coupon.list', compact('coupons'));
     }
 

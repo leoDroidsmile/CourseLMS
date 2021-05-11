@@ -22,6 +22,23 @@
             <i class="fa fa-plus-circle"></i> @translate(Add New Coupon Code)
         </a>
 
+        <div class="float-right">
+            <div class="row">
+                <div class="col">
+                    <form method="get" action="">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control col-12"
+                                   placeholder="@translate(Search by ID or Coupon Code)"
+                                   value="{{Request::get('search')}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">@translate(Search)</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 
         <!-- /.card-header -->
