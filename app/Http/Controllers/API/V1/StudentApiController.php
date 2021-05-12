@@ -376,7 +376,7 @@ class StudentApiController extends Controller
         }
         else
             $courses = Course::Published()
-                    ->Public()
+                    // ->Public()
                     ->latest()
                     ->with('category')
                     ->with('classes')
