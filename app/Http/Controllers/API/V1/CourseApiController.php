@@ -365,6 +365,7 @@ class CourseApiController extends Controller
                 
                 // Set the Coupon used
                 $coupon->is_used = true;
+                $coupon->student_id = $user->id;
                 $coupon->save();
 
 

@@ -22,6 +22,11 @@ class Coupon extends Model
     {
       return $this->rate;
     }
+
+    public function student(){
+      if($this->student_id)
+        return User::findOrFail($this->student_id);
+    }
     
     //END
 }

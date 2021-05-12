@@ -62,6 +62,7 @@
                     <th>@translate(End Date)</th>
                     <th>@translate(Status)</th>
                     <th>@translate(Used)</th>
+                    <th>@translate(Student)</th>
                     <th>@translate(Action)</th>
                 </tr>
                 </thead>
@@ -93,6 +94,12 @@
                             @else
                                 <span class="badge badge-success p-2">Not Used</span></td>
                             @endif
+
+                        <td>
+                            @if($coupon->is_used && $coupon->student())
+                                {{$coupon->student()->name}}
+                            @endif
+                        </td>
                         <td>
                             <div class="kanban-menu">
                                 <div class="dropdown">
