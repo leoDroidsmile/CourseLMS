@@ -10,6 +10,7 @@ use App\TeacherCoupon;
 use App\Model\Instructor;
 use App\Model\Course;
 use App\Model\AdminPaid;
+use App\Model\AdminPaidTeacherCoupon;
 use App\Model\InstructorEarning;
 use App\Model\CoursePurchaseHistory;
 
@@ -88,7 +89,13 @@ class InstructorController extends Controller
                 $paid_amount += $item->amount;
             }
 
-            return view('instructor.show', compact('instructor', 'all_teacher_coupons', 'used_teacher_coupons', 'paid_amount'));
+            $admin_paid_teacher_coupons = AdminPaidTeacherCoupon::where('user_id', $id)->get();
+            $paid_teacher_coupons = 0;
+            foreach($admin_paid_teacher_coupons as $item){
+                $paid_teacher_coupons += $item->count;
+            }
+
+            return view('instructor.show', compact('instructor', 'all_teacher_coupons', 'used_teacher_coupons', 'paid_amount', 'paid_teacher_coupons'));
         }
     }
 
@@ -201,9 +208,23 @@ class InstructorController extends Controller
     }
 
 
+    public function showPayTeacherCouponModal($instructor_id){
+        return view('instructor.pay-teacher-coupon', compact('instructor_id'));
+    }
+
+
     public function payToInstructor(Request $request){
         $paid_amount = new AdminPaid();
         $paid_amount->amount = $request->amount;
+        $paid_amount->user_id = $request->instructor_id;
+        $paid_amount->save();
+        return back();
+    }
+
+
+    public function payTeacherCoupons(Request  $request){
+        $paid_amount = new AdminPaidTeacherCoupon();
+        $paid_amount->count = $request->count;
         $paid_amount->user_id = $request->instructor_id;
         $paid_amount->save();
         return back();

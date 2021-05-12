@@ -62,9 +62,17 @@
                                 <div class="em-separator separator-dashed"></div>
                                 Teacher Coupons : <span class="text-primary">{{$used_teacher_coupons}} / {{ $all_teacher_coupons }}</span>
                             </a>
-                            <a onclick="forModal('{{ route("instructors.payModal", $instructor->user_id) }}', 'Pay to Instructor')">
+                            <a style="cursor:pointer;" onclick="forModal('{{ route("instructors.payModal", $instructor->user_id) }}', 'Pay to Instructor')">
                                 <div class="em-separator separator-dashed"></div>
                                 Paid : <span class="text-primary">{{$paid_amount}}</span>
+                                Remained : <span class="text-primary">{{ $instructor->balance? $instructor->balance - $paid_amount : 0}}</span>
+                            </a>
+                            <a style="cursor:pointer;" onclick="forModal('{{ route("instructors.payTeacherCouponsModal", $instructor->user_id) }}', 'Pay to Instructor')">
+                                <div class="em-separator separator-dashed"></div>
+
+                                <br>Teacher Coupons <br>
+                                Paid : <span class="text-primary">{{$paid_teacher_coupons}}</span>
+                                Remained : <span class="text-primary">{{ $used_teacher_coupons - $paid_teacher_coupons}}</span>
                             </a>
                         </div>
                     </div>
