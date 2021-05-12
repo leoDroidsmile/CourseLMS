@@ -402,13 +402,14 @@ class CourseApiController extends Controller
             ->where('course_id', $request->course_id)
             ->first();
 
-        if($coupon->is_used)
-            return response()->json([
-                'success' => false,
-                'message' => 'The Coupon was already used.',
-            ], 200);  
-            
         if ($coupon != null){
+
+            if($coupon->is_used)
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The Coupon was already used.',
+                ], 200); 
+                
             if($coupon->course_id == $request->course_id) {
                 $enrollment = new Enrollment();
                 $enrollment->user_id = $user->id; //this is student id
