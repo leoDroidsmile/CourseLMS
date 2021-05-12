@@ -28,7 +28,7 @@
                     <form method="get" action="">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control col-12"
-                                   placeholder="@translate(Search by ID or Coupon Code)"
+                                   placeholder="@translate(Search by ID or Coupon)"
                                    value="{{Request::get('search')}}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">@translate(Search)</button>

@@ -28,8 +28,17 @@ class TeacherCoupon extends Model
       return User::findOrFail($this->user_id);
     }
 
+    public function student(){
+      if($this->student_id)
+        return User::findOrFail($this->student_id);
+    }
+
     public function courseTitle(){
       return Course::findOrFail($this->course_id);
+    }
+
+    public function course(){
+      return $this->belongsTo(Course::class, 'course_id', 'id')->with('category');
     }
 
     //END

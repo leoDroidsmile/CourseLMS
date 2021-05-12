@@ -58,8 +58,9 @@
                             <a href="{{route('instructors.courses', $instructor->user_id)}}">
                                 Courses : <span class="text-primary">{{ sizeof($instructor->courses) }}</span>
                             </a>
-                            <div class="em-separator separator-dashed"></div>
+                            <a href="{{route('instructors.teacherCoupons', $instructor->user_id)}}"><div class="em-separator separator-dashed"></div>
                             Teacher Coupons : <span class="text-primary">{{$used_teacher_coupons}} / {{ $all_teacher_coupons }}</span>
+                            </a>
                         </div>
                     </div>
                 </div>

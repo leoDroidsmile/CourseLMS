@@ -98,6 +98,15 @@ class InstructorController extends Controller
         return view('instructor.courses-wallet', compact('histories'));
     }
 
+    public function teacherCoupons($id){
+        $teacher_coupons = TeacherCoupon::where('user_id', $id)
+            ->where('is_used', true)
+            ->with('course')
+            ->paginate(10);
+            
+        return view('instructor.teacher-coupons', compact('teacher_coupons'));
+    }
+
     /*Update profile */
     public function edit($id)
     {

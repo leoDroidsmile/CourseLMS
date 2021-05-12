@@ -30,7 +30,7 @@
                     <form method="get" action="">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control col-12"
-                                   placeholder="@translate(Search by ID or Coupon Code)"
+                                   placeholder="@translate(Search by ID or Coupon)"
                                    value="{{Request::get('search')}}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">@translate(Search)</button>
@@ -82,9 +82,9 @@
                         <td>{{ $coupon->courseTitle()->title }}</td>
                         <td>
                             @if($coupon->is_used)
-                            <span class="badge badge-success p-2">Not Used</span></td>
+                            <span class="badge badge-warning p-2">Used</span></td>
                         @else
-                            <span class="badge badge-warning p-2"> Used</span></td>
+                            <span class="badge badge-success p-2">Not Used</span></td>
                         @endif
                         </td>
                         {{-- <td>{{ $coupon->student_id }}</td> --}}
