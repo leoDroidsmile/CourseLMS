@@ -27,7 +27,7 @@
             </div>
 
             {{-- Slug --}}
-            <div class="form-group row">
+            {{-- <div class="form-group row">
                 <label class="col-lg-3 col-form-label" for="val-slug">
                     @translate(Slug) </label>
                 <div class="col-lg-9">
@@ -38,7 +38,7 @@
                     <span id="error_email"></span>
                     @error('slug') <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Provider --}}
             {{-- <div class="form-group row">

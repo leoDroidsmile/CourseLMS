@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 {{-- Slug --}}
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label class="col-lg-3 col-form-label" for="val-slug">
                         @translate(Slug) </label>
                     <div class="col-lg-9">
@@ -43,7 +43,7 @@
                         @error('slug') <span class="invalid-feedback"
                                              role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                     </div>
-                </div>
+                </div> --}}
 
                 {{-- Level --}}
                 {{-- <div class="form-group row">
@@ -218,7 +218,7 @@
                     <div class="col-lg-9">
                         <div class="switchery-list">
                             <input type="checkbox" name="is_private" class="js-switch-success"
-                                   id="val-is_free" {{ $each_course->is_private === 0 || $each_course->is_private === NULL ? ' ' : 'checked' }} {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}/>
+                                   id="val-is_private" {{ $each_course->is_private ? 'checked': '' }} {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}/>
                             @error('is_private') <span class="invalid-feedback"
                                                     role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                         </div>

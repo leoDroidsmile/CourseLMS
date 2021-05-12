@@ -105,7 +105,7 @@ class CourseController extends Controller
 
         $courses = new Course();
         $courses->title = $request->title;
-        $courses->slug = Str::slug($request->slug);
+        $courses->slug = '';
         $courses->short_description = $request->short_description;
         $courses->big_description = $request->big_description;
         if ($request->has('image')) {
@@ -280,7 +280,8 @@ class CourseController extends Controller
 
         $courses = Course::where('id', $request->id)->firstOrFail();
         $courses->title = $request->title;
-        $courses->slug = Str::slug($request->slug);
+        // $courses->slug = Str::slug($request->slug);
+        $courses->slug = '';
         $courses->short_description =$request->short_description;
         $courses->big_description = $request->big_description;
         if ($request->has('image')) {

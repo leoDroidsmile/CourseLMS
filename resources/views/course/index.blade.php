@@ -75,20 +75,27 @@
                                                     <h5 class="card-title font-16">{{ $course->title }}</h5>
                                                     <p class="card-text">{{ $course->relationBetweenInstructorUser->name }}</p>
                                                     <div class="d-flex justify-content-between">
-                                                        @if ($course->is_discount == true )
-                                                            <span>{{ $course->discount_price }}</span>
+                                                        @if($course->is_free)
+                                                            <span class="badge badge-primary">{{ 'Free' }}</span>
+                                                        @elseif ($course->is_discount == true )
                                                             <span> <del> {{ $course->price }} </del> </span>
+                                                            <span>{{ $course->discount_price }}</span>    
                                                         @else
-                                                            <span>{{ $course->price != null ? $course->price  : 'Free' }}</span>
+                                                            <span>{{ $course->price }}</span>
                                                         @endif
                                                     </div>
+                                                    @if($course->is_private)
+                                                        <span class="badge badge-warning">Private</span>
+                                                    @else
+                                                        <span class="badge badge-success">Public</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                             </td>
-                            <td><span class="badge badge-info">{{ $course->relationBetweenCategory->name }}</span></td>
+                            <td>{{ $course->relationBetweenCategory->name }}</td>
                             <td>
                                 @translate(Classes)- {{ $course->classes->count() }}
                                 @php
