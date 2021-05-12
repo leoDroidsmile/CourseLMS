@@ -95,6 +95,8 @@ Route::group(['middleware' => ['installed', 'checkBackend', 'auth', 'activity'],
     Route::get('/profile/{id}',                     'Instructor\InstructorController@edit')->name('instructors.edit');
     Route::get('/instructor/destroy/{id}',          'Instructor\InstructorController@destroy')->name('instructors.destroy');
     Route::post('/profile/update',                  'Instructor\InstructorController@update')->name('instructors.update')->middleware('demo');
+    Route::get('/pay/{instructor_id}',              'Instructor\InstructorController@showPayModal')->name('instructors.payModal');
+    Route::post('instructor/pay',                   'Instructor\InstructorController@payToInstructor')->name('instructors.pay');
     Route::post('/users/banned',                    'Instructor\InstructorController@banned')->name('users.banned')->middleware('demo');
 
 

@@ -9,6 +9,7 @@ use App\TeacherCoupon;
 
 use App\Model\Instructor;
 use App\Model\Course;
+use App\Model\AdminPaid;
 use App\Model\InstructorEarning;
 use App\Model\CoursePurchaseHistory;
 
@@ -79,7 +80,15 @@ class InstructorController extends Controller
                 ->with('user')
                 ->first();
 
-            return view('instructor.show', compact('instructor', 'all_teacher_coupons', 'used_teacher_coupons'));
+            $admin_paid = AdminPaid::where('user_id', $id)
+                ->get();
+
+            $paid_amount = 0;
+            foreach($admin_paid as $item){
+                $paid_amount += $item->amount;
+            }
+
+            return view('instructor.show', compact('instructor', 'all_teacher_coupons', 'used_teacher_coupons', 'paid_amount'));
         }
     }
 
@@ -183,6 +192,20 @@ class InstructorController extends Controller
             notify()->warning(translate('Please there are problem try again'));
         }
         $user->save();
+        return back();
+    }
+
+    /* Show Modal to pay to instructor */
+    public function showPayModal($instructor_id){
+        return view('instructor.create', compact('instructor_id'));
+    }
+
+
+    public function payToInstructor(Request $request){
+        $paid_amount = new AdminPaid();
+        $paid_amount->amount = $request->amount;
+        $paid_amount->user_id = $request->instructor_id;
+        $paid_amount->save();
         return back();
     }
 

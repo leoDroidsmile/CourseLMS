@@ -58,8 +58,13 @@
                             <a href="{{route('instructors.courses', $instructor->user_id)}}">
                                 Courses : <span class="text-primary">{{ sizeof($instructor->courses) }}</span>
                             </a>
-                            <a href="{{route('instructors.teacherCoupons', $instructor->user_id)}}"><div class="em-separator separator-dashed"></div>
-                            Teacher Coupons : <span class="text-primary">{{$used_teacher_coupons}} / {{ $all_teacher_coupons }}</span>
+                            <a href="{{route('instructors.teacherCoupons', $instructor->user_id)}}">
+                                <div class="em-separator separator-dashed"></div>
+                                Teacher Coupons : <span class="text-primary">{{$used_teacher_coupons}} / {{ $all_teacher_coupons }}</span>
+                            </a>
+                            <a onclick="forModal('{{ route("instructors.payModal", $instructor->user_id) }}', 'Pay to Instructor')">
+                                <div class="em-separator separator-dashed"></div>
+                                Paid : <span class="text-primary">{{$paid_amount}}</span>
                             </a>
                         </div>
                     </div>
