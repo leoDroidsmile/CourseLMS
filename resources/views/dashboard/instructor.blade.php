@@ -9,7 +9,7 @@
             <!-- Start row -->
             <div class="row">
 
-                <div class="col-lg-12 col-xl-4">
+                {{-- <div class="col-lg-12 col-xl-4">
                     <div class="card m-b-30">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- End col -->
                 <div class="col-lg-12 col-xl-12">
                     <div class="card m-b-30">
