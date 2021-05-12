@@ -15,6 +15,12 @@
         </div>
 
         <div class="form-group">
+            <input type="checkbox" name="is_used"
+                   id="is_used" {{ $single_coupon->is_used == 1 ? 'checked' : '' }}>
+            <label for="is_used">@translate(Is Used?)</label>
+        </div>
+
+        <div class="form-group">
             <label class="control-label">@translate(Select Instructor) <span class="text-danger">*</span></label>
             <div class="">
                 <select class="form-control lang" name="user_id" id="select_instructor" required>

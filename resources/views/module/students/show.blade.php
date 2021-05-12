@@ -125,24 +125,33 @@
         <div class="row flex-row">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
+
                 <tr>
                     <th>@translate(S/L)</th>
                     <th>@translate(Instructor)</th>
                     <th>@translate(Course Name)</th>
                     <th>@translate(Payment Method)</th>
                     <th>@translate(Coupon Code)</th>
-                    <th>@translate(Action)</th>
+                    @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin")
+                        <th>@translate(Action)</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
 
                 @forelse ($enrolls as $enroll)
+                
+                    @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin" 
+                        || \Illuminate\Support\Facades\Auth::user()->user_type == "Instructor" 
+                        && \Illuminate\Support\Facades\Auth::user()->id == $enroll->course->relationBetweenInstructorUser->id)
+
                     <tr>
                         <td>{{ $loop->index++ + 1 }}</td>
                         <td>{{ $enroll->course->relationBetweenInstructorUser->name }}</td>
                         <td>{{ $enroll->course->title }}</td>
                         <td>{{ $enroll->history->payment_method }}</td>
                         <td>{{ $enroll->history->CouponCode() }}</td>
+                        @if(\Illuminate\Support\Facades\Auth::user()->user_type == "Admin")
                         <td>
                             <a class="btn btn-primary ml-3" id="btn_download" 
                                 style="float:right; color:white;" title="@translate(Delete)" 
@@ -150,7 +159,9 @@
                                 <i class="fa fa-remove"></i> @translate(Delete)
                             </a>
                         </td>
+                        @endif
                     </tr>
+                    @endif
                 @empty
                     <tr>
                         <td colspan="7" class="text-center">

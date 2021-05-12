@@ -105,6 +105,12 @@ class TeacherCouponController extends Controller
           } else {
               $coupon_update->is_published = false;
           }
+
+          if ($request->is_used == 'on') {
+            $coupon_update->is_used = true;
+          } else {
+              $coupon_update->is_used = false;
+          }
   
           $coupon_update->user_id    = $request->user_id;
           $coupon_update->course_id  = $request->course_id;

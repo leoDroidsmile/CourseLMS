@@ -114,6 +114,12 @@ class CouponController extends Controller
             $coupon_update->is_published = false;
         }
 
+        if ($request->is_used == 'on') {
+            $coupon_update->is_used = true;
+        } else {
+            $coupon_update->is_used = false;
+        }
+
         $coupon_update->save();
         Alert::success(translate('Done'), translate('Coupon Updated Successfully'));
         return back();
