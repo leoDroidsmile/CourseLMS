@@ -297,8 +297,8 @@ class CourseApiController extends Controller
         $min_value  = Coupon::where('code',$request->code)->Published()->first()->min_value;
         
         if (Carbon::now() > $start_day && Carbon::now() < $end_day) {
-            if ($course->is_discount == 1 && $course->discount_price < $coupon->rate 
-                || $course->is_discount == 0 && $course->price < $coupon->rate) {
+            if ($course->is_discount == 1 && $course->discount_price <= $coupon->rate 
+                || $course->is_discount == 0 && $course->price <= $coupon->rate) {
             
                 //save in enrolments table
                 $enrollment = new Enrollment();
@@ -479,7 +479,7 @@ class CourseApiController extends Controller
         else
             $course_price = $course->price;
 
-        if ($course_price < $user->currentPoints()) {
+        if ($course_price <= $user->currentPoints()) {
         
             //save in enrolments table
             $enrollment = new Enrollment();
