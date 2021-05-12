@@ -55,7 +55,7 @@
                     <th>@translate(Teacher)</th>
                     <th>@translate(Course)</th>
                     <th>@translate(Used)</th>
-                    {{-- <th>@translate(By Student)</th> --}}
+                    <th>@translate(Student)</th>
                     <th>@translate(Action)</th>
                 </tr>
                 </thead>
@@ -87,7 +87,11 @@
                             <span class="badge badge-success p-2">Not Used</span></td>
                         @endif
                         </td>
-                        {{-- <td>{{ $coupon->student_id }}</td> --}}
+                        <td>
+                            @if($coupon->is_used && $coupon->student())
+                                {{ $coupon->student()->name }}
+                            @endif
+                        </td>
                         <td>
                             <div class="kanban-menu">
                                 <div class="dropdown">

@@ -29,7 +29,7 @@ class TeacherCoupon extends Model
     }
 
     public function student(){
-      if($this->student_id)
+      if($this->is_used && $this->student_id)
         return User::findOrFail($this->student_id);
     }
 
