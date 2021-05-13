@@ -437,10 +437,12 @@ class StudentApiController extends Controller
         if($request->is_read != 'all')
             $notifications = NotificationUser::where('user_id', $request->user()->id)
                 ->where('is_read', false)
-                ->latest();
+                ->latest()
+                ->get();
         else
             $notifications = NotificationUser::where('user_id', $request->user()->id)
-                ->latest();
+                ->latest()
+                ->get();
 
         return response(['notifications' => $notifications], 200);
     }

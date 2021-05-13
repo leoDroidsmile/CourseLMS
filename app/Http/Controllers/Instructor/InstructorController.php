@@ -111,7 +111,7 @@ class InstructorController extends Controller
     public function coursesInWallet($id){
         $histories = InstructorEarning::where('user_id', $id)
             ->with('enrollment')
-            ->latest()->paginate(1);
+            ->latest()->paginate(10);
         return view('instructor.courses-wallet', compact('histories'));
     }
 

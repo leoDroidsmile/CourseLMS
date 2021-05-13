@@ -55,6 +55,7 @@
                     </thead>
                     <tbody>
                     @forelse ($histories as $history)
+                    @if($history->enrollment)
                         <tr>
                             <td class="footable-first-visible">
                                 {{ ($loop->index+1) + ($histories->currentPage() - 1)*$histories->perPage() }}
@@ -64,6 +65,7 @@
                             <td>{{ $history->enrollment->student->name }}</td>
                             <td>{{ $history->enrollment->enrollcourse->price }}</td>
                             <td>{{ date('d-M-y',strtotime($history->created_at)) }}</td>
+                            
                             {{-- <td>
                                 <div class="dropdown">
                                     <button class="btn btn-link p-0 font-18 float-right" type="button"
@@ -97,6 +99,7 @@
                                 </div>
                             </td> --}}
                         </tr>
+                        @endif
                         @empty
                         <tr>
                             <td colspan="6">
