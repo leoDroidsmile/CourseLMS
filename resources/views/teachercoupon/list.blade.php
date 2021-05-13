@@ -101,7 +101,7 @@
                                             <i class="feather icon-edit-2 mr-2"></i>@translate(Edit)</a>
                                         <a class="dropdown-item" href="{{ route("teachercoupon.download", $coupon->id) }}">
                                             <i class="fa fa-download mr-2"></i>@translate(Download)</a>
-                                        <a class="dropdown-item" href="{{ route("teachercoupon.delete", $coupon->id) }}">
+                                        <a class="dropdown-item" onclick="confirm_modal('{{ route('teachercoupon.delete', $coupon->id) }}')">
                                             <i class="fa fa-remove mr-2"></i>@translate(Delete)</a>
                                     </div>
                                 </div>
