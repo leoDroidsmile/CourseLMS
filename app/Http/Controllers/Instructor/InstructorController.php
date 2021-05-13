@@ -14,6 +14,7 @@ use App\Model\AdminPaidTeacherCoupon;
 use App\Model\InstructorEarning;
 use App\Model\CoursePurchaseHistory;
 
+use DB;
 use Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -115,10 +116,19 @@ class InstructorController extends Controller
     }
 
     public function teacherCoupons($id){
-        $teacher_coupons = TeacherCoupon::where('user_id', $id)
-            ->where('is_used', true)
-            ->with('course')
-            ->paginate(10);
+        // $teacher_coupons = TeacherCoupon::where('user_id', $id)
+        //     ->where('is_used', true)
+        //     ->with('course')
+        //     ->get();
+
+        $teacher_coupons = DB::table('teacher_coupons')
+            ->selectRaw('categories.name as category_title, courses.title as course_title, count(*) as count')
+            ->where('teacher_coupons.is_used', true)
+            ->where('teacher_coupons.user_id', $id)
+            ->groupBy('teacher_coupons.course_id')
+            ->leftJoin('courses', 'teacher_coupons.course_id', '=', 'courses.id')
+            ->leftJoin('categories', 'courses.category_id', '=', 'categories.id')
+            ->get();
             
         return view('instructor.teacher-coupons', compact('teacher_coupons'));
     }

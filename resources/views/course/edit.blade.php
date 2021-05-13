@@ -232,7 +232,7 @@
                     <div class="col-lg-9">
                         <div class="switchery-list">
                             <input type="checkbox" name="is_free" class="js-switch-success"
-                                   id="val-is_free" {{ $each_course->is_free === 0 ? ' ' : 'checked' }} {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}/>
+                                   id="val-is_free" {{ $each_course->is_free ? 'checked' : '' }} {{ Auth::user()->user_type != 'Admin' ? '' : 'readonly' }}/>
                             @error('is_free') <span class="invalid-feedback"
                                                     role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                         </div>

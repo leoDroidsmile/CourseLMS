@@ -32,75 +32,24 @@
                 <table class="table foo-filtering-table text-center">
                     <thead class="text-center">
                     <tr class="footable-header">
-                        <th data-breakpoints="xs" class="footable-first-visible">
-                            @translate(S/L)
-                        </th>
-                        <th>
-                            @translate(Teacher Coupon)
-                        </th>
+                        
                         <th>
                             @translate(Category)
                         </th>
                         <th>
                             @translate(Title)
-                        </th>
+                        </th>                       
                         <th>
-                            @translate(Student)
+                            @translate(Count)
                         </th>
-                        <th>
-                            @translate(Price)
-                        </th>
-                        <th>
-                            @translate(Date)
-                        </th>
-                        {{-- <th>@translate(Action)</th> --}}
                     </tr>
                     </thead>
                     <tbody>
                     @forelse ($teacher_coupons as $coupon)
                         <tr>
-                            <td class="footable-first-visible">
-                                {{ ($loop->index+1) + ($teacher_coupons->currentPage() - 1)*$teacher_coupons->perPage() }}
-                            </td>
-                            <td>{{ $coupon->code }}</td>
-                            <td>{{ $coupon->course->category->name }}</td>
-                            <td>{{ $coupon->course->title }}</td>
-                            <td>{{ $coupon->student()->name }}</td>
-                            <td>{{ $coupon->course->price }}</td>
-                            <td>{{ date('d-M-y',strtotime($coupon->created_at)) }}</td>
-                            
-                            {{-- <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-link p-0 font-18 float-right" type="button"
-                                            id="widgetRevenue" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        <i class="feather icon-more-horizontal-"></i></button>
-                                    <div class="dropdown-menu dropdown-menu-right st-drop"
-                                         aria-labelledby="widgetRevenue" x-placement="bottom-end">
-
-                                        @if(\Illuminate\Support\Facades\Auth::user()->user_type != "Admin")
-                                        <a class="dropdown-item font-13"
-                                           href="{{ route('course.show',[$course->id,$course->slug])}}">
-                                            @translate(Details)
-                                        </a>
-                                        <a class="dropdown-item font-13"
-                                           href="{{ route('course.edit',[$course->id,$course->slug])}}">
-                                            {{ Auth::user()->user_type == 'Admin' ? '@translate(Details)' : '@translate(Edit)' }}
-                                        </a>
-                                        @else
-                                        <a class="dropdown-item"
-                                        onclick="confirm_modal('{{ route('course.destroy', $course->id) }}')"
-                                        href="#!">
-                                        <i class="feather icon-trash mr-2"></i>@translate(Delete Course)</a>     
-
-                                        <a class="dropdown-item"
-                                        onclick="confirm_modal('{{ route('course.destroy.students', $course->id) }}')"
-                                        href="#!">
-                                        <i class="feather icon-trash mr-2"></i>@translate(Delete All Students)</a>     
-                                        @endif
-                                    </div>
-                                </div>
-                            </td> --}}
+                            <td>{{ $coupon->category_title }}</td>
+                            <td>{{ $coupon->course_title }}</td>
+                            <td>{{ $coupon->count }}</td>
                         </tr>
                         @empty
                         <tr>
