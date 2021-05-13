@@ -41,8 +41,8 @@
                     <th>@translate(Icon)</th>
                     <th>@translate(Category)</th>
                     <th>@translate(Parent Category)</th>
-                    <th>@translate(Popular)</th>
-                    <th>@translate(Top)</th>
+                    {{-- <th>@translate(Popular)</th>
+                    <th>@translate(Top)</th> --}}
                     <th>@translate(Publish)</th>
                     <th>@translate(Action)</th>
                 </tr>
@@ -62,22 +62,22 @@
                         <td>
                             {{$item->parent->name ?? 'N/A'}}
                         </td>
-                        <td>
+                        {{-- <td>
                             <div class="switchery-list">
                                 <input type="checkbox" data-url="{{route('categories.popular')}}"
                                        data-id="{{$item->id}}"
                                        class="js-switch-secondary"
                                        id="category-switch" {{$item->is_popular == true ? 'checked' : null}} />
                             </div>
-                        </td>
-                        <td>
+                        </td> --}}
+                        {{-- <td>
                             <div class="switchery-list">
                                 <input type="checkbox" data-url="{{route('categories.top')}}"
                                        data-id="{{$item->id}}"
                                        class="js-switch-primary"
                                        id="category-switch" {{$item->top == true ? 'checked' : null}} />
                             </div>
-                        </td>
+                        </td> --}}
 
 
                         <td>
