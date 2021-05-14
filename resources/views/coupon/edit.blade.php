@@ -54,8 +54,8 @@
 
         <div class="form-group">
             <input type="checkbox" name="is_used"
-                   id="published" {{ $single_coupon->is_used == 1 ? 'checked' : '' }}>
-            <label for="published">@translate(Is Used?)</label>
+                   id="is_used" {{ $single_coupon->is_used == 1 ? 'checked' : '' }}>
+            <label for="is_used">@translate(Is Used?)</label>
         </div>
 
         <button type="submit" class="btn btn-primary">@translate(Submit)</button>

@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td>{{ $coupon->instructorName()->name }}</td>
+                        <td>{{ $coupon->instructorName()? $coupon->instructorName()->name : '' }}</td>
                         <td>{{ $coupon->courseTitle()->title }}</td>
                         <td>
                             @if($coupon->is_used)
