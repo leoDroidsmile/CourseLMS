@@ -535,6 +535,12 @@ class CourseApiController extends Controller
             $instructor_earning->save();
 
 
+            // Notify User
+            $details = [
+                'body' => translate('You purchased course - ' . $course->title),
+            ];
+            $this->userNotify($user->id,$details);
+            
             return response()->json([
                 'success' => true,
                 'message' => 'Courses have been purchased successfully.',
