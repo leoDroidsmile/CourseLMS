@@ -125,12 +125,12 @@ class SliderController extends Controller
             $slider->is_published = 1;
             $slider->save();
 
-            //all is unpublished
-            $sliders = Slider::whereNotIn('id',[$request->id])->get();
-            foreach ($sliders as $item){
-                $item->is_published =0;
-                $item->save();
-            }
+            // //all is unpublished
+            // $sliders = Slider::whereNotIn('id',[$request->id])->get();
+            // foreach ($sliders as $item){
+            //     $item->is_published =0;
+            //     $item->save();
+            // }
 
         }
         return response(['message' => translate('Slider status is changed ')], 200);
