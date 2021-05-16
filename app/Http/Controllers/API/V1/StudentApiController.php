@@ -455,11 +455,11 @@ class StudentApiController extends Controller
     }
 
     public function getSliders(Request $request){
-        $slider = Slider::findOrFail($request->id);
-        if($slider)
-            $slider->image = asset($slider->image);
-
-        $sliders = [$slider, $slider]; 
+        $sliders = Slider::where('is_published', true)->get();
+        foreach($sliders as $slider){
+            if($slider->image)
+                $slider->image = asset($slider->image);
+        }
         
         return response(['slider' => $sliders], 200);
     }
