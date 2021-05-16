@@ -356,6 +356,13 @@
                                             <i class="fa fa-contao"></i> <span>@translate(Blog)</span>
                                         </a>
                                     </li>
+
+                                    <li><a href="{{route('sliders.index')}}"
+                                        class="{{request()->is('dashboard/slider*') ?'active':null}}">
+                                        <i class="fa fa-gear"></i></i><span>@translate(Slider
+                                         Settings)</span></a>
+                                    </li>
+
                                 @endif
                                
                             @endif
